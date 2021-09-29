@@ -1,5 +1,6 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    form_themes: ['bootstrap_4_layout.html.twig'] # accepte plusieurs thèmes
     globals: 
         app_name: 'Tkr app'
         locales: '%app.locales%'
@@ -13,6 +14,7 @@ twig:
             phone_number_2: '+221 77 000 00 00'
             link: "https://leseoya.com"
             mission_text: 'text à definir'
+            user_empty: 'empty.png'
 when@test:
     twig:
         strict_variables: true

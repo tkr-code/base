@@ -33,7 +33,6 @@ supprimer une branche que nous venons de créer. Pour cela, il suffit d'exécute
 #
 forcer la supression avec des modifications
 > git branch -D nom_de_la_branche
-<<<<<<< HEAD
 
 #
 modifie le message du dernier commit
@@ -54,5 +53,3 @@ git commit --amend  vous permet de sélectionner le dernier commit afin d'y ajou
     git reset --hard HEAD^ permet de réinitialiser l'index et le répertoire de travail à l'état du dernier commit.
 
     git commit --amend permet de sélectionner le dernier commit pour y effectuer des modifications.
-=======
->>>>>>> c782feeb4eb1bf06faf30e36f49ce704e9a49622

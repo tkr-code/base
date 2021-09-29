@@ -1,0 +1,28 @@
+{% import "macros/navs.html.twig" as nav %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} | {{  app_name }}</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+    
+    {% block footer %}
+
+    {% endblock %}
+    <!-- jQuery -->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{{ asset('vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    {% block foot %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

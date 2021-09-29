@@ -1,0 +1,29 @@
+{% macro li(item,active = false) %}
+<li class="nav-item">
+    <a href="{{ item.path|default('#') }}" class="nav-link {{ active ? 'active':'' }}">
+        <i class="{{ item.icon|default('far fa-circle') }} nav-icon"></i>
+        <p>{{ item.name|default('name') }}</p>
+    </a>
+</li>
+{% endmacro %}
+
+{% macro section(section,option) %}
+    {% import _self as li %}
+{% if option.role is defined %}
+<li class="nav-header">{{ option.role|default('') }}</li>
+{% endif %}
+<li class="nav-item {{ option.open is defined ? 'menu-open':'' }}">
+    <a href="{{ option.link|default('#') }}" class="nav-link {{ option.active is defined ? 'active':'' }}">
+        <i class="nav-icon {{ option.icon|default('far fa-circle') }}"></i>
+        <p>
+        {{ section }}
+        <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        {% for item in option.pages %}
+        {{ li.li(item) }}
+        {% endfor %}
+    </ul>
+</li>
+{% endmacro %}

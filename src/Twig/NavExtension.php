@@ -30,15 +30,39 @@ class NavExtension extends AbstractExtension
             ],
             'admin'=>
             [
-                // [
-                //     'title'=>'user',
-                //     'path'=>$this->urlGenerator->generate('user_index'),
-                //     'icon'=>'fas fa-users'
-                // ]
+                [
+                    'name'=>'user',
+                    'path'=>$this->urlGenerator->generate('user_index'),
+                    'icon'=>'fas fa-users'
+                ],
+                [
+                    'name'=>'pays',
+                    'path'=>$this->urlGenerator->generate('user_index'),
+                    'icon'=>self::icon
+                ],
+                [
+                    'name'=>'Ville',
+                    'path'=>$this->urlGenerator->generate('user_index'),
+                    'icon'=>self::icon
+                ],
+                [
+                    'name'=>'pays',
+                    'path'=>$this->urlGenerator->generate('user_index'),
+                    'icon'=>self::icon
+                ],
             ],
             'dashboard'=>
             [
-
+                [
+                    'name'=>'Dashbord 1',
+                    'path'=>$this->urlGenerator->generate('admin'),
+                    'icon'=>self::icon
+                ],
+                [
+                    'name'=>'Profil',
+                    'path'=>$this->urlGenerator->generate('profile_index'),
+                    'icon'=>self::icon
+                ]
             ],
             'editor'=>
             [
