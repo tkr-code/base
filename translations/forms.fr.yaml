@@ -1,0 +1,24 @@
+State: Etat
+Shipping state: Etat de la livraison
+Shipping amount: Montant de la livraison
+Shipping adress: Addresse de la livraison
+Note: Note
+Date: Date
+Payment method: Méthode de paiement
+order: Commande
+Details: Détails
+Unit price: Prix unitaire
+Quantity: Quantité
+Article: Artcicle
+Category: Categorie
+Waiting: En attente
+in progress: En cour
+shipped: Expédié
+Ready: Pret
+Completed: Terminé
+Canceled: annuller
+Year: année
+First name: 'Prénom'
+Last name: 'Nom'
+Password: 'Mot de passe'
+Agree terms: 'Accepter les conditions'

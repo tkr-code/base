@@ -15,13 +15,13 @@ class PersonneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName',TextType::class,[
+            ->add('FirstName',TextType::class,[
                 'label'=>'first name',
                 'attr'=>[
                     'placeholder'=>'Prenom',
                 ]
             ])
-            ->add('lastName',TextType::class,[
+            ->add('LastName',TextType::class,[
                 'label'=>'last name',
                 'attr'=>[
                     'placeholder'=>'Nom',
