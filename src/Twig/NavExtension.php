@@ -1,17 +1,16 @@
 <?php 
 namespace App\Twig;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NavExtension extends AbstractExtension
 {
-    const icon ='far fa-circle';
-    private $urlGenerator;
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    private $translator;
+    public function __construct(TranslatorInterface $translator)
     {
-        $this->urlGenerator = $urlGenerator;
+        $this->translator = $translator;
     }
     public function getFunctions():array
     {
@@ -32,46 +31,51 @@ class NavExtension extends AbstractExtension
             [
                 [
                     'name'=>'user',
-                    'path'=>$this->urlGenerator->generate('user_index'),
-                    'icon'=>'fas fa-users'
-                ],
-                [
-                    'name'=>'pays',
-                    'path'=>$this->urlGenerator->generate('user_index'),
-                    'icon'=>self::icon
-                ],
-                [
-                    'name'=>'Ville',
-                    'path'=>$this->urlGenerator->generate('user_index'),
-                    'icon'=>self::icon
-                ],
-                [
-                    'name'=>'pays',
-                    'path'=>$this->urlGenerator->generate('user_index'),
-                    'icon'=>self::icon
-                ],
+                    'icon'=>'fas fa-users',
+                    'links'=>[
+                        [
+                            'name'=>$this->translator->trans('User'),
+                            'path'=>'user_index',
+                        ],
+                        [
+                            'name'=>$this->translator->trans('User'),
+                            'path'=>'user_new',
+                        ],
+                    ]
+                ]
+            ],
+            'user'=>
+            [
+                
             ],
             'dashboard'=>
             [
                 [
-                    'name'=>'Dashbord 1',
-                    'path'=>$this->urlGenerator->generate('admin'),
-                    'icon'=>self::icon
+                    'name'=>$this->translator->trans('Dashboard'),
+                    'icon'=>'fas fa-tachometer-alt',
+                    'links'=>[
+                        [
+                            'name'=>$this->translator->trans('Dashboard').' 1',
+                            'path'=>'admin'
+                        ]
+                    ]
                 ],
                 [
                     'name'=>'Profil',
-                    'path'=>$this->urlGenerator->generate('profile_index'),
-                    'icon'=>self::icon
-                ]
+                    'path'=>'profile_index',
+                ],
+                [
+                    'name'=>'App name',
+                    'icon'=>'fa fa-home',
+                    'links'=>
+                        [
+                            [
+                                'name'=>$this->translator->trans('Home'),
+                                'path'=>'home'
+                            ]
+                        ]
+                ],
             ],
-            'editor'=>
-            [
-                // [
-                //     'title'=>'customer',
-                //     'path'=>$this->urlGenerator->generate('admin_client_index'),
-                //     'icon'=>'far fa-circle'
-                // ]
-            ]
         ];
     }
 }

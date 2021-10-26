@@ -10,38 +10,35 @@
 
 
 {% block stylesheets %}
-  {{ head.dataTable() }}
+{{ head.dataTable() }}
 {% endblock %}
 
 {% block breadcrumb %}
-    {{ utils.breadcrumb('Manage user',[
-        {
-            path:'order_index',
-            name:'Manage orders'
-        }
-    ])}}
+{{ utils.breadcrumb('Edit User',[
+{
+path:path('user_index'),
+name:'Manage users'
+}
+])}}
 {% endblock %}
-{% block title %}Edit User{% endblock %}
+{% block title %}{{'Edit User'|trans}}{% endblock %}
 
 {% block body %}
 <div class="row">
     <div class="col-md-12">
         <div class="card card-outline card-success">
             <div class="card-header">
-                <h4>Edit User</h4>
-
+                <h4>{{'Edit User'|trans}}</h4>
             </div>
             <div class="card-body">
                 {{ include('admin/user/_form.html.twig', {'button_label': 'Update'}) }}
             </div>
             <div class="card-footer">
-            {{ link.back(path('user_index')) }}
+                {{ link.back(path('user_index')) }}
             </div>
         </div>
     </div>
 </div>
 
-
-
-    {# {{ include('admin/user/_delete_form.html.twig') }} #}
+{# {{ include('admin/user/_delete_form.html.twig') }} #}
 {% endblock %}

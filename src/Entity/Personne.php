@@ -22,6 +22,7 @@ class Personne
      *     min = 3,
      *     max = 70
      * )
+     * @Assert\NotNull
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
@@ -33,6 +34,7 @@ class Personne
      *     max = 70
      * )
      * @Assert\NotBlank()
+     * @Assert\NotNull
      * @ORM\Column(type="string", length=255)
      */
     private $lastName;

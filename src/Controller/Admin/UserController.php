@@ -3,18 +3,26 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Form\User1Type;
+use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("admin/user")
  */
 class UserController extends AbstractController
 {
+    private $translator;
+    private $parent_page;
+    public function __construct(TranslatorInterface $translatorInterface)
+    {
+        $this->parent_page = $translatorInterface->trans('User');
+        $this->translator = $translatorInterface;
+    }
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
@@ -22,6 +30,7 @@ class UserController extends AbstractController
     {
         return $this->render('admin/user/index.html.twig', [
             'users' => $userRepository->findAll(),
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -31,7 +40,7 @@ class UserController extends AbstractController
     public function new(Request $request): Response
     {
         $user = new User();
-        $form = $this->createForm(User1Type::class, $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -45,6 +54,7 @@ class UserController extends AbstractController
         return $this->renderForm('admin/user/new.html.twig', [
             'user' => $user,
             'form' => $form,
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -63,7 +73,7 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(User1Type::class, $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
