@@ -5,7 +5,7 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-6">
             <form method="post">
                 {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -43,6 +43,36 @@
                     Sign in
                 </button>
             </form>
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Password</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                {% for item in users %}
+                    <tr>
+                        <td>{{ item.email }}</td>
+                            <td>
+                        {% for item in item.roles %}
+                         {% if item == 'ROLE_ADMIN' %}
+                            Administrateur</td>
+                         {% elseif item == 'ROLE_EDITOR' %}
+                            Editeur
+                            {% elseif item == 'ROLE_USER' %}
+                            Utilsateur
+                         {% endif %}
+                        {% endfor %}
+                            </td>
+                        <td>password</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

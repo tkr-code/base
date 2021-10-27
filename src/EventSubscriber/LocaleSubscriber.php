@@ -21,17 +21,14 @@ class LocaleSubscriber implements EventSubscriberInterface
         if (!$request->hasPreviousSession()) {
             return;
         }
-        // dd($request);
         // try to see if the locale has been set as a _locale routing parameter
         $locale = $request->attributes->get('_locale');
         if ($locale = $request->attributes->get('_locale')) {
-            // dd($locale);
             $request->getSession()->set('_locale', $locale);
         } else {
             // if no explicit locale has been set on this request, use one from the session
             $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
         }
-        // dd($request);
     }
 
     public static function getSubscribedEvents()

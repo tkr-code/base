@@ -34,7 +34,7 @@ class NavExtension extends AbstractExtension
                     'icon'=>'fas fa-users',
                     'links'=>[
                         [
-                            'name'=>$this->translator->trans('User'),
+                            'name'=>$this->translator->trans('Users'),
                             'path'=>'user_index',
                         ],
                         [

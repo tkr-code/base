@@ -22,11 +22,11 @@ class UserFixtures extends Fixture
     {
         $users = array(
         array('first_name' => 'Malick','last_name' => 'Tounkara','email' => 'admin@mail.com',
-                'roles' => ["ROLE_ADMIN","ROLE_EDITOR"],'password' => 'pa','is_verified' => '1'),
+                'roles' => ["ROLE_ADMIN"]),
         array('first_name' => 'Mamadou','last_name' => 'Dieme','email' => 'editor@mail.com',
-                'roles' => ["ROLE_EDITOR","ROLE_USER"],'password' => 'demarrer','is_verified' => '1'),
-        array('first_name' => 'Pepin','last_name' => 'Ngoulou','email' => 'user1@mail.com',
-                'roles' => ["ROLE_USER"],'password' => 'demarrer','is_verified' => '1'),
+                'roles' => ["ROLE_EDITOR"]),
+        array('first_name' => 'Pepin','last_name' => 'Ngoulou','email' => 'user@mail.com',
+                'roles' => ["ROLE_USER"]),
         );
         foreach ($users as $value) {
             $user = new User();
@@ -34,6 +34,7 @@ class UserFixtures extends Fixture
             $personne->setFirstName($value['first_name'])
             ->setLastName($value['last_name']);
             $user->setEmail($value['email']);
+            $user->setIsVerified(true);
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
             ->setRoles($value['roles'])
             ->setPersonne($personne);

@@ -15,10 +15,23 @@
     ])}}
 {% endblock %}
 
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('vendor/cropper/cropper.min.css') }}">
+{% endblock %}
+
 {% block body %}
 {% for item in app.flashes('success') %}
   {{ alerte.alert(item,'success')}}
 {% endfor %}
+<style>
+#image{
+  display: block;
+  max-width: 100%;
+}
+</style>
+<div>
+  <img id="image" src="picture.jpg">
+</div>
   <div class="row">
     <div class="col-md-3">
       <!-- Profile Image -->
@@ -338,6 +351,10 @@
   </div>
   <!-- /.row -->
 {% endblock %}
+{% block foot %}
+  <!-- cropper -->
+  <script src="{{ asset('vendor/cropper/cropper.min.js') }}"></script>
+{% endblock %}
 
 {% block javascripts %}
   <script>
@@ -348,6 +365,19 @@
         $('#js-editor').animate({
           height:'toggle'
         })
+      })
+      const image = document.getElementById('image');
+      const cropper = new Cropper(image, {
+        aspectRatio: 16 / 9,
+        crop(event) {
+          console.log(event.detail.x);
+          console.log(event.detail.y);
+          console.log(event.detail.width);
+          console.log(event.detail.height);
+          console.log(event.detail.rotate);
+          console.log(event.detail.scaleX);
+          console.log(event.detail.scaleY);
+        },
       })
    })
   </script>

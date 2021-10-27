@@ -29,11 +29,13 @@
   .gallery img {
     width: 100px;
   }
-  .c-1{
-    color: #000!important;
+
+  .c-1 {
+    color: #000 !important;
   }
-  .c-1:hover{
-    color:  #0069d9!important;
+
+  .c-1:hover {
+    color: #0069d9 !important;
   }
 </style>
 
@@ -68,7 +70,8 @@
           <div class="navbar-search-block">
             <form class="form-inline">
               <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="{{'Search'|trans}}" aria-label="Search">
+                <input class="form-control form-control-navbar" type="search" placeholder="{{'Search'|trans}}"
+                  aria-label="Search">
                 <div class="input-group-append">
                   <button class="btn btn-navbar" type="submit">
                     <i class="fas fa-search"></i>
@@ -265,8 +268,7 @@
     </footer>
     {% endblock %}
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
+    <aside class="control-sidebar control-sidebar-dark" style="top: 57px; height: 297px; display: block;">
       <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
@@ -284,10 +286,14 @@
   <!-- Bootstrap 4 -->
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-  <!-- AdminLTE App -->
-  <script src="{{ asset('js/adminlte.js') }}"></script>
   <!-- Select2 -->
   <script src="{{ asset('vendor/select2/js/select2.full.min.js') }}"></script>
+  <!-- AdminLTE App -->
+  <script src="{{ asset('js/adminlte.js') }}"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="{{ asset('js/demo.js') }}"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="{{ asset('js/pages/dashboard.js') }}"></script>
   <script>
     $(document).ready(function () {
       //Initialize Select2 Elements
