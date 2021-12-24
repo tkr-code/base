@@ -16,12 +16,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class UserController extends AbstractController
 {
-    private $translator;
     private $parent_page;
     public function __construct(TranslatorInterface $translatorInterface)
     {
         $this->parent_page = $translatorInterface->trans('User');
-        $this->translator = $translatorInterface;
     }
     /**
      * @Route("/", name="user_index", methods={"GET"})

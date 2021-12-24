@@ -1,5 +1,5 @@
 {% macro edit(path) %}
-    <a class="btn btn-sm btn-success " href="{{ path }} "><i class="fas fa-pencil-alt"></i></a>
+    <a class="btn btn-sm text-success " href="{{ path|default('#') }} "><i class="fas fa-pencil-alt"></i></a>
 {% endmacro %}
 
 {% macro delete(path) %}

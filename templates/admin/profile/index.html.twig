@@ -29,9 +29,6 @@
   max-width: 100%;
 }
 </style>
-<div>
-  <img id="image" src="picture.jpg">
-</div>
   <div class="row">
     <div class="col-md-3">
       <!-- Profile Image -->
@@ -43,9 +40,6 @@
                   alt="{{ app.user.personne.firstName ~ ' ' ~ app.user.personne.lastName  }}">
           </div>
           <h3 class="profile-username text-center">{{app.user.personne.lastName | title}} {{app.user.personne.firstname | title }}</h3>
-
-          {# <p class="text-muted text-center">{{ app.user.personne.poste| title }}</p> #}
-
           <ul class="list-group list-group-unbordered mb-3">
             {% for item in app.user.roles %}
             <li class="list-group-item">

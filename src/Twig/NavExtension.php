@@ -23,32 +23,7 @@ class NavExtension extends AbstractExtension
     {
         return 
         [
-            'app'=>
-            [
-
-            ],
-            'admin'=>
-            [
-                [
-                    'name'=>'user',
-                    'icon'=>'fas fa-users',
-                    'links'=>[
-                        [
-                            'name'=>$this->translator->trans('Users'),
-                            'path'=>'user_index',
-                        ],
-                        [
-                            'name'=>$this->translator->trans('User'),
-                            'path'=>'user_new',
-                        ],
-                    ]
-                ]
-            ],
-            'user'=>
-            [
-                
-            ],
-            'dashboard'=>
+            'navs'=>
             [
                 [
                     'name'=>$this->translator->trans('Dashboard'),
@@ -61,7 +36,8 @@ class NavExtension extends AbstractExtension
                     ]
                 ],
                 [
-                    'name'=>'Profil',
+                    'name'=>'Profile',
+                    'icon'=>'fas fa-user',
                     'path'=>'profile_index',
                 ],
                 [
@@ -76,6 +52,23 @@ class NavExtension extends AbstractExtension
                         ]
                 ],
             ],
+            'admin'=>
+            [
+                [
+                    'name'=>$this->translator->trans('User'),
+                    'icon'=>'fas fa-users',
+                    'links'=>[
+                        [
+                            'name'=>$this->translator->trans('Users'),
+                            'path'=>'user_index',
+                        ],
+                        [
+                            'name'=>$this->translator->trans('User'),
+                            'path'=>'user_new',
+                        ],
+                    ]
+                ]
+            ]
         ];
     }
 }

@@ -30,7 +30,6 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
         return $this->renderForm('admin/profile/index.html.twig', [
             'form' => $form,
-            'parent_page'=>$this->translator->trans('Dashboard')
         ]);
     }
 

@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="Z7aWRoY" resname="Dashboard">
         <source>Dashboard</source>
-        <target>Tableau de bord</target>
+        <target>Tableau de board</target>
       </trans-unit>
       <trans-unit id="WiNESCj" resname="Manage">
         <source>Manage</source>

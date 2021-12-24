@@ -1,0 +1,15 @@
+{% macro css() %}
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}">
+{% endmacro %}
+
+{% macro js() %}
+<!-- jQuery -->
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{{ asset('vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- Bootstrap 4 -->
+<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+{% endmacro %}
