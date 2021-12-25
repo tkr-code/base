@@ -12,4 +12,7 @@
 {% macro add(path,text) %}
     <a class="btn mb-1 btn-lg btn-primary" href="{{ path }} "> {{ text|default('Create') }} <i class="fas fa-plus" aria-hidden="true"></i></a>
 {% endmacro %}
+{% macro iconEdit(path = '#') %}
+    <a href="{{ path }}"><i class="fas fa-pencil-alt text-success"></i></a>
+{% endmacro %}
 

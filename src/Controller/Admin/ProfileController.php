@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Form\ChangePasswordFormType;
+
 
 /**
  * @Route("admin/profile")
@@ -66,6 +68,27 @@ class ProfileController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("-edit-password", name="profile_edit_password", methods={"GET","POST"})
+     */
+    public function editPassword(Request $request): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ChangePasswordFormType::class);        
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $personne = $user->getPersonne();
+            $user->setPersonne($personne);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success','Profil modify');
+            return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/profile/edit-email.html.twig', [
+            'form' => $form,
+        ]);
+    }
     /**
      * @Route("/{id}/edit", name="profile_edit", methods={"GET","POST"})
      */

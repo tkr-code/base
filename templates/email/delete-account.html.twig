@@ -1,0 +1,9 @@
+{% extends "email/base.html.twig" %}
+{% block title %}Delete account{% endblock %}
+{% block body %}
+    <p>Bonjour {{ user.personne.fullName|default('') }}</p>
+    <p>
+        Nous sommes désolés d'apprendre que vous souhaitez vous désinscrire, cliquez sur le lien ci-dessous pour vous désinscrire
+    </p>
+    <p style="font-size: 12px">NB: Toutes vos informations seront supprimées et vous ne pourriez plus les restorer</p>
+{% endblock %}
