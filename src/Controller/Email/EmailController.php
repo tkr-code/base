@@ -2,6 +2,7 @@
 
 namespace App\Controller\Email;
 
+use App\Entity\User;
 use App\Repository\OrderRepository;
 use App\Repository\UserRepository;
 use App\Service\Email\EmailService;
@@ -38,6 +39,10 @@ class EmailController extends AbstractController
             [
                 'path'=>'email_new_user',
                 'name'=>'Nouvelle utulisateur'
+            ],
+            [
+                'path'=>'email_reset_email',
+                'name'=>"Modifier l'email"
             ],
             [
                 'path'=>'email_delete_account',
@@ -103,12 +108,22 @@ class EmailController extends AbstractController
         ]);
     }
     /**
+     * @Route("/email/reset-email", name="email_reset_email")
+     */
+    public function resetEmail(EmailService $emailService): Response
+    {
+        return $this->render('email/reset-email.html.twig',[
+            'theme'=>$emailService->theme(8)
+        ]);
+    }
+    /**
      * @Route("/email/delete-account", name="email_delete_account")
      */
     public function deleteAccount(EmailService $emailService): Response
     {
         return $this->render('email/delete-account.html.twig',[
-            'theme'=>$emailService->theme(7)
+            'theme'=>$emailService->theme(7),
+            'btnColor'=>'#d33'
         ]);
     }
 }

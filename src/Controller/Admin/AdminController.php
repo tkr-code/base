@@ -19,6 +19,7 @@ class AdminController extends AbstractController
      */
     public function index(): Response
     {
+
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }

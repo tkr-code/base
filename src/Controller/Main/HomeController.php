@@ -17,12 +17,4 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeControlerController',
         ]);
     }
-    /**
-     * @Route("/delete-account", name="delete_account")
-     */
-    public function deleteAccount(): Response
-    {
-        return $this->render('main/delete-account.html.twig', [
-        ]);
-    }
 }

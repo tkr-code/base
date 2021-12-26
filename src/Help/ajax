@@ -1,0 +1,11 @@
+$.ajax({
+url: "",
+method: "",
+dataType: '',
+data: {},
+beforeSend: function () {
+},
+success: function (data) {
+    
+}
+})

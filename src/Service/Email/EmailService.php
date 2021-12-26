@@ -2,13 +2,17 @@
 
 namespace App\Service\Email;
 
+use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Crap4j;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EmailService
 {
     private $translator;
-    public function __construct(TranslatorInterface $translatorInterface)
+    private $csrf;
+    public function __construct(TranslatorInterface $translatorInterface, CsrfTokenManagerInterface $csrfTokenManager)
     {
+        $this->csrf = $csrfTokenManager;
         $this->translator =$translatorInterface;
     }
     public function theme($id = '')
@@ -76,12 +80,20 @@ class EmailService
               $message = 'Un nouveau message a été crée.';
             break;
           case '7':
-            // contact
+            // Se désinscrire
             $introduction = '';
             $button_link ='delete_account' ;
             $button_text = 'Se désinscrire';
               $titre = "Avis de désinscription";
-              $message = "Vous ne recevrez plus d'email a partir de maintenant.";
+              $message = "Vous ne recevrez plus d'email a partir de maintenant";
+            break;
+          case '8':
+            // modifier email
+            $introduction = '';
+            $button_link ='edit_email' ;
+            $button_text = "Modifier l'email";
+            $titre = "Avis de modification d'email";
+              $message = "Vous allez modifier votre email";
             break;
 
           default:
@@ -101,7 +113,7 @@ class EmailService
                 'path'=>$button_link,
                 'text'=>$button_text
             ],
-            'resetToken'=>'reset/NLsV4E2rKC57yaBv2Ib2VAp2n3HKzFXjFCRRULa9'
+            'tokenKey'=>$this->csrf->getToken($button_link)
         ];
     }
 }
