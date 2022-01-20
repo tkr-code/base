@@ -1,5 +1,5 @@
 {% macro li(item) %}
-<li class="nav-item">
+<li class="nav-item" {{ item.id is defined ? 'id=' ~ item.id ~ '':''  }} >
     <a href="{{ path(item.path) }}" class="nav-link {{ app.request.attributes.get('_route') == item.path ? 'active': '' }} ">
         <i class="{{ item.icon|default('far fa-circle') }} nav-icon"></i>
         <p>{{ item.name|default('name') }}</p>

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Form\ChangePasswordFormType;
 
+use function PHPUnit\Framework\fileExists;
 
 /**
  * @Route("admin/profile")
@@ -28,10 +29,12 @@ class ProfileController extends AbstractController
     public function index(Request $request): Response
     {
         $user =  $this->getUser();
+        // dd($user->getPersonne()->getAvatar());
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
         return $this->renderForm('admin/profile/index.html.twig', [
             'form' => $form,
+            
         ]);
     }
 
@@ -90,27 +93,33 @@ class ProfileController extends AbstractController
         ]);
     }
     /**
-     * @Route("/{id}/edit", name="profile_edit", methods={"GET","POST"})
+     * @Route("/edit", name="profile_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
-    {        
+    public function edit(Request $request): Response
+    {   $user = $this->getUser();
         $form = $this->createForm(ProfileType::class, $user,[]);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $image = $form->get('avatar')->getData();
-            // dump($image);
             $personne = $user->getPersonne();
+            $lastImag = $personne->getAvatar();
             if ($image) {
-                # code...
                 $fichier = md5(uniqid()). '.'.$image->guessExtension();
-                $image->move(
-                $this->getParameter('user_images_directory'),
-                $fichier
-                );
+                
+                $image->move($this->getParameter('user_images_directory'),$fichier);
+
                 $personne->setAvatar($fichier);
+                //delete img user
+                if(!empty($lastImag)){
+
+                    $pathDeleteImg = $this->getParameter('user_images_directory').DIRECTORY_SEPARATOR.$lastImag;
+                    if(file_exists($pathDeleteImg)){
+                        unlink($pathDeleteImg);
+                    }
+                }
             }
+            
             $user->setPersonne($personne);
             $this->getDoctrine()->getManager()->flush();
             $message  = $this->translator->trans('profil modify');
