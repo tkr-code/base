@@ -26,17 +26,6 @@ name:'Manage Articles'
 {% for item in app.flashes('success') %}
 {{ alerte.alert(item,'success')}}
 {% endfor %}
-<style>
-  #image {
-    display: block;
-    max-width: 100%;
-  }
-
-  .loader-delete-account,
-  .alert-delete-account {
-    display: none;
-  }
-</style>
 <div class="row">
   <div class="col-md-3">
     <!-- Profile Image -->
@@ -49,12 +38,6 @@ name:'Manage Articles'
         </div>
         <h3 class="profile-username text-center">{{app.user.personne.lastName | title}} {{app.user.personne.firstname |
           title }}</h3>
-        <p>
-        
-          <a href="#" class="a">Modifier le mot de passe <i class="fas fa-pencil-alt text-success"></i> </a>
-        </p>
-
-
         <button type="button" id="btn-editor" class="btn btn-primary mb-3 btn-block">
           <b>Modifier <i class="fas fa-pencil-alt"></i> </b>
         </button>
@@ -107,14 +90,22 @@ name:'Manage Articles'
               <div class="col-md-4 col-12">
                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Adresse</strong>
                 <p class="text-muted">
-                  Sacre coeur 2, Dakar senegal
+                 {% if  app.user.adresse %}
+                 {{ app.user.adresse.rue}} , {{ app.user.adresse.ville }} {{ app.user.adresse.pays}}
+                 {% endif %}                 
                 </p>
               </div>
               <div class="col-md-4 col-12">
                 <strong><i class="fas fa-phone mr-1"></i> Telephone</strong>
                 <p class="text-muted">
-                  +221 78 127 82 88
+                {% for item in app.user.phones %}
+                  {{ item.valeur}}
+                  {% if not loop.last %}
+                    {{ ' |'}}
+                  {% endif %}
+                {% endfor %}
                 </p>
+                <a href="{{ path('profile_phone_new') }}" class="btn btn-primary">Ajouter un numero de téléphone !</a>
               </div>
             </div>
           </div>
@@ -129,6 +120,17 @@ name:'Manage Articles'
                 <div class="loader-edit-email">
                   <div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
                 </div>
+                <div class="alert-edit-email">
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus, qui.</p>
+                  </div>
+                  <script>
+                    $(".alert").alert();
+                  </script>
+                </div>
                 <button id="btn-edit-email" class="btn btn-primary">
                   Modifier l'email
                 </button>
@@ -139,9 +141,10 @@ name:'Manage Articles'
                 <p class="text-muted">
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, quis.
                 </p>
-                <button class="btn btn-primary"> <i class="fas fa-edit"></i>
+                
+                <a href="{{ path('profile_edit_password') }}" class="btn btn-primary"> <i class="fas fa-edit"></i>
                   Modifier le mot de passe
-                </button>
+                </a>
                 <hr>
               </div>
               <div class="col-md-6">
@@ -263,28 +266,26 @@ name:'Manage Articles'
             dataType: 'json',
             data: {},
             beforeSend: function () {
-              $('.loader-delete-account').css('display', 'initial')
-              $('#btn-delete-account').css('display', 'none')
+              $('.loader-edit-email').css('display', 'initial')
+              $('#btn-edit-email').css('display', 'none')
             },
             success: function (data) {
-              $('.loader-delete-account').css('display', 'none')
-              $('#btn-delete-account').css('display', 'initial')
-              $('.alert-delete-account').css('display', 'initial')
-              Swal.fire({
-                icon: 'success',
-                title: 'Your work has been saved',
-                showConfirmButton: false,
-                timer: 1500
-              })
+              if(data == 'success'){
+
+              }else{
+                  Swal.fire({
+                  icon: 'success',
+                  title: 'Your work has been saved',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              }
+              $('.loader-edit-email').css('display', 'none')
+              $('#btn-edit-email').css('display', 'initial')
+              $('.alert-edit-email').css('display', 'initial')
             }
           })
           //  ./ajax end
-          Swal.fire({
-            icon: 'success',
-            title: 'Un email de confirmation vous a été envoyé',
-            showConfirmButton: false,
-            timer: 1500
-          })
         }
       })
     })

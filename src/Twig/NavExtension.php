@@ -36,6 +36,7 @@ class NavExtension extends AbstractExtension
                     ]
                 ],
                 [
+                    'id'=>'profile',
                     'name'=>'Profile',
                     'icon'=>'fas fa-user',
                     'path'=>'profile_index',

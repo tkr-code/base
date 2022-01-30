@@ -1,0 +1,18 @@
+{% extends 'admin/base.html.twig' %} {% block title %}New Phone number{% endblock %} {% block body %}
+<div class="card card-outline card-primary">
+    <h4 class="card-header">Title</h4>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 col-12">
+                {{ form_start(form) }} {{ form_widget(form) }}
+                <button class="btn btn-primary">{{ button_label|default('Save') }}</button> 
+                {{ form_end(form) }}
+                <div class="btn btn-group">
+                    <a class="btn btn-dark" href="{{ path('profile_index') }}">back to profil</a>
+                    <a class="btn btn-primary" href="{{ path('profile_phone_index') }}">go to phone list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

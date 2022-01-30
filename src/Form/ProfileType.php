@@ -23,6 +23,9 @@ class ProfileType extends AbstractType
             ->add('personne',PersonneType::class,[
                 'label'=>false
             ])
+            ->add('adresse',AdresseType::class,[
+                'label'=>false
+            ])
             ->add('avatar',FileType::class,[
                 'label'=>'avatar ( jpg or png )  ',
                 'multiple'=>false,

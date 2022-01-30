@@ -3,13 +3,18 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Phone;
 use App\Form\ProfileType;
+use App\Form\PhoneType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Form\ChangePasswordFormType;
+use App\Repository\PhoneRepository;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -38,6 +43,7 @@ class ProfileController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/new", name="profile_new", methods={"GET","POST"})
      */
@@ -62,6 +68,40 @@ class ProfileController extends AbstractController
     }
 
     /**
+     * @Route("/phone", name="profile_phone_index", methods={"GET"})
+     */
+    public function phoneIndex(PhoneRepository $phoneRepository): Response
+    {        
+        return $this->render('admin/profile/phone/index.html.twig', [
+            'phones' =>$phoneRepository->findBy([
+                        'user'=>$this->getUser()->getId(),
+                    ])
+        ]);
+    }
+    /**
+     * @Route("/phone/new", name="profile_phone_new", methods={"GET","POST"})
+     */
+    public function phoneNew(Request $request): Response
+    {
+        $phone = new Phone();
+        $phone->setUser($this->getUser());
+        $form = $this->createForm(PhoneType::class, $phone);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($phone);
+            $entityManager->flush();
+            $this->addFlash('success','Success');
+            return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/profile/phone/new.html.twig', [
+            'phone' => $phone,
+            'form' => $form,
+        ]);
+    }
+    /**
      * @Route("/{id}", name="profile_show", methods={"GET"})
      */
     public function show(User $user): Response
@@ -74,21 +114,26 @@ class ProfileController extends AbstractController
     /**
      * @Route("-edit-password", name="profile_edit_password", methods={"GET","POST"})
      */
-    public function editPassword(Request $request): Response
+    public function editPassword(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface ): Response
     {
+        // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordFormType::class);        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $personne = $user->getPersonne();
-            $user->setPersonne($personne);
+
+            $user->setPassword(
+                $userPasswordHasherInterface->hashPassword($user, $form->get('plainPassword')->getData())
+            );
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success','Profil modify');
+            $this->addFlash('success','Mot de passe modoifier');
+            
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/profile/edit-email.html.twig', [
+        return $this->renderForm('admin/profile/password/edit.html.twig', [
             'form' => $form,
         ]);
     }
