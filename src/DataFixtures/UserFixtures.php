@@ -35,7 +35,7 @@ class UserFixtures extends Fixture
                 'first_name' => 'Pepin','last_name' => 'Ngoulou','email' => 'admin3@mail.com',
                 'roles' => ["ROLE_ADMIN"]],
         [
-                'first_name' => 'Pepin','last_name' => 'Ngoulou','email' => 'editor1@mail.com',
+                'first_name' => 'Pepin2','last_name' => 'Ngoulou','email' => 'editor1@mail.com',
                 'roles' => ["ROLE_EDITOR"]],
         [
                 'first_name' => 'prenom1','last_name' => 'nom1','email' => 'user1@mail.com',
@@ -63,6 +63,7 @@ class UserFixtures extends Fixture
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
             ->setRoles($value['roles'])
             ->setPersonne($personne);
+            $this->addReference('_user_'.$value['first_name'],$user);
             $this->em->persist($user);
         }
         $this->em->flush();

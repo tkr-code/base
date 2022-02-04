@@ -42,6 +42,11 @@ class NavExtension extends AbstractExtension
                     'path'=>'profile_index',
                 ],
                 [
+                    'name'=>'Chat',
+                    'icon'=>'fas fa-envelope',
+                    'path'=>'admin_chat_index',
+                ],
+                [
                     'name'=>'App name',
                     'icon'=>'fa fa-home',
                     'links'=>

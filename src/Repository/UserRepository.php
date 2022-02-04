@@ -21,6 +21,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         parent::__construct($registry, User::class);
     }
+    public function findQuery(){
+        return $this->createQueryBuilder('q');
+    }
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
@@ -36,6 +39,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function conversationUser(int $emeteur, int $recepteur){
+        $query = $this->findQuery();
+        $query->join('q.envoyer','m');
+        $query->andWhere('m.emetteur = :id_emmetteur OR m.recepteur = :id_emmetteur');
+
+        $query->andWhere('m.emetteur = :id_recepteur OR m.recepteur = :id_recepteur');
+
+        $query->setParameter('id_emmetteur',$emeteur);
+        $query->setParameter('id_recepteur',$recepteur);
+        $query->orderBy('q.id','ASC');
+        $query->distinct();
+        // $query->setMaxResults(1);
+        return $query->getQuery()->getResult();
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

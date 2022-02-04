@@ -65,9 +65,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $phones;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="emetteur")
+     */
+    private $envoyer;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="recepteur")
+     */
+    private $recu;
+
     public function __construct()
     {
         $this->phones = new ArrayCollection();
+        $this->envoyer = new ArrayCollection();
+        $this->recu = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -219,6 +231,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($phone->getUser() === $this) {
                 $phone->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getEnvoyer(): Collection
+    {
+        return $this->envoyer;
+    }
+
+    public function addEnvoyer(Message $envoyer): self
+    {
+        if (!$this->envoyer->contains($envoyer)) {
+            $this->envoyer[] = $envoyer;
+            $envoyer->setEmetteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnvoyer(Message $envoyer): self
+    {
+        if ($this->envoyer->removeElement($envoyer)) {
+            // set the owning side to null (unless already changed)
+            if ($envoyer->getEmetteur() === $this) {
+                $envoyer->setEmetteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getRecu(): Collection
+    {
+        return $this->recu;
+    }
+
+    public function addRecu(Message $recu): self
+    {
+        if (!$this->recu->contains($recu)) {
+            $this->recu[] = $recu;
+            $recu->setRecepteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecu(Message $recu): self
+    {
+        if ($this->recu->removeElement($recu)) {
+            // set the owning side to null (unless already changed)
+            if ($recu->getRecepteur() === $this) {
+                $recu->setRecepteur(null);
             }
         }
 
