@@ -5,7 +5,7 @@
 {% block body %}
 <div class="content">
 	<div class="container p-0">
-		<div class="card">
+		<div class="card card-chat">
 			<div class="row g-0">
 				<div class="col-12 col-lg-5 col-xl-3 border-right">
 
@@ -17,9 +17,12 @@
 						</div>
 					</div>
 					<div class="user-conversation">
+						<div class="user-conversation-loader">
+							<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
+						</div>
 
-						{% for item in users %}
-						<a data-emetteur="{{item.id}}" data-recepteur="20" href="#"
+						{# {% for item in users %}
+						<a data-emetteur="{{app.user.id}}" data-recepteur="{{item.id}}" href="#"
 							class="list-group-item list-group-item-action border-0 conversation">
 							<div class="badge bg-success float-right">{{ item.recu|length }}</div>
 							<div class="d-flex align-items-start">
@@ -47,12 +50,15 @@
 									</div>
 								</div>
 							</div>
-						</a>
+						</a> #}
 					</div>
-
 					<hr class="d-block d-lg-none mt-1 mb-0">
 				</div>
-				<div class="col-12 col-lg-7 col-xl-9 chat-content"></div>
+				<div class="col-12 col-lg-7 col-xl-9 chat-content">
+					<div class="chat-content-loader">
+						<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -84,64 +90,75 @@
 				success: function (data) {
 					if (data == 'success') {
 						$('.chat-messages').append(sendApendHtml(message))
+						chatScrollToBottom()
+						$('.message-send').val('')
 					} else {
 						alert("le message n'a pas pu etre envoyé")
 					}
 				}
 			})
-			$('.message-send').val('')
-			chatScrollToBottom()
 		}) //send message
 
 		function sendApendHtml(message) {
-			let html = '<div class="chat-message-right pb-4">' +
-				'<div>' +
-				'		<img src="https://bootdey.com/img/Content/avatar/avatar1.png"' +
-				'		class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">' +
-				'			<div class="text-muted small text-nowrap mt-2">2:33 am</div>' +
-				'		</div>' +
-				'		<div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">' +
-				'			<div class="font-weight-bold mb-1">You</div>' +
-				message +
-				'		</div>' +
-				'	</div>'
+			let date = new Date();
+			let html =
+				'<div class="chat-message-right mb-4">'
+				+ '<div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">'
+				+ '<div class="font-weight-bold mb-1">You</div>'
+				+ message
+				+ '<div class="text-muted small text-nowrap mt-2 float-right ml-2">'
+				+ date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+				+ '</div>'
+				+ '</div>'
+				+ '</div>'
 			return html
 		}
 
 		function chatScrollToBottom() {
 			$('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight)
 		}
-
+		setInterval(() => {
+			
+		}, 500);
 		$(document).on('click', '.conversation', function () {
 			let recepteur = $(this).data('recepteur');
+			if (recepteur) {
+				$.ajax({
+					url: "{{path('chat_get_content')}}",
+					method: "POST",
+					dataType: 'text',
+					data: {
+						content: '',
+						recepteur: recepteur,
+					},
+					beforeSend: function () {
+						// $('.user-conversation-loader').css('display')
+					},
+					success: function (data) {
+						$('.chat-content').html(data)
+						chatScrollToBottom()
+					}
+				})
+			}
+
+		})
+
+
+		getUserConversation()
+		function getUserConversation() {
 			$.ajax({
-				url: "{{path('chat_get_content')}}",
+				url: "{{path('chat_get_user_conversation')}}",
 				method: "POST",
-				dataType: '',
-				data: {
-					content: '',
-					recepteur: recepteur,
-				},
+				dataType: 'text',
+				data: {},
 				beforeSend: function () {
 				},
 				success: function (data) {
-					$('.chat-content').html(data)
+					$('.user-conversation').html(data)
 				}
 			})
-		})
 
-		$.ajax({
-			url: "{{path('chat_get_user_conversation')}}",
-			method: "POST",
-			dataType: '',
-			data: {},
-			beforeSend: function () {
-			},
-			success: function (data) {
-				$('.user-conversation').html(data)
-			}
-		})
-
+		}
 
 	})
 </script>

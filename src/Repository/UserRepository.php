@@ -39,19 +39,40 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function conversationUser(int $emeteur, int $recepteur){
+    public function chatUsers(int $emetteur){
+        
+
+    //     $conn = $this->getEntityManager()->getConnection();
+    //     $sql = '
+    // select distinct  u.id from user u left join message m on u.id = m.emetteur_id left join message on u.id=m.recepteur_id where not u.id = 19;    //         ';
+    //     $stmt = $conn->prepare($sql);
+    //    return $resultSet = $stmt->executeQuery([]);
+        
         $query = $this->findQuery();
-        $query->join('q.envoyer','m');
-        $query->andWhere('m.emetteur = :id_emmetteur OR m.recepteur = :id_emmetteur');
-
-        $query->andWhere('m.emetteur = :id_recepteur OR m.recepteur = :id_recepteur');
-
-        $query->setParameter('id_emmetteur',$emeteur);
-        $query->setParameter('id_recepteur',$recepteur);
-        $query->orderBy('q.id','ASC');
+        $query->leftJoin('q.envoyer','e');
+        $query->leftJoin('q.recu','r');
+        $query->orwhere('e.emetteur = :emetteur or e.recepteur = :emetteur');
+        $query->orwhere('r.emetteur = :emetteur or r.recepteur = :emetteur' );
+        $query->andWhere('not q.id = :emetteur');
+        $query->setParameter('emetteur',$emetteur);
         $query->distinct();
-        // $query->setMaxResults(1);
         return $query->getQuery()->getResult();
+        // $query->join('q.envoyer','e');
+        // $query->join('q.recu','r');
+        // $query->andWhere('e.emetteur = :id_emmetteur OR e.recepteur = :id_emmetteur');
+
+        // $query->andWhere('e.emetteur = :id_recepteur OR e.recepteur = :id_recepteur');
+
+        // $query->andWhere('r.emetteur = :id_emmetteur OR r.recepteur = :id_emmetteur');
+        // $query->andWhere('r.emetteur = :id_recepteur OR r.recepteur = :id_recepteur');
+
+        // $query->setParameter('id_emmetteur',$emeteur);
+        // $query->setParameter('id_recepteur',$recepteur);
+        // $query->orderBy('q.id','ASC');
+        // $query->distinct();
+        // $query->setMaxResults(1);
+        // return $query->getQuery()->getResult();
+        // return
     }
     // /**
     //  * @return User[] Returns an array of User objects

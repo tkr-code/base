@@ -24,15 +24,24 @@ class MessageRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('q');
     }
     public function conversation(int $emeteur, int $recepteur){
-        $query = $this->findQuery();
-        $query->andWhere('q.emetteur = :id_emmetteur AND q.recepteur = :id_recepteur');
+        // $query = $this->findQuery();
+        // $query->andWhere('q.emetteur = :id_emmetteur AND q.recepteur = :id_recepteur');
 
-        $query->orWhere('q.emetteur = :id_recepteur AND q.recepteur = :id_emmetteur');
+        // $query->orWhere('q.emetteur = :id_recepteur AND q.recepteur = :id_emmetteur');
 
-        $query->setParameter('id_emmetteur',$emeteur);
-        $query->setParameter('id_recepteur',$recepteur);
-        $query->orderBy('q.id','ASC');
-        return $query->getQuery()->getResult();
+        // $query->setParameter('id_emmetteur',$emeteur);
+        // $query->setParameter('id_recepteur',$recepteur);
+        // $query->orderBy('q.id','ASC');
+        $conn= $this->getEntityManager()->getConnection();
+        $sql = '
+            SELECT * FROM message m
+            ';
+            $sql = "SELECT * FROM message m LEFT JOIN user u ON u.id = m.emetteur_id
+            WHERE (emetteur_id = {$emeteur} AND recepteur_id = {$recepteur})
+            OR (emetteur_id = {$recepteur} AND recepteur_id = {$emeteur}) ORDER BY m.id";
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery([]);
+        return $resultSet->fetchAllAssociative();
     }
     
     public function conversationUser(int $emeteur, int $recepteur){
@@ -45,6 +54,7 @@ class MessageRepository extends ServiceEntityRepository
         $query->setParameter('id_recepteur',$recepteur);
         $query->orderBy('q.id','ASC');
         $query->distinct('q.emetteur');
+        // select distinct u.id from user u left join message me on u.id = me.emetteur_id left join message mr on u.id= mr.recepteur_id  where (me.emetteur_id = 37 or me.recepteur_id = 37) or ( mr.emetteur_id = 37 or mr.recepteur_id = 37) AND  u.id <> 37;
         // $query->setMaxResults(1);
         return $query->getQuery();
     }

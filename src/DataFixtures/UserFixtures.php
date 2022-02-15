@@ -60,6 +60,7 @@ class UserFixtures extends Fixture
             ->setLastName($value['last_name']);
             $user->setEmail($value['email']);
             $user->setIsVerified(true);
+            $user->setStatus('offline');
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
             ->setRoles($value['roles'])
             ->setPersonne($personne);

@@ -54,14 +54,15 @@ class ChatAjaxController extends AbstractController
      */
     public function getChatContent(Request $request, UserRepository $userRepository, MessageRepository $messageRepository): Response
     {
-        $user = new User();
+        $user = $this->getUser();
+        $userRecepteur= '';
         $recepteur =(int) $_POST['recepteur'];
         if(isset($_POST['content'])){
-            $user = $userRepository->find($recepteur);
+            $userRecepteur = $userRepository->find($recepteur);
         }
         return $this->render('chat/content.html.twig', [
-            'user'=>$user,
-            'messages'=>$messageRepository->conversation(19,20),
+            'user'=>$userRecepteur,
+            'messages'=>$messageRepository->conversation($user->getId(),$recepteur),
             'id_emetteur'=>$recepteur
         ]);
     }
@@ -69,11 +70,11 @@ class ChatAjaxController extends AbstractController
     /**
      * @Route("/chat/get-user-conversation/", name="chat_get_user_conversation", methods={"GET","POST"})
      */
-    public function getChatUser(Request $request,MessageRepository $messageRepository): Response
+    public function getChatUser(Request $request,UserRepository $userRepository): Response
     {
-        
+        $user = $this->getUser();
         return $this->render('chat/user-content.html.twig', [
-            'messages'=>$messageRepository->conversationUser(19,20),
+            'conversations'=>$userRepository->chatUsers($user->getId()),
         ]);
     }
 

@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AdresseRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class Adresse
 {
@@ -21,16 +20,22 @@ class Adresse
     private $id;
 
     /**
+     * @Assert\NotNull
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $rue;
 
     /**
+     * @Assert\NotNull
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $ville;
 
     /**
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $pays;

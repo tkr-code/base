@@ -20,7 +20,7 @@ class ChatController extends AbstractController
     public function index(MessageRepository $messageRepository, UserRepository $userRepository): Response
     {
         // dd(
-        //   $userRepository->conversationUser(19,20)
+        //   $userRepository->chatUsers(37)
         // );
         return $this->render('admin/chat/index1.html.twig', [
             'users' =>$userRepository->findAll()

@@ -12,33 +12,17 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
 
-        for ($i=0; $i < 3; $i++) { 
             $message = new Message();
             $message->setEmetteur($this->getReference('_user_Malick'));
             $message->setRecepteur($this->getReference('_user_Mamadou'));
-            $message->setMessage('Lorem ipsum dolor sit amet.');
+            $message->setMessage('Salut mamadou.');
             $message->setIsRead(false);
             $manager->persist($message);
-        }
-        for ($i=0; $i < 5; $i++) { 
+        
             $message = new Message();
             $message->setEmetteur($this->getReference('_user_Mamadou'));
             $message->setRecepteur($this->getReference('_user_Malick'));
-            $message->setMessage('Lorem ipsum dolor sit amet.');
-            $message->setIsRead(false);
-            $manager->persist($message);
-        }
-            $message = new Message();
-            $message->setEmetteur($this->getReference('_user_Malick'));
-            $message->setRecepteur($this->getReference('_user_Mamadou'));
-            $message->setMessage('Lorem ipsum dolor sit amet.');
-            $message->setIsRead(false);
-            $manager->persist($message);
-
-            $message = new Message();
-            $message->setEmetteur($this->getReference('_user_Mamadou'));
-            $message->setRecepteur($this->getReference('_user_Malick'));
-            $message->setMessage('Lorem ipsum dolor sit amet.');
+            $message->setMessage('Salut Malick.');
             $message->setIsRead(false);
             $manager->persist($message);
 

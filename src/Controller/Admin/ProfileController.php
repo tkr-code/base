@@ -145,7 +145,6 @@ class ProfileController extends AbstractController
         $form = $this->createForm(ProfileType::class, $user,[]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $image = $form->get('avatar')->getData();
             $personne = $user->getPersonne();
             $lastImag = $personne->getAvatar();
@@ -174,7 +173,7 @@ class ProfileController extends AbstractController
 
         return $this->renderForm('admin/profile/index.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'form' => $form
         ]);
     }
 

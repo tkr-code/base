@@ -56,11 +56,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $personne;
 
     /**
+     * @Assert\Valid
      * @ORM\OneToOne(targetEntity=Adresse::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $adresse;
 
     /**
+     * 
      * @ORM\OneToMany(targetEntity=Phone::class, mappedBy="user")
      */
     private $phones;
@@ -74,6 +76,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="recepteur")
      */
     private $recu;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
 
     public function __construct()
     {
@@ -293,6 +300,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $recu->setRecepteur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
