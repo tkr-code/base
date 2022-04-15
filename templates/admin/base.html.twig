@@ -1,9 +1,10 @@
 {% import "macros/navs.html.twig" as nav %}
 {% import "macros/breadcrumb.html.twig" as breadcrumb %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app.request.locale }}">
 <head>
   <meta charset="utf-8">
+  <meta name="description" content="Application de base de TKR">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %} | {{  app_name }}</title>
 
@@ -14,17 +15,15 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+  <!-- select2 -->
+  <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
   <!-- Sweetalert 2 -->
   <link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
   {% block head %}{% endblock %}
   {% block stylesheet %}{% endblock %}
 
 </head>
-<style>
-  #js-editor{
-    display: none;
-  }
-</style>
 <body class="hold-transition sidebar-mini layout-fixed {{ app.request.attributes.get('_route') == 'admin' ? '':'sidebar-collapse' }}">
 <div class="wrapper">
 
@@ -43,6 +42,7 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/" class="nav-link">{{'Home'|trans}}</a>
       </li>
+      {% include "includes/_lang.html.twig" %}
     </ul>
 
     <!-- Right navbar links -->
@@ -268,14 +268,16 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('js/adminlte.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-{# <script src="{{ asset('js/demo.js') }}"></script> #}
-
+ <!--script src="{{ asset('js/demo.js') }}"></script-->
+<!-- Select2 -->
+ <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
 {% block foot %}{% endblock %}
 
 <script>
   $(document).ready(function(){
+
     $(document).on('click','#btn-logout',function(){
       Swal.fire({
         title: 'Etes vous sûr?',
@@ -288,10 +290,9 @@
         confirmButtonText: 'Oui, je confirme!'
       }).then((result) => {
         if (result.isConfirmed) {
-
             Swal.fire({
               icon: 'success',
-              title: 'Your work has been saved',
+              title: 'Déconnection réussie !',
               showConfirmButton: false,
               timer: 1500
             }).then((result)=>{
@@ -300,6 +301,9 @@
         }
       })
     })
+
+    // SELECT2 
+    $('.select2').select2()
   })
 </script>
 {% block javascripts %}

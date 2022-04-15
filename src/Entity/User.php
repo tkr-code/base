@@ -17,6 +17,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    public const OFF_LINE = 'Offline';
+    public const ON_LINE = 'Online';
+    const roles = [
+        'Administrateur'=>'ROLE_ADMIN',
+        'Utilisateur'=>'ROLE_USER',
+        'Editeur'=>'ROLE_EDITOR',
+        'Client'=>'ROLE_CLIENT',
+    ];
+    const status =[
+        'Offline'=>self::OFF_LINE,
+        'Online'=>self::ON_LINE
+    ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

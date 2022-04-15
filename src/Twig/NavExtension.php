@@ -69,7 +69,7 @@ class NavExtension extends AbstractExtension
                             'path'=>'user_index',
                         ],
                         [
-                            'name'=>$this->translator->trans('User'),
+                            'name'=>$this->translator->trans('New'),
                             'path'=>'user_new',
                         ],
                     ]

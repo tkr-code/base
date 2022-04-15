@@ -3,16 +3,25 @@
 {% endmacro %}
 
 {% macro delete(path) %}
-    <a class="btn btn-sm btn-danger " href="{{ path }} "><i class="fas fa-trash-alt"></i></a>
+    <a class="btn btn-sm" href="{{ path }}" title="Supprimer" ><i class="text-danger fas fa-trash-alt"></i></a>
 {% endmacro %}
 
 {% macro back(path,text) %}
-    <a class="btn btn-default" href="{{ path }} "> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> {{ text|default('back to list') }} </a>
+    <a class="btn btn-dark my-3" href="{{ path }}" title="Retour"> 
+    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> {{ text|default('back to list') }} </a>
 {% endmacro %}
+{% macro goTo(path,text) %}
+    <a class="btn btn-info my-3" href="{{ path }}" title="Retour"> 
+    <i class="fa fa-arrow-circle-up" aria-hidden="true"></i> {{ text|default('back to list') }} </a>
+{% endmacro %}
+
 {% macro add(path,text) %}
-    <a class="btn mb-1 btn-lg btn-primary" href="{{ path }} "> {{ text|default('Create') }} <i class="fas fa-plus" aria-hidden="true"></i></a>
+    <a class="btn my-3 btn-primary" href="{{ path }} "> 
+    <i class="fas fa-plus" aria-hidden="true"></i>
+    {{ text|default('Create') }} 
+    </a>
 {% endmacro %}
 {% macro iconEdit(path = '#') %}
-    <a href="{{ path }}"><i class="fas fa-pencil-alt text-success"></i></a>
+    <a href="{{ path }}" title="Modifier"><i class="fas fa-pencil-alt text-success"></i></a>
 {% endmacro %}
 

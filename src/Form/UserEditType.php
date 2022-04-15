@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class UserType extends AbstractType
+class UserEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -29,18 +29,10 @@ class UserType extends AbstractType
                     'class'=>'select2'
                 ]
             ])
-            
             ->add('personne',PersonneType::class,[
                 'label'=>false
                 ])
             ->add('adresse',AdresseType::class)
-            ->add('password',PasswordType::class,[
-                'required'=>true,
-                'constraints'=>[
-                    new Length(['min' => 3])
-                    ]
-            ])
-            ->add('isVerified')
         ;
     }
 

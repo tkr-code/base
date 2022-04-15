@@ -22,45 +22,32 @@ class UserFixtures extends Fixture
     {
         $users = [
         [
-                'first_name' => 'Malick',
-                'last_name' => 'Tounkara',
-                'email' => 'admin1@mail.com',
+                'first_name' => 'Admin',
+                'last_name' => 'Admin',
+                'email' => 'admin@mail.com',
                 'roles' => ["ROLE_ADMIN"]
         ],
         [
-                'first_name' => 'Mamadou','last_name' => 'Dieme','email' => 'admin2@mail.com',
-                'roles' => ["ROLE_ADMIN"]
+                'first_name' => 'Editor',
+                'last_name' => 'Editor',
+                'email' => 'editor@mail.com',
+                'roles' => ["ROLE_EDITOR"]
         ],
         [
-                'first_name' => 'Pepin','last_name' => 'Ngoulou','email' => 'admin3@mail.com',
-                'roles' => ["ROLE_ADMIN"]],
-        [
-                'first_name' => 'Pepin2','last_name' => 'Ngoulou','email' => 'editor1@mail.com',
-                'roles' => ["ROLE_EDITOR"]],
-        [
-                'first_name' => 'prenom1','last_name' => 'nom1','email' => 'user1@mail.com',
-                'roles' => ["ROLE_USER"]],
-        [
-                'first_name' => 'prenom2','last_name' => 'nom2','email' => 'user2@mail.com',
-                'roles' => ["ROLE_USER"]],
-        [
-                'first_name' => 'prenom3','last_name' => 'nom3','email' => 'user3@mail.com',
-                'roles' => ["ROLE_USER"]],
-        [
-                'first_name' => 'prenom4','last_name' => 'nom4','email' => 'user4@mail.com',
-                'roles' => ["ROLE_USER"]],
-        [
-                'first_name' => 'prenom5','last_name' => 'nom5','email' => 'user5@mail.com',
-                'roles' => ["ROLE_USER"]],
+                'first_name' => 'User',
+                'last_name' => 'User',
+                'email' => 'user@mail.com',
+                'roles' => ["ROLE_USER"]
+        ],
         ];
         foreach ($users as $value) {
             $user = new User();
             $personne = new Personne();
-            $personne->setFirstName($value['first_name'])
-            ->setLastName($value['last_name']);
+            $personne->setFirstName('Prenom_'.$value['first_name'])
+            ->setLastName('Nom_'.$value['last_name']);
             $user->setEmail($value['email']);
             $user->setIsVerified(true);
-            $user->setStatus('offline');
+            $user->setStatus('Offline');
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
             ->setRoles($value['roles'])
             ->setPersonne($personne);

@@ -13,16 +13,16 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
     {
 
             $message = new Message();
-            $message->setEmetteur($this->getReference('_user_Malick'));
-            $message->setRecepteur($this->getReference('_user_Mamadou'));
-            $message->setMessage('Salut mamadou.');
+            $message->setEmetteur($this->getReference('_user_Admin'));
+            $message->setRecepteur($this->getReference('_user_User'));
+            $message->setMessage('Salut User.');
             $message->setIsRead(false);
             $manager->persist($message);
         
             $message = new Message();
-            $message->setEmetteur($this->getReference('_user_Mamadou'));
-            $message->setRecepteur($this->getReference('_user_Malick'));
-            $message->setMessage('Salut Malick.');
+            $message->setEmetteur($this->getReference('_user_User'));
+            $message->setRecepteur($this->getReference('_user_Admin'));
+            $message->setMessage('Salut Admin.');
             $message->setIsRead(false);
             $manager->persist($message);
 

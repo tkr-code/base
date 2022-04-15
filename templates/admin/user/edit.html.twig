@@ -33,12 +33,7 @@ name:'Manage users'
             <div class="card-body">
                 {{ include('admin/user/_form.html.twig', {'button_label': 'Update'}) }}
             </div>
-            <div class="card-footer">
-                {{ link.back(path('user_index')) }}
-            </div>
         </div>
     </div>
 </div>
-
-{# {{ include('admin/user/_delete_form.html.twig') }} #}
 {% endblock %}

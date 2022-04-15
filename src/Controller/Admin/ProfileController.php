@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use App\Form\ChangePasswordFormType;
+use App\Form\ProfileChangePasswordFormType;
 use App\Repository\PhoneRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
@@ -57,7 +57,7 @@ class ProfileController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
+            $this->addFlash('success',"success");
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -119,7 +119,7 @@ class ProfileController extends AbstractController
         // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-        $form = $this->createForm(ChangePasswordFormType::class);        
+        $form = $this->createForm(ProfileChangePasswordFormType::class);        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -128,7 +128,7 @@ class ProfileController extends AbstractController
                 $userPasswordHasherInterface->hashPassword($user, $form->get('plainPassword')->getData())
             );
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success','Mot de passe modoifier');
+            $this->addFlash('success','Mot de passe modifier');
             
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -166,7 +166,7 @@ class ProfileController extends AbstractController
             
             $user->setPersonne($personne);
             $this->getDoctrine()->getManager()->flush();
-            $message  = $this->translator->trans('profil modify');
+            $message  = $this->translator->trans("La modification a été éffectué avec succès.");
             $this->addFlash('success',$message);
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }

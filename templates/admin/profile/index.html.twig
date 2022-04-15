@@ -9,12 +9,7 @@
 {% block title %}Profile utilisateur{% endblock %}
 
 {% block breadcrumb %}
-{{ utils.breadcrumb('Profile',[
-{
-path:'article_index',
-name:'Manage Articles'
-}
-])}}
+{{ utils.breadcrumb('Profile',[])}}
 {% endblock %}
 
 {% block head %}
@@ -23,9 +18,8 @@ name:'Manage Articles'
 <link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
 {% endblock %}
 {% block body %}
-{% for item in app.flashes('success') %}
-{{ alerte.alert(item,'success')}}
-{% endfor %}
+{% include "includes/_alerte.html.twig" %}
+
 <div class="row">
   <div class="col-md-3">
     <!-- Profile Image -->
@@ -38,7 +32,7 @@ name:'Manage Articles'
         </div>
         <h3 class="profile-username text-center">{{app.user.personne.lastName | title}} {{app.user.personne.firstname |
           title }}</h3>
-        <button type="button" id="btn-editor" class="btn btn-primary mb-3 btn-block">
+        <button type="button" id="btn-editor" class="btn btn-success mb-3 btn-block">
           <b>Modifier <i class="fas fa-pencil-alt"></i> </b>
         </button>
         <div id="js-editor">
@@ -47,7 +41,8 @@ name:'Manage Articles'
           'novalidate':'novalidate'
           },action: path('profile_edit',{id: app.user.id })}) }}
           {{ form_widget(form) }}
-          <button class="btn btn-primary btn-lg">Update <i class="fas fa-save"></i> </button>
+          <div id="show_preview" class="text-center my-3"></div>
+          <button class="btn btn-success"><i class="fas fa-save"></i> Update </button>
           {{ form_end(form) }}
         </div>
       </div>
@@ -92,6 +87,9 @@ name:'Manage Articles'
                 <p class="text-muted">
                  {% if  app.user.adresse %}
                  {{ app.user.adresse.rue}} , {{ app.user.adresse.ville }} {{ app.user.adresse.pays}}
+                 {% else %}
+                 
+                   Cliquer sur modifier pour définir votre adresse 
                  {% endif %}                 
                 </p>
               </div>
@@ -308,6 +306,20 @@ name:'Manage Articles'
     //     console.log(event.detail.scaleY);
     //   },
     // })
+            /*******lire une image avant insertion *********/
+        function previewFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#show_preview + img').remove();
+                    $('#show_preview').html('<img class="profile-user-img img-fluid img-circle" src="' + e.target.result + '" />');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+         $("#profile_avatar").change(function() {
+            previewFile(this);
+        })
   })
 </script>
 {% endblock %}
