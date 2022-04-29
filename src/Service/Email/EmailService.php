@@ -113,7 +113,7 @@ class EmailService
                 'path'=>$button_link,
                 'text'=>$button_text
             ],
-            'tokenKey'=>$this->csrf->getToken($button_link)
+            'tokenKey'=> ($button_link) ? $this->csrf->getToken($button_link) : null
         ];
     }
 }

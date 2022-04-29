@@ -41,11 +41,11 @@ class NavExtension extends AbstractExtension
                     'icon'=>'fas fa-user',
                     'path'=>'profile_index',
                 ],
-                [
-                    'name'=>'Chat',
-                    'icon'=>'fas fa-envelope',
-                    'path'=>'admin_chat_index',
-                ],
+                // [
+                //     'name'=>'Chat',
+                //     'icon'=>'fas fa-envelope',
+                //     'path'=>'admin_chat_index',
+                // ],
                 [
                     'name'=>'App name',
                     'icon'=>'fa fa-home',

@@ -1,7 +1,7 @@
 {% import "macros/navs.html.twig" as nav %}
 {% import "macros/breadcrumb.html.twig" as breadcrumb %}
 <!doctype html>
-<html lang="en">
+<html lang="{{ app.request.locale}}">
 
 <head>
   <!-- Required meta tags -->
@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}">
   <!-- font-awesome -->
   <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="{{ asset('img/AdminLTELogo.png') }}" type="image/x-icon">
   <title>{% block title %}{% endblock %} | {{ app_name }}</title>
   {% block head %}{% endblock %}
 </head>
@@ -31,6 +33,9 @@
           <a class="nav-link" href="/">Home </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{{ path('contact') }}">Contact </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{ path('app_login') }}">Login</a>
         </li>
         {% if app.user %}
@@ -41,16 +46,13 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ path('admin') }}">Tableau de bord</a>
-            <a class="dropdown-item" href="{{ path('admin') }}">Tableau de bord</a>
+            <a class="dropdown-item" href="{{ path('profile_index') }}">Profil</a>
+            <a class="dropdown-item" href="{{ path('admin_chat_index') }}">Chat</a>
           </div>
         </li>
         {% endif %}
           {% include "includes/_lang.html.twig" %}
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </div>
   </nav>
   {% block body %}{% endblock %}

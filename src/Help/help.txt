@@ -4,3 +4,5 @@ maildev --hide-extensions STARTTLS
 composer dump-env prod
 
 composer install --no-dev --optimize-autoloader
+
+<img src="https://via.placeholder.com/150">

@@ -1,0 +1,5 @@
+{% if user %}
+<div class="chat-messages p-4">
+    {{ include ("chat/_chat.html.twig",{message: messages, emetteur: id_emetteur}) }}
+</div>
+{% endif %}

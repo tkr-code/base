@@ -1,74 +1,303 @@
 {% extends "admin/base.html.twig" %}
+{% block title %}Chat{% endblock %}
 {% block head %}
 <link rel="stylesheet" href="{{ asset('css/chat.css') }}">
 {% endblock %}
 {% block body %}
-<div class="content">
-	<div class="container p-0">
-		<div class="card card-chat">
-			<div class="row g-0">
-				<div class="col-12 col-lg-5 col-xl-3 border-right">
-
-					<div class="px-4 d-none d-md-block">
-						<div class="d-flex align-items-center">
-							<div class="flex-grow-1">
-								<input type="text" class="form-control my-3" placeholder="Search...">
+{% include "includes/_alerte.html.twig" %}
+<style>
+.user-conversation{
+	min-height:350px
+}
+.chat-messages{
+	min-height:350px!important
+}
+.chat-content-help{
+	/* Center verticalement */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+	padding: 3px;
+}
+</style>
+<div class="row">
+	<div class="col-12 col-md-12">
+		<div class="contet">
+			<div class="container-fluid p-0">
+				<div class="card card-chat">
+					<div class="row g-0">
+						<div class="col-12 col-lg-5 col-xl-3 border-right">
+							<div class=" p-3 border-bottom">
+								<a href="{{ path('admin_chat_new') }}" class="btn btn-primary" ><i class="fas fa-comment-medical"></i> Nouvelle discussion</a>
 							</div>
-						</div>
-					</div>
-					<div class="user-conversation">
-						<div class="user-conversation-loader">
-							<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
-						</div>
-
-						{# {% for item in users %}
-						<a data-emetteur="{{app.user.id}}" data-recepteur="{{item.id}}" href="#"
-							class="list-group-item list-group-item-action border-0 conversation">
-							<div class="badge bg-success float-right">{{ item.recu|length }}</div>
-							<div class="d-flex align-items-start">
-								<img src="https://bootdey.com/img/Content/avatar/avatar5.png"
-									class="rounded-circle mr-1" alt="" width="40" height="40">
-								<div class="flex-grow-1 ml-3">
-									{{ item.personne.fullName }}
-									<div class="small">
-										<span class="fas fa-circle chat-online"></span>
-										Online
+							<div class="px-4 d-none d-md-block">
+								<div class="d-flex align-items-center">
+									<div class="flex-grow-1">
+										<input type="text" class="form-control my-3" placeholder="Search...">
 									</div>
 								</div>
 							</div>
-						</a>
-						{% endfor %}
-						<a href="#" class="list-group-item list-group-item-action border-0">
-							<div class="d-flex align-items-start">
-								<img src="https://bootdey.com/img/Content/avatar/avatar4.png"
-									class="rounded-circle mr-1" alt="Christina Mason" width="40" height="40">
-								<div class="flex-grow-1 ml-3">
-									Christina Mason
-									<div class="small">
-										<span class="fas fa-circle chat-offline"></span>
-										Offline
+							<div class="user-conversation">
+								<div class="user-conversation-loader">
+									<div class="overlay">
+										<i class="fas fa-2x fa-sync-alt fa-spin"></i>
 									</div>
 								</div>
 							</div>
-						</a> #}
-					</div>
-					<hr class="d-block d-lg-none mt-1 mb-0">
-				</div>
-				<div class="col-12 col-lg-7 col-xl-9 chat-content">
-					<div class="chat-content-loader">
-						<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
+							<hr class="d-block d-lg-none mt-1 mb-0">
+						</div>
+						<div class="col-12 col-lg-7 col-xl-9 chat-content">
+							<div class="chat-content-help">
+								<div class="text-center">
+									<h3>{{ app_name|capitalize }} chat</h3>
+									<p>Selectionner une conversation ou envoyer un nouveau message</p>
+									<div class="text-center">
+										<i class="fas fa-comments fa-5x"></i>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+	Launch Default Modal
+</button>
+
+<div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-bod">
+				<!-- DIRECT CHAT -->
+				<div class="card direct-chat direct-chat-warning">
+					<div class="card-header">
+						<h3 class="card-title">Direct Chat</h3>
+
+						<div class="card-tools">
+							<span title="3 New Messages" class="badge badge-warning">3</span>
+							<button type="button" class="btn btn-tool" data-card-widget="collapse">
+								<i class="fas fa-minus"></i>
+							</button>
+							<button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
+								<i class="fas fa-comments"></i>
+							</button>
+							<button type="button" class="btn btn-tool" data-dismiss="modal">
+								<i class="fas fa-times"></i>
+							</button>
+						</div>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<!-- Conversations are loaded here -->
+						<div class="direct-chat-messages">
+							<!-- Message. Default to the left -->
+							<div class="direct-chat-msg">
+								<div class="direct-chat-infos clearfix">
+									<span class="direct-chat-name float-left">Alexander Pierce</span>
+									<span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+								</div>
+								<!-- /.direct-chat-infos -->
+								<img class="direct-chat-img" src="{{ asset('img/user1-128x128.jpg') }}"
+									alt="message user image">
+								<!-- /.direct-chat-img -->
+								<div class="direct-chat-text">
+									Is this template really for free? That's unbelievable!
+								</div>
+								<!-- /.direct-chat-text -->
+							</div>
+							<!-- /.direct-chat-msg -->
+
+							<!-- Message to the right -->
+							<div class="direct-chat-msg right">
+								<div class="direct-chat-infos clearfix">
+									<span class="direct-chat-name float-right">Sarah Bullock</span>
+									<span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+								</div>
+								<!-- /.direct-chat-infos -->
+								<img class="direct-chat-img" src="{{ asset('img/user3-128x128.jpg') }}"
+									alt="message user image">
+								<!-- /.direct-chat-img -->
+								<div class="direct-chat-text">
+									You better believe it!
+								</div>
+								<!-- /.direct-chat-text -->
+							</div>
+							<!-- /.direct-chat-msg -->
+
+							<!-- Message. Default to the left -->
+							<div class="direct-chat-msg">
+								<div class="direct-chat-infos clearfix">
+									<span class="direct-chat-name float-left">Alexander Pierce</span>
+									<span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
+								</div>
+								<!-- /.direct-chat-infos -->
+								<img class="direct-chat-img" src="{{ asset('img/user1-128x128.jpg') }}"
+									alt="message user image">
+								<!-- /.direct-chat-img -->
+								<div class="direct-chat-text">
+									Working with AdminLTE on a great new app! Wanna join?
+								</div>
+								<!-- /.direct-chat-text -->
+							</div>
+							<!-- /.direct-chat-msg -->
+
+							<!-- Message to the right -->
+							<div class="direct-chat-msg right">
+								<div class="direct-chat-infos clearfix">
+									<span class="direct-chat-name float-right">Sarah Bullock</span>
+									<span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
+								</div>
+								<!-- /.direct-chat-infos -->
+								<img class="direct-chat-img" src="{{ asset('img/user3-128x128.jpg') }}"
+									alt="message user image">
+								<!-- /.direct-chat-img -->
+								<div class="direct-chat-text">
+									I would love to.
+								</div>
+								<!-- /.direct-chat-text -->
+							</div>
+							<!-- /.direct-chat-msg -->
+
+						</div>
+						<!--/.direct-chat-messages-->
+
+						<!-- Contacts are loaded here -->
+						<div class="direct-chat-contacts">
+							<ul class="contacts-list">
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="{{ asset('img/user1-128x128.jpg') }}"
+											alt="User Avatar">
+
+										<div class="contacts-list-info">
+											<span class="contacts-list-name">
+												Count Dracula
+												<small class="contacts-list-date float-right">2/28/2015</small>
+											</span>
+											<span class="contacts-list-msg">How have you been? I was...</span>
+										</div>
+										<!-- /.contacts-list-info -->
+									</a>
+								</li>
+								<!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="{{ asset('img/user7-128x128.jpg') }}"
+											alt="User Avatar">
+
+										<div class="contacts-list-info">
+											<span class="contacts-list-name">
+												Sarah Doe
+												<small class="contacts-list-date float-right">2/23/2015</small>
+											</span>
+											<span class="contacts-list-msg">I will be waiting for...</span>
+										</div>
+										<!-- /.contacts-list-info -->
+									</a>
+								</li>
+								<!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="{{ asset('img/user3-128x128.jpg') }}"
+											alt="User Avatar">
+
+										<div class="contacts-list-info">
+											<span class="contacts-list-name">
+												Nadia Jolie
+												<small class="contacts-list-date float-right">2/20/2015</small>
+											</span>
+											<span class="contacts-list-msg">I'll call you back at...</span>
+										</div>
+										<!-- /.contacts-list-info -->
+									</a>
+								</li>
+								<!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="{{ asset('img/user5-128x128.jpg')}}"
+											alt="User Avatar">
+
+										<div class="contacts-list-info">
+											<span class="contacts-list-name">
+												Nora S. Vans
+												<small class="contacts-list-date float-right">2/10/2015</small>
+											</span>
+											<span class="contacts-list-msg">Where is your new...</span>
+										</div>
+										<!-- /.contacts-list-info -->
+									</a>
+								</li>
+								<!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="{{ asset('img/user6-128x128.jpg') }}"
+											alt="User Avatar">
+
+										<div class="contacts-list-info">
+											<span class="contacts-list-name">
+												John K.
+												<small class="contacts-list-date float-right">1/27/2015</small>
+											</span>
+											<span class="contacts-list-msg">Can I take a look at...</span>
+										</div>
+										<!-- /.contacts-list-info -->
+									</a>
+								</li>
+								<!-- End Contact Item -->
+								<li>
+									<a href="#">
+										<img class="contacts-list-img" src="{{ asset('img/user8-128x128.jpg') }}"
+											alt="User Avatar">
+
+										<div class="contacts-list-info">
+											<span class="contacts-list-name">
+												Kenneth M.
+												<small class="contacts-list-date float-right">1/4/2015</small>
+											</span>
+											<span class="contacts-list-msg">Never mind I found...</span>
+										</div>
+										<!-- /.contacts-list-info -->
+									</a>
+								</li>
+								<!-- End Contact Item -->
+							</ul>
+							<!-- /.contacts-list -->
+						</div>
+						<!-- /.direct-chat-pane -->
+					</div>
+					<!-- /.card-body -->
+					<div class="card-footer">
+						<form action="#" method="post">
+							<div class="input-group">
+								<input type="text" name="message" placeholder="Type Message ..." class="form-control">
+								<span class="input-group-append">
+									<button type="button" class="btn btn-warning">Send</button>
+								</span>
+							</div>
+						</form>
+					</div>
+					<!-- /.card-footer-->
+				</div>
+				<!--/.direct-chat -->
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<div>
+
+</div>
 {% endblock %}
 
 {% block javascripts %}
 <script>
-	$(document).ready(function () {
-		// chatScrollToBottom() // maintient le scroll en bas
+	$(document).ready(function () { // chatScrollToBottom() // maintient le scroll en bas
 		$(document).on('click', '#send', function () {
 			let message = $('.message-send').val()
 			let id_recepteur = $(this).data('recepteur')
@@ -77,7 +306,7 @@
 				return
 			}
 			$.ajax({
-				url: "{{path('chat_new')}}",
+				url: "{{ path('chat_new') }}",
 				method: "POST",
 				dataType: 'json',
 				data: {
@@ -85,54 +314,45 @@
 					id_recepteur: id_recepteur,
 					message: message
 				},
-				beforeSend: function () {
-				},
+				beforeSend: function () { },
 				success: function (data) {
 					if (data == 'success') {
 						$('.chat-messages').append(sendApendHtml(message))
 						chatScrollToBottom()
 						$('.message-send').val('')
 					} else {
-						alert("le message n'a pas pu etre envoyé")
+						alert("Le message n'a pas pu etre envoyé")
 					}
 				}
 			})
-		}) //send message
+		}) // send message
 
 		function sendApendHtml(message) {
 			let date = new Date();
-			let html =
-				'<div class="chat-message-right mb-4">'
-				+ '<div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">'
-				+ '<div class="font-weight-bold mb-1">You</div>'
-				+ message
-				+ '<div class="text-muted small text-nowrap mt-2 float-right ml-2">'
-				+ date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
-				+ '</div>'
-				+ '</div>'
-				+ '</div>'
+			let html = '<div class="chat-message-right mb-4">' + '<div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">' + '<div class="font-weight-bold mb-1">You</div>' + message + '<div class="text-muted small text-nowrap mt-2 float-right ml-2">' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '</div>' + '</div>' + '</div>'
 			return html
 		}
 
 		function chatScrollToBottom() {
 			$('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight)
 		}
-		setInterval(() => {
-			
-		}, 500);
-		$(document).on('click', '.conversation', function () {
-			let recepteur = $(this).data('recepteur');
+		// setInterval(() => {
+		// 	let recepteur = $('.conversation').data('recepteur'); 
+		// 	discussion(recepteur)
+		// 	// console.log(recepteur)
+		// }, 1000);
+		conversation()
+		function conversation(recepteur){
 			if (recepteur) {
 				$.ajax({
-					url: "{{path('chat_get_content')}}",
+					url: "{{ path('chat_get_content') }}",
 					method: "POST",
 					dataType: 'text',
 					data: {
 						content: '',
-						recepteur: recepteur,
+						recepteur: recepteur
 					},
-					beforeSend: function () {
-						// $('.user-conversation-loader').css('display')
+					beforeSend: function () { // $('.user-conversation-loader').css('display')
 					},
 					success: function (data) {
 						$('.chat-content').html(data)
@@ -140,19 +360,41 @@
 					}
 				})
 			}
-
+		}
+		function discussion(recepteur){
+			if (recepteur) {
+				$.ajax({
+					url: "{{ path('chat_get_discussion') }}",
+					method: "POST",
+					dataType: 'text',
+					data: {
+						content: '',
+						recepteur: recepteur
+					},
+					beforeSend: function () { // $('.user-conversation-loader').css('display')
+					},
+					success: function (data) {
+						$('.position-relative').html(data)
+						chatScrollToBottom()
+					}
+				})
+			}
+		}
+		$(document).on('click', '.conversation', function () {
+			let recepteur = $(this).data('recepteur');
+			conversation(recepteur)
 		})
 
 
+	
 		getUserConversation()
 		function getUserConversation() {
 			$.ajax({
-				url: "{{path('chat_get_user_conversation')}}",
+				url: "{{ path('chat_get_user_conversation') }}",
 				method: "POST",
 				dataType: 'text',
 				data: {},
-				beforeSend: function () {
-				},
+				beforeSend: function () { },
 				success: function (data) {
 					$('.user-conversation').html(data)
 				}

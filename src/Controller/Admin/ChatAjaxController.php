@@ -43,7 +43,7 @@ class ChatAjaxController extends AbstractController
     {
         $id_emetteur = $_POST['id_emetteur'];
         $id_recepteur = $_POST['id_recepteur'];
-        return $this->render('chat/get-chat.html.twig', [
+        return $this->render('admin/chat/get-chat.html.twig', [
             'messages' => $messageRepository->conversation($id_emetteur, $id_recepteur),
             'emetteur' => $id_emetteur
         ]);
@@ -60,7 +60,24 @@ class ChatAjaxController extends AbstractController
         if(isset($_POST['content'])){
             $userRecepteur = $userRepository->find($recepteur);
         }
-        return $this->render('chat/content.html.twig', [
+        return $this->render('admin/chat/content.html.twig', [
+            'user'=>$userRecepteur,
+            'messages'=>$messageRepository->conversation($user->getId(),$recepteur),
+            'id_emetteur'=>$recepteur
+        ]);
+    }
+    /**
+     * @Route("/chat/get-discussion/", name="chat_get_discussion", methods={"GET","POST"})
+     */
+    public function getChatDiscussion(Request $request, UserRepository $userRepository, MessageRepository $messageRepository): Response
+    {
+        $user = $this->getUser();
+        $userRecepteur= '';
+        $recepteur =(int) $_POST['recepteur'];
+        if(isset($_POST['content'])){
+            $userRecepteur = $userRepository->find($recepteur);
+        }
+        return $this->render('admin/chat/discussion.html.twig', [
             'user'=>$userRecepteur,
             'messages'=>$messageRepository->conversation($user->getId(),$recepteur),
             'id_emetteur'=>$recepteur
@@ -73,7 +90,7 @@ class ChatAjaxController extends AbstractController
     public function getChatUser(Request $request,UserRepository $userRepository): Response
     {
         $user = $this->getUser();
-        return $this->render('chat/user-content.html.twig', [
+        return $this->render('admin/chat/user-content.html.twig', [
             'conversations'=>$userRepository->chatUsers($user->getId()),
         ]);
     }

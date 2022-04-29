@@ -40,7 +40,7 @@ class ChatController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($message);
             $entityManager->flush();
-            $this->addFlash('success','Success');
+            $this->addFlash('success','Le message a été envoyé');
             return $this->redirectToRoute('admin_chat_index', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('admin/chat/new.html.twig', [
