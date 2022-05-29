@@ -1,0 +1,62 @@
+{% macro breadcrumb(pageName,pages) %}
+	<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">{{pageName|default('Dashboard')}}</h1>
+				</div>
+				<!-- /.col -->
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="{{ path('admin') }}">{{'Home'|trans}}</a>
+						</li>
+						{% for item in pages %}
+							<li class="breadcrumb-item">
+								<a href="{{ item.path }}">{{ item.name }}</a>
+							</li>
+						{% endfor %}
+						<li class="breadcrumb-item active">{{ pageName|default('Dashboard 1') }}</li>
+					</ol>
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<!-- /.content-header -->
+{% endmacro %}
+
+{% macro alert(message, type) %}
+	{# MESSAGE D'ALERTE #}
+	<div class="alert alert-{{type}} alert-dismissible fade show" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<strong>{{ message }}</strong>
+	</div>
+
+	<script>
+		$(".alert").alert();
+	</script>
+{% endmacro %}
+
+{% macro infoBox(params) %}
+	<div class="info-box">
+		<span class="info-box-icon {{ params.bg }} elevation-1">
+			<i class="{{ params.icon|default() }}"></i>
+		</span>
+
+		<div class="info-box-content">
+			<span class="info-box-text">
+				<a href="{{ params.path|default('#') }}" class="a-1">{{params.name}}</a>
+			</span>
+			<span class="info-box-number">
+				{{ params.count}}
+			</span>
+		</div>
+		<!-- /.info-box-content -->
+	</div>
+{% endmacro %}

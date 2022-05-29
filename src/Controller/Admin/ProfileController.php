@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Form\ProfileChangePasswordFormType;
 use App\Repository\PhoneRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
@@ -83,19 +84,27 @@ class ProfileController extends AbstractController
      */
     public function phoneNew(Request $request): Response
     {
+        
         $phone = new Phone();
         $phone->setUser($this->getUser());
-        $form = $this->createForm(PhoneType::class, $phone);
-        $form->handleRequest($request);
+        if($request->request->get('ajax')){
+            return new JsonResponse([
+                'reponse'=>false,
+                'content'=>'data'
+            ]);
+        }else{
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($phone);
-            $entityManager->flush();
-            $this->addFlash('success','Success');
-            return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
+            $form = $this->createForm(PhoneType::class, $phone);
+            $form->handleRequest($request);
+            
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($phone);
+                $entityManager->flush();
+                $this->addFlash('success','Success');
+                return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
-
         return $this->renderForm('admin/profile/phone/new.html.twig', [
             'phone' => $phone,
             'form' => $form,

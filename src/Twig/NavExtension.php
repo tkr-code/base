@@ -4,7 +4,9 @@ namespace App\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Symfony\Contracts\Translation\TranslatorInterface;
-
+/**
+ * Gere la navigation par order de privillege
+ */
 class NavExtension extends AbstractExtension
 {
     private $translator;
@@ -23,6 +25,7 @@ class NavExtension extends AbstractExtension
     {
         return 
         [
+            //navigation vu par tous les users
             'navs'=>
             [
                 [
@@ -58,6 +61,7 @@ class NavExtension extends AbstractExtension
                         ]
                 ],
             ],
+            //Navigation vu par l'administrateur
             'admin'=>
             [
                 [
@@ -74,6 +78,13 @@ class NavExtension extends AbstractExtension
                         ],
                     ]
                 ]
+            ],
+            //Navigation vu par l'editeur
+            'editor'=>[
+                // [
+                //     'name'=>'Test',
+                //     'path'=>'home'
+                // ]
             ]
         ];
     }

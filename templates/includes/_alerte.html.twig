@@ -1,5 +1,5 @@
-{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/admin.html.twig" as utils %}
 
 {% for item in app.flashes('success') %}
-{{ alerte.alert(item,'success')}}
+{{ utils.alert(item,'success')}}
 {% endfor %}
