@@ -1,6 +1,10 @@
 {% extends "admin/base.html.twig" %}
-
+{% import "macros/admin.html.twig" as admin %}
 {% block title %}Tableau de bord
+{% endblock %}
+
+{% block breadcrumb %}
+	{{ admin.breadcrumb('Dashboard'|trans) }}
 {% endblock %}
 
 {% block body %}
@@ -13,7 +17,7 @@
 
 				<div class="info-box-content">
 					<span class="info-box-text">Users</span>
-					<span class="info-box-number"></span>
+					<span class="info-box-number">3</span>
 				</div>
 				<!-- /.info-box-content -->
 			</div>

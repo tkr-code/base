@@ -18,7 +18,7 @@ class AdresseType extends AbstractType
                     'placeholder'=>'Rue',
                 ]
             ])
-            ->add('ville',TextType::class,[
+            ->add('city',TextType::class,[
                 'attr'=>[
                     'placeholder'=>'Ville',
                 ]
@@ -28,7 +28,6 @@ class AdresseType extends AbstractType
                     'placeholder'=>'Pays',
                 ]
             ])
-
         ;
     }
 

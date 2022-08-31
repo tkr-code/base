@@ -2,11 +2,12 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['bootstrap_4_layout.html.twig'] # accepte plusieurs thèmes
     globals: 
-        app_name: 'Tkr app'
+        app_name: 'TKR APP'
         locales: '%app.locales%'
         navs: '@App\Twig\NavExtension'
         site: 
             name: 'TKR App'
+            version: '1.0'
             description: 'App de base pour projet Symfony 5.3'
             email: 'malick.tounkara.1@gmail.com'
             current_name: 'F cfa'

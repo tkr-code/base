@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\UserPassportInterface
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Route("admin/user")
+ * @Route("my-account/user")
  */
 class UserController extends AbstractController
 {

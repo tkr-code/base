@@ -15,6 +15,8 @@ class AppExtension extends AbstractExtension
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
             new TwigFilter('date_format_fr', [$this, 'doSomething']),
+            new TwigFilter('phone_format', [$this, 'phoneFormat']),
+
         ];
     }
 
@@ -23,6 +25,14 @@ class AppExtension extends AbstractExtension
         return [
             new TwigFunction('dateFilter', [$this, 'doSomething']),
         ];
+    }
+    public function phoneFormat(string $phone){
+        if (strlen($phone) == 9) {
+            return substr($phone, 0, 2).' '.substr($phone, 2, 3).' '.substr($phone, 5, 2).' '.substr($phone, 7, 2).'';
+        }else if(strlen($phone) == 10) {
+            return substr($phone, 0, 2).' '.substr($phone, 2, 3).' '.substr($phone, 5, 2).' '.substr($phone, 7, 2).'';
+        }
+        return $phone;
     }
 
     /**

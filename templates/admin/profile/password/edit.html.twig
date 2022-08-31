@@ -4,7 +4,7 @@
 {% block title %}Edit user password{% endblock %}
 
 {% block breadcrumb %}
-    {{ utils.breadcrumb('Edit password',[
+    {{ utils.breadcrumb('Edit password'|trans,[
         {
             path:path('profile_index'),
             name:'Profile'
@@ -17,17 +17,14 @@
     <div class="col-md-6 mx-auto col-12">
         <div class="card card-primary card-outline">
             <div class="card-header">
-                <h4>
-                    Edit password
-                </h4>
+                <div class="card-title">
+                    {{'Edit password'|trans}}
+                </div>
             </div>
             <div class="card-body">
                 {{ form_start(form) }}
                     {{ form_widget(form) }}
-                    <div class="btn-group">
-                        <a class="btn btn-dark" href="{{ path('profile_index') }}">back to list <i class="fas fa-arrow-alt-circle-left    "></i></a>
-                        <button class="btn btn-primary">{{ button_label|default('Save') }} <i class="fas fa-save"></i> </button>
-                    </div>
+                    {% include "includes/_form_save.html.twig" with {path: path('profile_index') } %}
                 {{ form_end(form) }}
             </div>
         </div>

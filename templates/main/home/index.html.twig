@@ -3,31 +3,37 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-
 <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-3">{{ app_name }}</h1>
-        <p class="lead">PMD DEVELOPPER| Malick Tounkara</p>
-        <hr class="my-2">
-        <p>{{'More info'|trans}}</p>
-        <p>{{ site.description }}</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="{{ path('app_login') }}" role="button">{{'Log in'|trans}}</a>
-        </p>
+  <div class="container">
+    <h1 class="display-3">{{ app_name }}</h1>
+    <post-comments></post-comments>
+    <hr>
+    <div class="row">
+      <div id="lift-stuff-app"></div>
     </div>
+    <p class="lead">PMD DEVELOPPER| Malick Tounkara</p>
+    <hr class="my-2">
+    <p>{{'More info'|trans}}</p>
+    <p>{{ site.description }}</p>
+    {% if not is_granted('ROLE_USER') %}
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="{{ path('app_login') }}" role="button">{{'Log in'|trans}}</a>
+    </p>
+    {% endif %}
+  </div>
 </div>
 <div class="container">
-    {% for item in app.flashes('success') %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <strong>{{item}}</strong> 
-        </div>
-        
-        <script>
-          $(".alert").alert();
-        </script>
-    {% endfor %}
+  {% for item in app.flashes('success') %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>{{item}}</strong>
+  </div>
+
+  <script>
+    $(".alert").alert();
+  </script>
+  {% endfor %}
 </div>
 {% endblock %}

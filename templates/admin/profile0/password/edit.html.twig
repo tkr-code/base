@@ -1,0 +1,44 @@
+{% extends "admin/base.html.twig" %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+
+{% block title %}Edit user password{% endblock %}
+
+{% block breadcrumb %}
+    {{ utils.breadcrumb('Edit password',[
+        {
+            path:path('profile_index'),
+            name:'Profile'
+        }
+    ])}}
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-6 mx-auto col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h4>
+                    Edit password
+                </h4>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <div class="btn-group">
+                        <a class="btn btn-dark" href="{{ path('profile_index') }}">back to list <i class="fas fa-arrow-alt-circle-left    "></i></a>
+                        <button class="btn btn-primary">{{ button_label|default('Save') }} <i class="fas fa-save"></i> </button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready(function(){
+        $('#profile a').addClass('active')
+    })
+</script>
+{% endblock %}

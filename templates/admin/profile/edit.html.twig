@@ -15,7 +15,7 @@
 
 {% block body %}
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6 mx-auto">
         <div class="card card-primary card-outline">
             <div class="card-header">
                 <h4>
@@ -24,7 +24,6 @@
             </div>
             <div class="card-body">
                 {{ include('admin/profile/_form.html.twig', {'button_label': 'Update'}) }}
-                <a href="{{ path('profile_index') }}">back to list <i class="fas fa-arrow-alt-circle-left    "></i></a>
             </div>
         </div>
     </div>

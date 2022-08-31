@@ -101,69 +101,57 @@
         <source>Description</source>
         <target>Description</target>
       </trans-unit>
-      <trans-unit id="xDY3y18" resname="Caractéristique">
-        <source>Caractéristique</source>
-        <target>__Caractéristique</target>
-      </trans-unit>
-      <trans-unit id="L.WZgUO" resname="Tous">
-        <source>Tous</source>
-        <target>__Tous</target>
-      </trans-unit>
       <trans-unit id="tRLZfny" resname="User">
         <source>User</source>
-        <target>__User</target>
-      </trans-unit>
-      <trans-unit id="GUU7.F6" resname="La modification a été éffectué avec succès.">
-        <source>La modification a été éffectué avec succès.</source>
-        <target>__La modification a été éffectué avec succès.</target>
+        <target>Utilisateur</target>
       </trans-unit>
       <trans-unit id="vSTb9IR" resname="Hi! Please confirm your email!">
         <source>Hi! Please confirm your email!</source>
-        <target>__Hi! Please confirm your email!</target>
+        <target>Salut ! Merci de confirmer votre email!</target>
       </trans-unit>
       <trans-unit id="awzJBNC" resname="Users">
         <source>Users</source>
-        <target>__Users</target>
+        <target>Utilisateurs</target>
       </trans-unit>
       <trans-unit id="GP3VSbL" resname="New">
         <source>New</source>
-        <target>__New</target>
+        <target>Nouveau</target>
       </trans-unit>
       <trans-unit id="CLBBk1e" resname="You">
         <source>You</source>
-        <target>__You</target>
+        <target>Vous</target>
       </trans-unit>
       <trans-unit id="6KiDUxl" resname="Edit User">
         <source>Edit User</source>
-        <target>__Edit User</target>
+        <target>Modifier un Utilisateur</target>
       </trans-unit>
       <trans-unit id="OpQ.Vio" resname="Manage Users">
         <source>Manage Users</source>
-        <target>__Manage Users</target>
+        <target>Gestion des Utilisateur</target>
       </trans-unit>
       <trans-unit id="10MHBUC" resname="Confirmation">
         <source>Confirmation</source>
-        <target>__Confirmation</target>
+        <target>Confirmation</target>
       </trans-unit>
       <trans-unit id="nZPB._o" resname="Please confirm your email address by clicking the following link">
         <source>Please confirm your email address by clicking the following link</source>
-        <target>__Please confirm your email address by clicking the following link</target>
+        <target>Mercie de confirmer votre adresse email en cliquant sur ce lien</target>
       </trans-unit>
       <trans-unit id="87wG9uu" resname="This link will expire in">
         <source>This link will expire in</source>
-        <target>__This link will expire in</target>
+        <target>Ce lien expire dans </target>
       </trans-unit>
       <trans-unit id="F7WctIl" resname="Cheers!">
         <source>Cheers!</source>
-        <target>__Cheers!</target>
+        <target>Salut!</target>
       </trans-unit>
       <trans-unit id="ITaQX9q" resname="Confirm my Email">
         <source>Confirm my Email</source>
-        <target>__Confirm my Email</target>
+        <target>Confirmer mon mot de passe</target>
       </trans-unit>
       <trans-unit id="4O3_s6c" resname="Reset password">
         <source>Reset password</source>
-        <target>__Reset password</target>
+        <target>Reinitialiser le mot de passe</target>
       </trans-unit>
       <trans-unit id="fdTZfZq" resname="More info">
         <source>More info</source>
@@ -180,6 +168,26 @@
       <trans-unit id="dHkQ3aq" resname="Your email (required)">
         <source>Your email (required)</source>
         <target>Votre email (obligatoire)</target>
+      </trans-unit>
+      <trans-unit id="u92.A1p" resname="Edit password">
+        <source>Edit password</source>
+        <target>Modifier le mot de passe</target>
+      </trans-unit>
+      <trans-unit id="PEgjRvN" resname="back">
+        <source>back</source>
+        <target>Retour</target>
+      </trans-unit>
+      <trans-unit id="GUU7.F6" resname="La modification a été éffectué avec succès.">
+        <source>La modification a été éffectué avec succès.</source>
+        <target>__La modification a été éffectué avec succès.</target>
+      </trans-unit>
+      <trans-unit id="FQn1YfJ" resname="Save">
+        <source>Save</source>
+        <target>Enregistrer</target>
+      </trans-unit>
+      <trans-unit id="Xaj3_8K" resname="Back to list">
+        <source>Back to list</source>
+        <target>Retour à la liste</target>
       </trans-unit>
     </body>
   </file>

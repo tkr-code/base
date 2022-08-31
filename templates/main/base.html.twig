@@ -15,6 +15,9 @@
   <link rel="shortcut icon" href="{{ asset('img/AdminLTELogo.png') }}" type="image/x-icon">
   <title>{% block title %}{% endblock %} | {{ app_name }}</title>
   {% block head %}{% endblock %}
+  {{ encore_entry_link_tags('app') }}
+  {% block stylesheets  %}
+  {% endblock %}
 </head>
 
 <body>
@@ -57,9 +60,19 @@
   {% block body %}{% endblock %}
   {% block footer %}{% endblock %}
   <script src="{{ asset('vendor/jquery/jquery.slim.min.js') }}"></script>
-  <script src="{{ asset('vendor/bootstrap/js/bootstrap.js') }}"></script>
+   <script src="{{ asset('vendor/bootstrap/js/bootstrap.js') }}"></script>
   {% block foot %}{% endblock %}
-  {% block javascripts %}{% endblock %}
+  {{ encore_entry_script_tags('app') }}
+  <script>
+    $(document).ready(function(){
+      $("body").css('background','red')
+
+    })
+    // window.addEventListener('load',function(){
+		// })
+  </script>
+  {% block javascripts %}
+  {% endblock %}
 </body>
 
 </html>

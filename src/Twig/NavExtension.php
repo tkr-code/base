@@ -4,15 +4,19 @@ namespace App\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
+
 /**
  * Gere la navigation par order de privillege
  */
 class NavExtension extends AbstractExtension
 {
     private $translator;
-    public function __construct(TranslatorInterface $translator)
+    private $twig;
+    public function __construct(TranslatorInterface $translator, Environment $twig)
     {
         $this->translator = $translator;
+        $this->twig = $twig;
     }
     public function getFunctions():array
     {
@@ -20,9 +24,11 @@ class NavExtension extends AbstractExtension
             new TwigFunction('sidebar',[$this,'getNavs'])
         ];
     }
-
+    
     public function getNavs()
     {
+        $globals = $this->twig->getGlobals();
+        
         return 
         [
             //navigation vu par tous les users
@@ -50,7 +56,7 @@ class NavExtension extends AbstractExtension
                 //     'path'=>'admin_chat_index',
                 // ],
                 [
-                    'name'=>'App name',
+                    'name'=>$globals['app_name'],
                     'icon'=>'fa fa-home',
                     'links'=>
                         [

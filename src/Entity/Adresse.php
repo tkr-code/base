@@ -2,10 +2,9 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\AdresseRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AdresseRepository::class)
@@ -20,34 +19,111 @@ class Adresse
     private $id;
 
     /**
-     * @Assert\NotNull
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstName;
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255 , nullable=true)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $codePostal;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $tel;
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $rue;
-
-    /**
-     * @Assert\NotNull
-     * @Assert\NotBlank()
-     * @ORM\Column(type="string", length=255)
-     */
-    private $ville;
-
-    /**
-     * @Assert\NotNull()
-     * @Assert\NotBlank()
-     * @ORM\Column(type="string", length=255)
-     */
-    private $pays;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, mappedBy="adresse", cascade={"persist", "remove"})
      */
     private $user;
 
+    /**
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pays;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(?string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(string $tel): self
+    {
+        $this->tel = $tel;
+
+        return $this;
     }
 
     public function getRue(): ?string
@@ -55,33 +131,9 @@ class Adresse
         return $this->rue;
     }
 
-    public function setRue(string $rue): self
+    public function setRue(?string $rue): self
     {
         $this->rue = $rue;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $ville): self
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getPays(): ?string
-    {
-        return $this->pays;
-    }
-
-    public function setPays(string $pays): self
-    {
-        $this->pays = $pays;
 
         return $this;
     }
@@ -104,6 +156,18 @@ class Adresse
         }
 
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPays(): ?string
+    {
+        return $this->pays;
+    }
+
+    public function setPays(string $pays): self
+    {
+        $this->pays = $pays;
 
         return $this;
     }

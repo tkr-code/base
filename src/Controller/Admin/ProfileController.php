@@ -20,7 +20,7 @@ use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use function PHPUnit\Framework\fileExists;
 
 /**
- * @Route("admin/profile")
+ * @Route("/my-account/profile")
  */
 class ProfileController extends AbstractController
 {
@@ -35,7 +35,6 @@ class ProfileController extends AbstractController
     public function index(Request $request): Response
     {
         $user =  $this->getUser();
-        // dd($user->getPersonne()->getAvatar());
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
         return $this->renderForm('admin/profile/index.html.twig', [

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,15 +16,14 @@ class AdminController extends AbstractController
         $this->translator = $translatorInterface;
     }
     /**
-     * @Route("/admin/", name="admin")
+     * @Route("/my-account/", name="admin")
      */
-    public function index(): Response
+    public function index(UserRepository $userRepository): Response
     {
-
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
-        return $this->render('admin/index.html.twig',[
+        return $this->render('admin/dashboard/index.html.twig',[
             'parent_page'=>$this->translator->trans('Dashboard')
         ]);
     }
