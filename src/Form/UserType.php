@@ -33,7 +33,7 @@ class UserType extends AbstractType
             ->add('personne',PersonneType::class,[
                 'label'=>false
                 ])
-            ->add('adresse',AdresseType::class)
+            // ->add('adresse',AdresseType::class)
             ->add('password',PasswordType::class,[
                 'required'=>true,
                 'constraints'=>[

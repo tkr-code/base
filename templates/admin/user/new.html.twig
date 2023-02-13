@@ -36,7 +36,7 @@ name:'Manage users'
                     <div class="form-group col-12 col-md-6">
                         {{ form_row(form.personne.FirstName)}}
                     </div>
-                    <div class="form-group col-12 col-md-4">
+                    {# <div class="form-group col-12 col-md-4">
                         {{ form_row(form.adresse.rue)}}
                     </div>
                     <div class="form-group col-12 col-md-4">
@@ -44,7 +44,7 @@ name:'Manage users'
                     </div>
                     <div class="form-group col-12 col-md-4">
                         {{ form_row(form.adresse.pays)}}
-                    </div>
+                    </div> #}
                 </div>
                 {{ form_widget(form) }}
                 {{ links.back(path('user_index'),"back to list") }}

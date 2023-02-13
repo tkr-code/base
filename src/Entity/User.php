@@ -20,7 +20,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public const OFF_LINE = 'Offline';
     public const ON_LINE = 'Online';
     const roles = [
-        'Administrateur'=>'ROLE_ADMIN',
+        // 'Administrateur'=>'ROLE_ADMIN',
         'Utilisateur'=>'ROLE_USER',
         'Editeur'=>'ROLE_EDITOR',
         'Client'=>'ROLE_CLIENT',
