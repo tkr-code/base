@@ -37,7 +37,7 @@ class ContactController extends AbstractController
           $mailerInterface->send($email);
           $this->addFlash('success','Votre message a été envoyé.');
         }
-        return $this->renderForm('main/contact/index.html.twig', [
+        return $this->renderForm($this->getParameter('template').'/contact/index.html.twig', [
             'form' => $form,
         ]);
     }
