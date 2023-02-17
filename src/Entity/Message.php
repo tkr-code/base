@@ -14,8 +14,7 @@ class Message
     public function __construct()
     {
         $this->created_at = new DateTime();
-        $this->is_read = false;
-        
+        $this->is_read = false;   
     }
     /**
      * @ORM\Id

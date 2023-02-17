@@ -1,3 +1,7 @@
 --translation extraction
 php bin/console translation:update --dump-messages fr
 php bin/console translation:update --force fr
+
+fos routing
+php bin/console fos:js-routing:debug
+php bin/console fos:js-routing:dump --format=json --target=assets/js/routes.json

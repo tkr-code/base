@@ -19,17 +19,16 @@ class Adresse
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 , nullable=true)
      */
     private $firstName;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255 , nullable=true)
      */
     private $city;
@@ -45,7 +44,6 @@ class Adresse
     private $tel;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $rue;
@@ -56,7 +54,6 @@ class Adresse
     private $user;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $pays;

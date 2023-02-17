@@ -13,6 +13,11 @@ class AdresseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('tel',TextType::class,[
+                'attr'=>[
+                    'placeholder'=>'Numéro de téléphone',
+                ]
+            ])
             ->add('rue',TextType::class,[
                 'attr'=>[
                     'placeholder'=>'Rue',
@@ -21,6 +26,11 @@ class AdresseType extends AbstractType
             ->add('city',TextType::class,[
                 'attr'=>[
                     'placeholder'=>'Ville',
+                ]
+            ])
+            ->add('codePostal',TextType::class,[
+                'attr'=>[
+                    'placeholder'=>'Code postal',
                 ]
             ])
             ->add('pays',TextType::class,[

@@ -3,6 +3,7 @@
 {% import "macros/alertes.html.twig" as alerte %}
 {% import "macros/link.html.twig" as links %}
 {% import "macros/role.html.twig" as roles %}
+{% import "macros/modal.html.twig" as modalMacro %}
 {% extends
 "admin/base.html.twig" %}
 {% block title %}Profile utilisateur
@@ -17,56 +18,41 @@
 {% endblock %}
 
 {% block modal %}
-<div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="overlay modal-loader" style="display:none">
-				<i class="fas fa-2x fa-sync fa-spin"></i>
-			</div>
-			<div class="modal-header">
-				<h4 class="modal-title">Default Modal</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-			<div class="modal-body"></div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
+{{ modalMacro.default() }}
 {% endblock %}
 {% block body %}
 {% include "includes/_alerte.html.twig" %}
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-3 col-12">
 		<!-- Profile Image -->
 		<div class="card card-primary card-outline">
 			<div class="card-body box-profile">
 				<div class="text-center">
-					<img class="profile-user-img img-fluid img-circle"
-						src="{{ asset('img/user/' ~ app.user.personne.avatar|default('empty.png') ) }}"
-						alt="{{ app.user.personne.firstName ~ ' ' ~ app.user.personne.lastName }}">
+					<div id="js-load-profile-user-img">
+						{% include "admin/profile/_profil_img.html.twig" %}
+					</div>
 				</div>
-				<h3 class="profile-username text-center">{{app.user.personne.lastName | title}}
-					{{app.user.personne.firstname | title }}
+				<h3 class="profile-username text-center">
+					{{app.user.fullName | title }}
 				</h3>
-				<button type="button" id="btn-editor" class="btn btn-success mb-3 btn-block">
-					<b>Modifier
-						<i class="fas fa-pencil-alt"></i>
-					</b>
-				</button>
-				<div id="js-editor">
-					{{ form_start(form,{ attr:{ 'novalidate':'novalidate' },action: path('profile_edit',{id: app.user.id
+				<div id="form-edit-avatar">
+					{{ form_start(form,{action: path('profile_edit',{id:
+					app.user.id
 					})}) }}
 					{{ form_widget(form) }}
+					{# <div id="show-cropper-avatar" class="text-center my-3">
+						<img src="" id="avatar" width="300px" />
+					</div> #}
 					<div id="show_preview" class="text-center my-3"></div>
 					<button class="btn btn-success">
 						<i class="fas fa-save"></i>
-						Update
+						Modifier
 					</button>
 					{{ form_end(form) }}
 				</div>
+				{# <a href="#" type="button" id="modal-edit-avatar">Modifier la photo de profile
+					<i class="fas fa-camera"></i>
+				</a> #}
 			</div>
 			<!-- /.card-body -->
 		</div>
@@ -74,6 +60,7 @@
 	</div>
 	<!-- /.col -->
 	<div class="col-md-9">
+		
 		<div class="card">
 			<div class="card-header p-2">
 				<ul class="nav nav-pills">
@@ -129,7 +116,7 @@
 							<div class="col-md-4 col-12">
 								<strong>
 									<i class="fas fa-phone mr-1"></i>
-									Telephone</strong>
+									Téléphone</strong>
 								<div id="load-phone-list">
 									{% include "admin/profile/_phone_list.html.twig" %}
 								</div>
@@ -182,12 +169,18 @@
 								<hr>
 							</div>
 							{% if is_granted('ROLE_ADMIN') %}
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<strong>
 									<i class="fas fas-fa-user-slash mr-1"></i>
 									Supprimer mon compte</strong>
-								<p class="text-muted">
-									Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, quis.
+								<p class="text-muted text-left">
+									Nous allons examiner votre demande et supprimer votre compte de l'application dès
+									que possible. Veuillez noter que nous devrons peut-être vous contacter directement
+									avant de pouvoir traiter cette demande. Sachez que vous aurez encore accès à la
+									plupart des données de votre compte pendant une période déterminée après
+									l'approbation de cette demande, mais il existe certaines exceptions (comme les
+									notifications) pour lesquelles les informations ne seront plus disponibles une fois
+									le compte supprimé.
 								</p>
 								<div class="loader-delete-account">
 									<div class="overlay">
@@ -221,7 +214,53 @@
 			</div>
 			<!-- /.card-body -->
 		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">
+							Modifier le profil
+						</div>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						{{ form_start(form2,{ attr:{ 'novalidate':'novalidate'} }) }}
+						{{ form_widget(form2) }}
+						<button class="btn btn-success">
+							<i class="fas fa-save"></i>
+							Modifier
+						</button>
+						{{ form_end(form2) }}
+					</div>
+					<!-- /.card-body -->
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+				<div class="card-header">
+					<div class="card-title">
+						Modifier l'adresse
+					</div>
+				</div>
+				<!-- /.card-header -->
+				<div class="card-body">
+					{# {{ form_start(form3,{ attr:{ 'novalidate':'novalidate'} }) }} #}
+					{{ form_start(form3) }}
+					{{ form_widget(form3) }}
+					<button class="btn btn-success">
+						<i class="fas fa-save"></i>
+						Modifier
+					</button>
+					{{ form_end(form3) }}
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+			</div>
+		</div>
 		<!-- /.card -->
+		
 	</div>
 	<!-- /.col -->
 </div>
@@ -303,7 +342,7 @@
 		})
 
 		// Modifier une numéro de téléphone
-		$(document).on('click', '#btn-update-phone', function (e) {
+		$(document).on('click', '#btn-Modifier-phone', function (e) {
 			e.preventDefault()
 			let numero = $('#tel-phone').val()
 			let token = $(this).attr('token')
@@ -364,13 +403,13 @@
 		// open modal add
 		$(document).on('click', '#modal-add-phone', function () {
 			$('#modal-default').modal('show')
-			let body = '<div class="form-group">' + '<input id="tel-phone" type="text" placeholder="Entrer le numero" class="form-control phone">' + '<small id="help-tel-phone" class="text-danger"></small></div>' + '<div class="form-group">' + '<label>Numero whatsapp ?</label> ' + '<input type="checkbox" id="isWhatsapp"></div>' + '<button id="btn-add-phone" token="{{ csrf_token("add-phone-item") }}" class="btn btn-primary">Ajouter</button>'
+			let body = '<div class="form-group">' + '<input id="tel-phone" type="text" placeholder="Entrer le numero" class="form-control phone">' + '<small id="help-tel-phone" class="text-danger"></small></div>' + '<div class="form-group">' + '<label>Numero whatsapp ?</label> ' + '<input type="checkbox" id="isWhatsapp"></div>' + '<button id="btn-add-phone" token="  {{ csrf_token("add-phone-item") }}" class="btn btn-primary">Ajouter</button>'
 			$('#modal-default .modal-title').html('Ajouter un numéro')
 			$('#modal-default .modal-body').html(body)
 
 		})
 		// open modal edit
-		$(document).on('click', '.modal-update-phone', function (e) {
+		$(document).on('click', '.modal-Modifier-phone', function (e) {
 			e.preventDefault()
 			let href = $(this).attr('href')
 			$('#modal-default').modal('show')
@@ -396,7 +435,7 @@
 			let numero = $('#tel-phone').val()
 			let token = $(this).attr('token')
 			let isWhatsapp = $('#isWhatsapp').is(':checked') ? 'Oui' : 'Non'
-			if(numero.length < 8){
+			if (numero.length < 8) {
 				$('#help-tel-phone').text('Numéro invalide')
 				return
 			}
@@ -544,12 +583,6 @@
 					})
 					// ./ajax end
 				}
-			})
-		})
-		// send email end
-		$(document).on('click', '#btn-editor', function () {
-			$('#js-editor').animate({
-				height: 'toggle'
 			})
 		})
 		/*******lire une image avant insertion *********/

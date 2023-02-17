@@ -37,6 +37,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 70
+     * )
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstName;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 70
+     * )
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
+    /**
      * @Assert\NotBlank
      * @Assert\Email(
      *  message = "The email '{{ value }}' is not a valid email;"
@@ -60,12 +85,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
-
-    /**
-     * @Assert\Valid
-     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
-     */
-    private $personne;
 
     /**
      * @Assert\Valid
@@ -104,6 +123,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+    public function getFullName(): ?string
+    {
+        return  $this->getFirstName() .' '.$this->getLastName();
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -198,18 +257,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    public function getPersonne(): ?Personne
-    {
-        return $this->personne;
-    }
-
-    public function setPersonne(?Personne $personne): self
-    {
-        $this->personne = $personne;
 
         return $this;
     }

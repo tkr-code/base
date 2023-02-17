@@ -9,6 +9,7 @@
 
 {% block body %}
 	<div class="row">
+	{% if is_granted('ROLE_ADMIN') %}
 		<div class="col-12 col-sm-6 col-md-3">
 			<div class="info-box mb-3">
 				<span class="info-box-icon bg-warning elevation-1">
@@ -24,6 +25,7 @@
 			<!-- /.info-box -->
 		</div>
 		<!-- /.col -->
+	{% endif %}
 	</div>
 {% endblock %}
 {% block foot %}<!-- AdminLTE dashboard demo (This is only for demo purposes) -->

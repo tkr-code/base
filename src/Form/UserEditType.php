@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class UserEditType extends AbstractType
 {
@@ -29,9 +30,18 @@ class UserEditType extends AbstractType
                     'class'=>'select2'
                 ]
             ])
-            ->add('personne',PersonneType::class,[
-                'label'=>false
-                ])
+            ->add('FirstName',TextType::class,[
+                'label'=>'first name',
+                'attr'=>[
+                    'placeholder'=>'Prenom',
+                ]
+            ])
+            ->add('LastName',TextType::class,[
+                'label'=>'last name',
+                'attr'=>[
+                    'placeholder'=>'Nom',
+                ]
+            ])
             // ->add('adresse',AdresseType::class)
         ;
     }

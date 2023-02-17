@@ -23,8 +23,17 @@ class RegistrationFormType extends AbstractType
                     'placeholder'=>'Email'
                 ]
             ])
-            ->add('personne',PersonneType::class,[
-                'label'=>false
+            ->add('FirstName',TextType::class,[
+                'label'=>'first name',
+                'attr'=>[
+                    'placeholder'=>'Prenom',
+                ]
+            ])
+            ->add('LastName',TextType::class,[
+                'label'=>'last name',
+                'attr'=>[
+                    'placeholder'=>'Nom',
+                ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

@@ -1,3 +1,1 @@
-// $(document).ready(function(){
-//     alert('ok')
-// })
+console.log('ready')

@@ -27,7 +27,7 @@ class MessageType extends AbstractType
                     // ->orderBy('u.username', 'ASC');
             },
             'choice_label'=>function($user){
-                return $user->getPersonne()->getFullName();
+                return $user->getFullName();
             }
             ])
         ->add('message')

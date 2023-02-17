@@ -13,7 +13,7 @@
 .alert-edit-email {
   display: none;
 }
-
-#js-editor {
-  display: none;
+#show-cropper-avatar{
+  width: 400px;
+  margin: 0 auto;
 }

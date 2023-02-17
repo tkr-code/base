@@ -94,7 +94,7 @@ name:'Manage Users'|trans
                                 {% for item in user.roles %}
                                 {% if item == 'ROLE_USER' %}
                                 <tr>
-                                    <td>{{ user.personne.fullName }}</td>
+                                    <td>{{ user.fullName }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                                     <td>
@@ -128,7 +128,7 @@ name:'Manage Users'|trans
                                 {% for item in user.roles %}
                                 {% if item == 'ROLE_ADMIN' %}
                                 <tr>
-                                    <td>{{ user.personne.fullName }}</td>
+                                    <td>{{ user.fullName }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                                     <td>
@@ -162,7 +162,7 @@ name:'Manage Users'|trans
                                 {% for item in user.roles %}
                                 {% if item == 'ROLE_EDITOR' %}
                                 <tr>
-                                    <td>{{ user.personne.fullName }}</td>
+                                    <td>{{ user.fullName }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                                     <td>
