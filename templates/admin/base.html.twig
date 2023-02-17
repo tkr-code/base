@@ -30,6 +30,11 @@
 	{% block stylesheet %}{% endblock %}
 </head>
 
+<style>
+[class*="sidebar-dark-"] {
+  background-color: #343a40;
+}
+</style>
 <body
 	class="hold-transition sidebar-mini layout-fixed {{ app.request.attributes.get('_route') == 'admin' ? '':'sidebar-collapse' }}">
 	<div class="js-loader js-loader-hide">

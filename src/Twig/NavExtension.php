@@ -83,7 +83,17 @@ class NavExtension extends AbstractExtension
                             'path'=>'user_new',
                         ],
                     ]
-                ]
+                ],
+                [
+                    'name'=>$this->translator->trans('Paramettres'),
+                    'icon'=>'fas fa-cogs',
+                    'links'=>[
+                        [
+                            'name'=>$this->translator->trans('Options'),
+                            'path'=>'app_admin_option_index',
+                        ]
+                    ]
+                ],
             ],
             //Navigation vu par l'editeur
             'editor'=>[
