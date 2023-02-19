@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<title>New Options</title>
+
+{% block body %}
+    <h1>Create new Options</h1>
+
+    {{ include('admin/options/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_options_index') }}">back to list</a>
+{% endblock %}

@@ -7,10 +7,7 @@
 	<meta charset="utf-8">
 	<meta name="description" content="Application de base de TKR">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>
-		{% block title %}{% endblock %}
-		|
-		{{ app_name }}</title>
+	<title>	{% block title %}{% endblock %}	| {{ app_name }}</title>
 
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet"
@@ -147,7 +144,7 @@
 		<!-- /.content-wrapper -->
 		{% block footer %}
 		<footer class="main-footer">
-			<strong>Copyright &copy; 2020-2021
+			<strong>Copyright &copy; 2020- <span id="year"></span>
 				<a target="_blank" href="#">{{ app_name }}</a>.</strong>
 			All rights reserved.
 			<div class="float-right d-none d-sm-inline-block">
@@ -176,6 +173,8 @@
 	<!-- Select2 -->
 	<script src="{{ asset('vendor/select2/js/select2.min.js') }}"> </script>
 	<script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
+	<script src="{{ asset('js/util.js') }}"></script>
 
 	{% block foot %}{% endblock %}
 

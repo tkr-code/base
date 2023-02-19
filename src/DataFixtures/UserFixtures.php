@@ -42,15 +42,13 @@ class UserFixtures extends Fixture
         ];
         foreach ($users as $value) {
             $user = new User();
-            $personne = new Personne();
-            $personne->setFirstName('Prenom_'.$value['first_name'])
+            $user->setFirstName('Prenom_'.$value['first_name'])
             ->setLastName('Nom_'.$value['last_name']);
             $user->setEmail($value['email']);
             $user->setIsVerified(true);
             $user->setStatus('Offline');
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
-            ->setRoles($value['roles'])
-            ->setPersonne($personne);
+            ->setRoles($value['roles']);
             $this->addReference('_user_'.$value['first_name'],$user);
             $this->em->persist($user);
         }

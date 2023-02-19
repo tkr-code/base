@@ -90,7 +90,7 @@ class NavExtension extends AbstractExtension
                     'links'=>[
                         [
                             'name'=>$this->translator->trans('Options'),
-                            'path'=>'app_admin_option_index',
+                            'path'=>'app_admin_options_index',
                         ]
                     ]
                 ],

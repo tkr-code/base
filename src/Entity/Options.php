@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\OptionRepository;
+use App\Repository\OptionsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=OptionRepository::class)
- * @ORM\Table(name="`option`")
+ * @ORM\Entity(repositoryClass=OptionsRepository::class)
  */
-class Option
+class Options
 {
     /**
      * @ORM\Id
