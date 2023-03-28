@@ -1,0 +1,31 @@
+{% import "macros/breadcrumb.html.twig" as breadcrumbs %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+{% endblock %}
+
+{% block breadcrumb %}{{ breadcrumbs.breadcrumb('Manage user',[{path:path('user_index'),name:'Manage Users'|trans}])}}
+{% endblock %}
+
+{% block title %}{{'Users'|trans}}{% endblock %}
+
+{% block body %}
+	{% include "includes/_alerte.html.twig" %}
+	<div class="card card-outline card-primary">
+		<div class="card-body"></div>
+	</div>
+
+	{{ link.back(path('admin'), 'back to dashboard'|trans) }}
+{% endblock %}

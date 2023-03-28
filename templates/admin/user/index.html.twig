@@ -6,7 +6,6 @@
 {% import "macros/link.html.twig" as link %}
 {% import "macros/dataTable.html.twig" as dataTable %}
 
-
 {% extends 'admin/base.html.twig' %}
 
 {% block head %}
@@ -31,7 +30,7 @@ name:'Manage Users'|trans
 }
 ])}}
 {% endblock %}
-{% block title %}Users{% endblock %}
+{% block title %}{{'Users'|trans}}{% endblock %}
 
 {% block body %}
 {% include "includes/_alerte.html.twig" %}
@@ -43,7 +42,7 @@ name:'Manage Users'|trans
                     <li class="nav-item">
                         <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
                             href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home"
-                            aria-selected="true">Users</a>
+                            aria-selected="true">{{'Users'|trans}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
@@ -53,14 +52,14 @@ name:'Manage Users'|trans
                     <li class="nav-item">
                         <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill"
                             href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages"
-                            aria-selected="false">Editor</a>
+                            aria-selected="false">{{'Editor'|trans}}</a>
                     </li>
                 </ul>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-sm6 col-md-3">
-                        <a class="btn btn-primary my-3" href="{{ path('user_new') }}">Create new <i class="fa fa-plus"
+                        <a class="btn btn-primary my-3" href="{{ path('user_new') }}">{{'Create new'|trans}} <i class="fa fa-plus"
                             aria-hidden="true"></i></a>
                     </div>
                     <div class="col-12 col-sm-6 col-md-3">
@@ -68,7 +67,7 @@ name:'Manage Users'|trans
                             <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
                 
                             <div class="info-box-content">
-                                <span class="info-box-text">User</span>
+                                <span class="info-box-text">{{'User'|trans}}</span>
                                 <span class="info-box-number"> {{ users|length }} </span>
                             </div>
                             <!-- /.info-box-content -->
@@ -83,9 +82,9 @@ name:'Manage Users'|trans
                         <table id="table-1" class="table">
                             <thead>
                                 <tr>
-                                    <th>User</th>
+                                    <th>{{'User'|trans}}</th>
                                     <th>Email</th>
-                                    <th>Is Verified</th>
+                                    <th>{{'Is Verified'|trans}}</th>
                                     <th>actions</th>
                                 </tr>
                             </thead>
@@ -106,7 +105,7 @@ name:'Manage Users'|trans
                                 {% endfor %}
                                 {% else %}
                                 <tr>
-                                    <td colspan="6">no records found</td>
+                                    <td colspan="6">{{'no records found'|trans}}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -117,9 +116,9 @@ name:'Manage Users'|trans
                         <table id="table-2" class="table">
                             <thead>
                                 <tr>
-                                    <th>User</th>
+                                    <th>{{'User'|trans}}</th>
                                     <th>Email</th>
-                                    <th>IsVerified</th>
+                                    <th>{{'Is Verified'|trans}}</th>
                                     <th>actions</th>
                                 </tr>
                             </thead>
@@ -140,7 +139,7 @@ name:'Manage Users'|trans
                                 {% endfor %}
                                 {% else %}
                                 <tr>
-                                    <td colspan="6">no records found</td>
+                                    <td colspan="6">{{'no records found'|trans}}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -151,10 +150,10 @@ name:'Manage Users'|trans
                         <table id="table-3" class="table">
                             <thead>
                                 <tr>
-                                    <th>User</th>
+                                    <th>{{'User'|trans}}</th>
                                     <th>Email</th>
-                                    <th>IsVerified</th>
-                                    <th>actions</th>
+                                    <th>{{'Is Verified'|trans}}</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -174,18 +173,17 @@ name:'Manage Users'|trans
                                 {% endfor %}
                                 {% else %}
                                 <tr>
-                                    <td colspan="6">no records found</td>
+                                    <td colspan="6">{{'no records found'|trans}}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-                {{ link.back(path('admin'), 'back to dashboard') }}
             </div>
             <!-- /.card -->
         </div>
+            {{ link.back(path('admin'), 'back to dashboard'|trans) }}
     </div>
 </div>
 

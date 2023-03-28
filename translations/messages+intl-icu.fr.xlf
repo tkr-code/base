@@ -189,6 +189,34 @@
         <source>Back to list</source>
         <target>Retour à la liste</target>
       </trans-unit>
+      <trans-unit id="0NuLXjZ" resname="Options">
+        <source>Options</source>
+        <target>Options</target>
+      </trans-unit>
+      <trans-unit id="k2oWHDk" resname="Editor">
+        <source>Editor</source>
+        <target>Editeurr</target>
+      </trans-unit>
+      <trans-unit id="nz33U6Q" resname="Create new">
+        <source>Create new</source>
+        <target>créer un nouveau</target>
+      </trans-unit>
+      <trans-unit id="QAxmkmc" resname="Is Verified">
+        <source>Is Verified</source>
+        <target>est vérifié</target>
+      </trans-unit>
+      <trans-unit id="D5lam8." resname="no records found">
+        <source>no records found</source>
+        <target>Aucun enregistrement trouvé</target>
+      </trans-unit>
+      <trans-unit id="jJQKXII" resname="back to dashboard">
+        <source>back to dashboard</source>
+        <target>retour au tableau de bord</target>
+      </trans-unit>
+      <trans-unit id="dKiDoDe" resname="Settings">
+        <source>Settings</source>
+        <target>Paramettres</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

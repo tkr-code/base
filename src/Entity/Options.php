@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\OptionsRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=OptionsRepository::class)
+ * @UniqueEntity(fields={"name"}, message="Cette valeur existe")
  */
 class Options
 {
@@ -26,6 +28,11 @@ class Options
      * @ORM\Column(type="text")
      */
     private $value;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $label;
 
     public function getId(): ?int
     {
@@ -52,6 +59,18 @@ class Options
     public function setValue(string $value): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(string $label): self
+    {
+        $this->label = $label;
 
         return $this;
     }

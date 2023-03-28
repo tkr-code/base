@@ -2,12 +2,18 @@
 
 namespace App\Twig;
 
+use App\Repository\OptionsRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
+    private $optionsRepository;
+    public function __construct(OptionsRepository $optionsRepository)
+    {
+        $this->optionsRepository = $optionsRepository;
+    }
     public function getFilters(): array
     {
         return [
@@ -24,7 +30,16 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('dateFilter', [$this, 'doSomething']),
+            new TwigFunction('options', [$this, 'options']),
         ];
+    }
+
+    public function options(string $name){
+        $Option =  $this->optionsRepository->findOneBy([
+            'name'=>$name
+        ],null);
+
+        return $Option->getValue();
     }
     public function phoneFormat(string $phone){
         if (strlen($phone) == 9) {

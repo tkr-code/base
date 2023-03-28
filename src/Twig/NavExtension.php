@@ -85,7 +85,7 @@ class NavExtension extends AbstractExtension
                     ]
                 ],
                 [
-                    'name'=>$this->translator->trans('Paramettres'),
+                    'name'=>$this->translator->trans('Settings'),
                     'icon'=>'fas fa-cogs',
                     'links'=>[
                         [
