@@ -10,6 +10,10 @@
 .article-action{
   font-size:14px;
 }
+.btn-action{
+	border: navy;
+	background: no-repeat
+}
 #image {
   display  : block;
   max-width: 100%;

@@ -11,7 +11,8 @@ framework:
         cookie_secure: auto
         cookie_samesite: lax
         storage_factory_id: session.storage.factory.native
-
+    # assets:
+    #     base_path: '/test1/public'
     #esi: true
     #fragments: true
     php_errors:

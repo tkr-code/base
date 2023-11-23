@@ -6,3 +6,7 @@ composer dump-env prod
 composer install --no-dev --optimize-autoloader
 
 <img src="https://via.placeholder.com/150">
+
+MAILER_DSN=gmail://YourEmailAddress:YourPassword@default?verify_peer=0
+
+MAILER_DSN=smtp://contact@pmd-developper.com:pmd@contact@mail.pmddevelopper.com
