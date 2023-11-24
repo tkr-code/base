@@ -1,107 +1,89 @@
-<?php 
+<?php
+
 namespace App\Twig;
 
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-/**
- * Gere la navigation par order de privillege
- */
 class NavExtension extends AbstractExtension
 {
     private $translator;
-    private $twig;
-    public function __construct(TranslatorInterface $translator, Environment $twig)
+    private $app_name;
+    public function __construct(Environment $twig, TranslatorInterface $translator)
     {
+        $this->app_name = 'Base';
         $this->translator = $translator;
-        $this->twig = $twig;
     }
-    public function getFunctions():array
+    const icon = 'far fa-circle';
+    public function getFunctions(): array
     {
-        return[
-            new TwigFunction('sidebar',[$this,'getNavs'])
+        return [
+            new TwigFunction('sidebar', [$this, 'getNavs'])
         ];
     }
-    
+
     public function getNavs()
     {
-        $globals = $this->twig->getGlobals();
-        
-        return 
-        [
-            //navigation vu par tous les users
-            'navs'=>
+        return
             [
+                'navs' =>
                 [
-                    'name'=>$this->translator->trans('Dashboard'),
-                    'icon'=>'fas fa-tachometer-alt',
-                    'links'=>[
-                        [
-                            'name'=>$this->translator->trans('Dashboard').' 1',
-                            'path'=>'admin'
-                        ]
-                    ]
-                ],
-                [
-                    'id'=>'profile',
-                    'name'=>'Profile',
-                    'icon'=>'fas fa-user',
-                    'path'=>'profile_index',
-                ],
-                // [
-                //     'name'=>'Chat',
-                //     'icon'=>'fas fa-envelope',
-                //     'path'=>'admin_chat_index',
-                // ],
-                [
-                    'name'=>$globals['app_name'],
-                    'icon'=>'fa fa-home',
-                    'links'=>
-                        [
+                    [
+                        'name' => $this->translator->trans('Dashboard'),
+                        'icon' => 'fas fa-tachometer-alt',
+                        'links' => [
                             [
-                                'name'=>$this->translator->trans('Home'),
-                                'path'=>'home'
+                                'name' => $this->translator->trans('Dashboard') . ' 1',
+                                'path' => 'admin'
                             ]
                         ]
-                ],
-            ],
-            //Navigation vu par l'administrateur
-            'admin'=>
-            [
-                [
-                    'name'=>$this->translator->trans('User'),
-                    'icon'=>'fas fa-users',
-                    'links'=>[
+                    ],
+                    [
+                        // 'id' => 'profile',
+                        'name' => 'Profile',
+                        'icon' => 'fas fa-user',
+                        'path' => 'profile_index',
+                    ],
+                    [
+                        'name' => $this->app_name,
+                        'icon' => 'fa fa-home',
+                        'links' =>
                         [
-                            'name'=>$this->translator->trans('Users'),
-                            'path'=>'user_index',
-                        ],
-                        [
-                            'name'=>$this->translator->trans('New'),
-                            'path'=>'user_new',
-                        ],
-                    ]
-                ],
-                [
-                    'name'=>$this->translator->trans('Settings'),
-                    'icon'=>'fas fa-cogs',
-                    'links'=>[
-                        [
-                            'name'=>$this->translator->trans('Options'),
-                            'path'=>'app_admin_options_index',
+                            [
+                                'name' => $this->translator->trans('Home'),
+                                'path' => 'home'
+                            ],
+                        
                         ]
-                    ]
+                    ],
+                    
+                    
                 ],
-            ],
-            //Navigation vu par l'editeur
-            'editor'=>[
-                // [
-                //     'name'=>'Test',
-                //     'path'=>'home'
-                // ]
-            ]
-        ];
+                'admin' =>
+                [
+
+                    // [
+                    //     'name' => 'Gérant',
+                    //     'icon' => 'fas fa-users',
+                    //     'links' => [
+                    //         [
+                    //             'name' => 'Gérants',
+                    //             'path' => 'gerant_index',
+                    //         ],
+                    //         [
+                    //             'name' => 'Nouveau',
+                    //             'path' => 'gerant_new',
+                    //         ],
+                    //     ]
+
+                    // ],
+
+                ],
+                'editor' =>
+                []
+            ];
     }
 }

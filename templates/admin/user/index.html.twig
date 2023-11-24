@@ -1,190 +1,47 @@
-{% import "macros/table.html.twig" as table %}
-{% import "macros/head.html.twig" as head %}
-{% import "macros/foot.html.twig" as foot %}
-{% import "macros/breadcrumb.html.twig" as utils %}
-{% import "macros/button.html.twig" as btn %}
-{% import "macros/link.html.twig" as link %}
-{% import "macros/dataTable.html.twig" as dataTable %}
-
 {% extends 'admin/base.html.twig' %}
 
-{% block head %}
-{{ dataTable.css() }}
-{% endblock %}
+{% block title %}User index{% endblock %}
 
-{% block foot %}
-{{ dataTable.js() }}
-{% endblock %}
+{% block content %}
+    <h1>User index</h1>
 
-{% block javascripts %}
-{{ dataTable.script('#table-1') }}
-{{ dataTable.script('#table-2') }}
-{{ dataTable.script('#table-3') }}
-{% endblock %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Avatar</th>
+                <th>IsVerified</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.avatar }}</td>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-{% block breadcrumb %}
-{{ utils.breadcrumb('Manage user',[
-{
-path:path('user_index'),
-name:'Manage Users'|trans
-}
-])}}
-{% endblock %}
-{% block title %}{{'Users'|trans}}{% endblock %}
-
-{% block body %}
-{% include "includes/_alerte.html.twig" %}
-<div class="row">
-    <div class="col-md-12">
-        <div class="card card-primary card-tabs">
-            <div class="card-header p-0 pt-1">
-                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
-                            href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home"
-                            aria-selected="true">{{'Users'|trans}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
-                            href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile"
-                            aria-selected="false">Admin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill"
-                            href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages"
-                            aria-selected="false">{{'Editor'|trans}}</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12 col-sm6 col-md-3">
-                        <a class="btn btn-primary my-3" href="{{ path('user_new') }}">{{'Create new'|trans}} <i class="fa fa-plus"
-                            aria-hidden="true"></i></a>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3">
-                            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
-                
-                            <div class="info-box-content">
-                                <span class="info-box-text">{{'User'|trans}}</span>
-                                <span class="info-box-number"> {{ users|length }} </span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                   
-                </div>
-                <div class="tab-content" id="custom-tabs-one-tabContent">
-                    <div class="tab-pane fade active show" id="custom-tabs-one-home" role="tabpanel"
-                        aria-labelledby="custom-tabs-one-home-tab">
-                        <table id="table-1" class="table">
-                            <thead>
-                                <tr>
-                                    <th>{{'User'|trans}}</th>
-                                    <th>Email</th>
-                                    <th>{{'Is Verified'|trans}}</th>
-                                    <th>actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for user in users %}
-                                {% for item in user.roles %}
-                                {% if item == 'ROLE_USER' %}
-                                <tr>
-                                    <td>{{ user.fullName }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                                    <td>
-                                        {{ link.delete(path('user_show', {'id': user.id})) }}
-                                        {{ link.edit(path('user_edit', {'id': user.id}))}}
-                                    </td>
-                                </tr>
-                                {% endif %}
-                                {% endfor %}
-                                {% else %}
-                                <tr>
-                                    <td colspan="6">{{'no records found'|trans}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
-                        aria-labelledby="custom-tabs-one-profile-tab">
-                        <table id="table-2" class="table">
-                            <thead>
-                                <tr>
-                                    <th>{{'User'|trans}}</th>
-                                    <th>Email</th>
-                                    <th>{{'Is Verified'|trans}}</th>
-                                    <th>actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for user in users %}
-                                {% for item in user.roles %}
-                                {% if item == 'ROLE_ADMIN' %}
-                                <tr>
-                                    <td>{{ user.fullName }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                                    <td>
-                                        {{ link.delete(path('user_show', {'id': user.id})) }}
-                                        {{ link.edit(path('user_edit', {'id': user.id}))}}
-                                    </td>
-                                </tr>
-                                {% endif %}
-                                {% endfor %}
-                                {% else %}
-                                <tr>
-                                    <td colspan="6">{{'no records found'|trans}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel"
-                        aria-labelledby="custom-tabs-one-messages-tab">
-                        <table id="table-3" class="table">
-                            <thead>
-                                <tr>
-                                    <th>{{'User'|trans}}</th>
-                                    <th>Email</th>
-                                    <th>{{'Is Verified'|trans}}</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for user in users %}
-                                {% for item in user.roles %}
-                                {% if item == 'ROLE_EDITOR' %}
-                                <tr>
-                                    <td>{{ user.fullName }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                                    <td>
-                                        {{ link.delete(path('user_show', {'id': user.id})) }}
-                                        {{ link.edit(path('user_edit', {'id': user.id}))}}
-                                    </td>
-                                </tr>
-                                {% endif %}
-                                {% endfor %}
-                                {% else %}
-                                <tr>
-                                    <td colspan="6">{{'no records found'|trans}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- /.card -->
-        </div>
-            {{ link.back(path('admin'), 'back to dashboard'|trans) }}
-    </div>
-</div>
-
+    <a href="{{ path('app_admin_user_new') }}">Create new</a>
 {% endblock %}

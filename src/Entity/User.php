@@ -3,166 +3,47 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
- */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    public const OFF_LINE = 'Offline';
-    public const ON_LINE = 'Online';
-    const roles = [
-        // 'Administrateur'=>'ROLE_ADMIN',
-        'Utilisateur'=>'ROLE_USER',
-        'Editeur'=>'ROLE_EDITOR',
-        'Client'=>'ROLE_CLIENT',
-    ];
-    const status =[
-        'Offline'=>self::OFF_LINE,
-        'Online'=>self::ON_LINE
-    ];
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(
-     *     min = 3,
-     *     max = 70
-     * )
-     * @ORM\Column(type="string", length=255)
-     */
-    private $firstName;
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $email = null;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(
-     *     min = 3,
-     *     max = 70
-     * )
-     * @ORM\Column(type="string", length=255)
-     */
-    private $lastName;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $avatar;
-
-    /**
-     * @Assert\NotBlank
-     * @Assert\Email(
-     *  message = "The email '{{ value }}' is not a valid email;"
-     * )
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
+    #[ORM\Column]
+    private array $roles = [];
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
      */
-    private $password;
+    #[ORM\Column]
+    private ?string $password = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatar = null;
+
+    #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
-
-    /**
-     * @Assert\Valid
-     * @ORM\OneToOne(targetEntity=Adresse::class, inversedBy="user", cascade={"persist", "remove"})
-     */
-    private $adresse;
-
-    /**
-     * 
-     * @ORM\OneToMany(targetEntity=Phone::class, mappedBy="user")
-     */
-    private $phones;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="emetteur")
-     */
-    private $envoyer;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="recepteur")
-     */
-    private $recu;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $status;
-
-    public function __construct()
-    {
-        $this->phones = new ArrayCollection();
-        $this->envoyer = new ArrayCollection();
-        $this->recu = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
-    public function getFullName(): ?string
-    {
-        return  $this->getFirstName() .' '.$this->getLastName();
-    }
-
-    public function setFirstName(string $firstName): self
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getAvatar(): ?string
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?string $avatar): self
-    {
-        $this->avatar = $avatar;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -170,7 +51,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email): static
     {
         $this->email = $email;
 
@@ -188,26 +69,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier instead
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
      * @see UserInterface
      */
     public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        // $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(array $roles): static
     {
         $this->roles = $roles;
 
@@ -222,7 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->password = $password;
 
@@ -230,23 +103,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * Returning a salt is only needed, if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
      * @see UserInterface
      */
-    public function getSalt(): ?string
-    {
-        return null;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): static
+    {
+        $this->avatar = $avatar;
+
+        return $this;
     }
 
     public function isVerified(): bool
@@ -254,123 +152,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->isVerified;
     }
 
-    public function setIsVerified(bool $isVerified): self
+    public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?Adresse
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(?Adresse $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Phone[]
-     */
-    public function getPhones(): Collection
-    {
-        return $this->phones;
-    }
-
-    public function addPhone(Phone $phone): self
-    {
-        if (!$this->phones->contains($phone)) {
-            $this->phones[] = $phone;
-            $phone->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removePhone(Phone $phone): self
-    {
-        if ($this->phones->removeElement($phone)) {
-            // set the owning side to null (unless already changed)
-            if ($phone->getUser() === $this) {
-                $phone->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Message[]
-     */
-    public function getEnvoyer(): Collection
-    {
-        return $this->envoyer;
-    }
-
-    public function addEnvoyer(Message $envoyer): self
-    {
-        if (!$this->envoyer->contains($envoyer)) {
-            $this->envoyer[] = $envoyer;
-            $envoyer->setEmetteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEnvoyer(Message $envoyer): self
-    {
-        if ($this->envoyer->removeElement($envoyer)) {
-            // set the owning side to null (unless already changed)
-            if ($envoyer->getEmetteur() === $this) {
-                $envoyer->setEmetteur(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Message[]
-     */
-    public function getRecu(): Collection
-    {
-        return $this->recu;
-    }
-
-    public function addRecu(Message $recu): self
-    {
-        if (!$this->recu->contains($recu)) {
-            $this->recu[] = $recu;
-            $recu->setRecepteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRecu(Message $recu): self
-    {
-        if ($this->recu->removeElement($recu)) {
-            // set the owning side to null (unless already changed)
-            if ($recu->getRecepteur() === $this) {
-                $recu->setRecepteur(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }

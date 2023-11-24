@@ -4,7 +4,7 @@
 {% block title %}Edit user password{% endblock %}
 
 {% block breadcrumb %}
-    {{ utils.breadcrumb('Edit password'|trans,[
+    {{ utils.breadcrumb('Modifier le mot de passe',[
         {
             path:path('profile_index'),
             name:'Profile'
@@ -12,13 +12,13 @@
     ])}}
 {% endblock %}
 
-{% block body %}
+{% block content %}
 <div class="row">
     <div class="col-md-6 mx-auto col-12">
         <div class="card card-primary card-outline">
             <div class="card-header">
                 <div class="card-title">
-                    {{'Edit password'|trans}}
+                    Modifier le mot de passe
                 </div>
             </div>
             <div class="card-body">

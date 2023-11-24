@@ -1,5 +1,0 @@
-//case a cocher
-$('input[type="checkbox"]').click(function(){
-    var val = $(this).attr("value");
-    $("." + val).toggle();
-});

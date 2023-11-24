@@ -2,62 +2,64 @@
 
 namespace App\Twig;
 
-use App\Repository\OptionsRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use App\Entity\User;
 
 class AppExtension extends AbstractExtension
 {
-    private $optionsRepository;
-    public function __construct(OptionsRepository $optionsRepository)
+    public function __construct()
     {
-        $this->optionsRepository = $optionsRepository;
     }
     public function getFilters(): array
     {
         return [
-            // If your filter generates SAFE HTML, you should add a third
-            // parameter: ['is_safe' => ['html']]
-            // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
-            new TwigFilter('date_format_fr', [$this, 'doSomething']),
+            new TwigFilter('price_format', [$this, 'priceFormat']),
+            new TwigFilter('explode_email', [$this, 'exploideEmail']),
             new TwigFilter('phone_format', [$this, 'phoneFormat']),
-
+            new TwigFilter('date_format_fr', [$this, 'doSomething']),
+            new TwigFilter('date_format_min_fr', [$this, 'dateFormatMinFr']),
         ];
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('dateFilter', [$this, 'doSomething']),
-            new TwigFunction('options', [$this, 'options']),
+            new TwigFunction('dataTables', [$this, 'dataTables']),
+            new TwigFunction('dateFilter', [$this, 'dateFilter']),
         ];
     }
+        
+    public function dataTables(){
 
-    public function options(string $name){
-        $Option =  $this->optionsRepository->findOneBy([
-            'name'=>$name
-        ],null);
+    }
 
-        return $Option->getValue();
+    public function priceFormat(float $number){
+       return number_format($number,2,'.',' ');
+    }
+
+    public function exploideEmail(string $email){
+        $data = explode('::',$email);
+        if(empty($data[1])){
+            return $email;
+        }else{
+            return $data[1];
+        }
     }
     public function phoneFormat(string $phone){
         if (strlen($phone) == 9) {
             return substr($phone, 0, 2).' '.substr($phone, 2, 3).' '.substr($phone, 5, 2).' '.substr($phone, 7, 2).'';
         }else if(strlen($phone) == 10) {
             return substr($phone, 0, 2).' '.substr($phone, 2, 3).' '.substr($phone, 5, 2).' '.substr($phone, 7, 2).'';
+        }else if(strlen($phone) == 12) {
+            return substr($phone, 0, 3).' '.substr($phone, 3, 2).' '.substr($phone, 5, 3).' '.substr($phone, 8, 2).' '.substr($phone, 10, 2).'';;
         }
         return $phone;
     }
 
-    /**
-     * RETOURNE LA DATE AU FORMAT:'jour mois annee'
-     * ex: lundi 31 octobre 2010
-     *
-     * @param [type] $date
-     * @return void
-     */
-    public function doSomething($date)
+
+    public function dateFilter($date)
     {
         //   $date = new \DateTime($date);
         switch ($date->format('N')) {
@@ -133,33 +135,20 @@ class AppExtension extends AbstractExtension
                 $mois = 'septembre';
                 break;
             case '10':
-                // code...
                 $mois = 'octobre';
                 break;
             case '11':
-                // code...
                 $mois = 'novembre';
                 break;
             case '12':
-                // code...
                 $mois = 'décembre';
                 break;
-
             default:
-                // code...
                 break;
         }
 
         return $jour.' '.$date->format('d').' '.$mois.' '.$date->format('Y');
     }
-
-    /**
-     * RETOURNE LA DATE AU FORMAT:'jour mois annee heure et minute'
-     * ex: lundi 31 octobre 2010 à 11h30
-     *
-     * @param [type] $date
-     * @return void
-     */
     public function dateFormatMinFr($date)
     {
         //   $date = new \DateTime($date);

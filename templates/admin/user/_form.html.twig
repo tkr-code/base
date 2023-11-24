@@ -1,6 +1,4 @@
-{% import "macros/link.html.twig" as links %}
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    {{ links.back(path('user_index'),"back to list") }}
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

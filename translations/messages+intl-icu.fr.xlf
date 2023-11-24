@@ -1,221 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="eTuFS4d" resname="View cart">
-        <source>View cart</source>
-        <target>Voir le Panier</target>
-      </trans-unit>
-      <trans-unit id="eVF_lX3" resname="See all our articles">
-        <source>See all our articles</source>
-        <target>Voir tous nos biens</target>
-      </trans-unit>
-      <trans-unit id="DpQINTx" resname="Add to cart">
-        <source>Add to cart</source>
-        <target>Ajouter au panier</target>
-      </trans-unit>
-      <trans-unit id="EdWLCN6" resname="Home page">
-        <source>Home page</source>
-        <target>Page d'acueil</target>
+      <trans-unit id="GUU7.F6" resname="La modification a été éffectué avec succès.">
+        <source>La modification a été éffectué avec succès.</source>
+        <target>__La modification a été éffectué avec succès.</target>
       </trans-unit>
       <trans-unit id="Z7aWRoY" resname="Dashboard">
         <source>Dashboard</source>
-        <target>Tableau de board</target>
-      </trans-unit>
-      <trans-unit id="WiNESCj" resname="Manage">
-        <source>Manage</source>
-        <target>Gérer</target>
-      </trans-unit>
-      <trans-unit id="tTGBpNh" resname="My account">
-        <source>My account</source>
-        <target>Mon compte</target>
-      </trans-unit>
-      <trans-unit id="Iv67XLO" resname="My orders">
-        <source>My orders</source>
-        <target>Mes commandes</target>
-      </trans-unit>
-      <trans-unit id="GF_NsyJ" resname="Hello">
-        <source>Hello</source>
-        <target>Salut</target>
-      </trans-unit>
-      <trans-unit id="ScJmuqq" resname="Search">
-        <source>Search</source>
-        <target>Recherche</target>
+        <target>Tableau de bord</target>
       </trans-unit>
       <trans-unit id="OnhpU4i" resname="Home">
         <source>Home</source>
         <target>Accueil</target>
       </trans-unit>
-      <trans-unit id="K1w9JnI" resname="Contact">
-        <source>Contact</source>
-        <target>Contact</target>
-      </trans-unit>
-      <trans-unit id="DiImtSN" resname="Welcome">
-        <source>Welcome</source>
-        <target>Bienvenue</target>
-      </trans-unit>
-      <trans-unit id="KdlJIlE" resname="Article">
-        <source>Article</source>
-        <target>Article</target>
-      </trans-unit>
-      <trans-unit id="nWMiwfT" resname="Login">
-        <source>Login</source>
-        <target>Se connecter</target>
-      </trans-unit>
-      <trans-unit id="P5yZH2O" resname="Change password">
-        <source>Change password</source>
-        <target>Modifier le mot de passe</target>
-      </trans-unit>
-      <trans-unit id="FaMlmHb" resname="Manage adresses">
-        <source>Manage adresses</source>
-        <target>Gérer les addresses</target>
-      </trans-unit>
       <trans-unit id="SWFhRVF" resname="Log out">
         <source>Log out</source>
         <target>Se déconnecter</target>
       </trans-unit>
-      <trans-unit id="pSrOQg8" resname="All">
-        <source>All</source>
-        <target>Tous</target>
-      </trans-unit>
-      <trans-unit id="bik6jAC" resname="Waiting">
-        <source>Waiting</source>
-        <target>En attente</target>
-      </trans-unit>
-      <trans-unit id="wfiOnWx" resname="In progress">
-        <source>In progress</source>
-        <target>En cour</target>
-      </trans-unit>
-      <trans-unit id="E8ou4km" resname="Canceled">
-        <source>Canceled</source>
-        <target>Anuller</target>
-      </trans-unit>
-      <trans-unit id="Iqlw0uW" resname="Completed">
-        <source>Completed</source>
-        <target>Terminer</target>
-      </trans-unit>
-      <trans-unit id="Um4Ah8w" resname="Description">
-        <source>Description</source>
-        <target>Description</target>
-      </trans-unit>
-      <trans-unit id="tRLZfny" resname="User">
-        <source>User</source>
-        <target>Utilisateur</target>
-      </trans-unit>
-      <trans-unit id="vSTb9IR" resname="Hi! Please confirm your email!">
-        <source>Hi! Please confirm your email!</source>
-        <target>Salut ! Merci de confirmer votre email!</target>
-      </trans-unit>
-      <trans-unit id="awzJBNC" resname="Users">
-        <source>Users</source>
-        <target>Utilisateurs</target>
-      </trans-unit>
-      <trans-unit id="GP3VSbL" resname="New">
-        <source>New</source>
-        <target>Nouveau</target>
-      </trans-unit>
-      <trans-unit id="CLBBk1e" resname="You">
-        <source>You</source>
-        <target>Vous</target>
-      </trans-unit>
-      <trans-unit id="6KiDUxl" resname="Edit User">
-        <source>Edit User</source>
-        <target>Modifier un Utilisateur</target>
-      </trans-unit>
-      <trans-unit id="OpQ.Vio" resname="Manage Users">
-        <source>Manage Users</source>
-        <target>Gestion des Utilisateur</target>
-      </trans-unit>
-      <trans-unit id="10MHBUC" resname="Confirmation">
-        <source>Confirmation</source>
-        <target>Confirmation</target>
-      </trans-unit>
-      <trans-unit id="nZPB._o" resname="Please confirm your email address by clicking the following link">
-        <source>Please confirm your email address by clicking the following link</source>
-        <target>Mercie de confirmer votre adresse email en cliquant sur ce lien</target>
-      </trans-unit>
-      <trans-unit id="87wG9uu" resname="This link will expire in">
-        <source>This link will expire in</source>
-        <target>Ce lien expire dans </target>
-      </trans-unit>
-      <trans-unit id="F7WctIl" resname="Cheers!">
-        <source>Cheers!</source>
-        <target>Salut!</target>
-      </trans-unit>
-      <trans-unit id="ITaQX9q" resname="Confirm my Email">
-        <source>Confirm my Email</source>
-        <target>Confirmer mon mot de passe</target>
-      </trans-unit>
-      <trans-unit id="4O3_s6c" resname="Reset password">
-        <source>Reset password</source>
-        <target>Reinitialiser le mot de passe</target>
-      </trans-unit>
-      <trans-unit id="fdTZfZq" resname="More info">
-        <source>More info</source>
-        <target>Plus d'information</target>
-      </trans-unit>
-      <trans-unit id="wYmEDPf" resname="Log in">
-        <source>Log in</source>
-        <target>Se connecter</target>
-      </trans-unit>
-      <trans-unit id="lpzL089" resname="Email">
-        <source>Email</source>
-        <target>Email</target>
-      </trans-unit>
-      <trans-unit id="dHkQ3aq" resname="Your email (required)">
-        <source>Your email (required)</source>
-        <target>Votre email (obligatoire)</target>
-      </trans-unit>
-      <trans-unit id="u92.A1p" resname="Edit password">
-        <source>Edit password</source>
-        <target>Modifier le mot de passe</target>
+      <trans-unit id="vko3pnY" resname="All rights reserved">
+        <source>All rights reserved</source>
+        <target>Tous droits reservés</target>
       </trans-unit>
       <trans-unit id="PEgjRvN" resname="back">
         <source>back</source>
         <target>Retour</target>
       </trans-unit>
-      <trans-unit id="GUU7.F6" resname="La modification a été éffectué avec succès.">
-        <source>La modification a été éffectué avec succès.</source>
-        <target>__La modification a été éffectué avec succès.</target>
-      </trans-unit>
       <trans-unit id="FQn1YfJ" resname="Save">
         <source>Save</source>
         <target>Enregistrer</target>
       </trans-unit>
-      <trans-unit id="Xaj3_8K" resname="Back to list">
-        <source>Back to list</source>
-        <target>Retour à la liste</target>
+      <trans-unit id="GXZu1sy" resname="Cancel">
+        <source>Cancel</source>
+        <target>Annuler</target>
       </trans-unit>
-      <trans-unit id="0NuLXjZ" resname="Options">
-        <source>Options</source>
-        <target>Options</target>
+      <trans-unit id="Tds_loA" resname="completed">
+        <source>completed</source>
+        <target>Terminer</target>
       </trans-unit>
-      <trans-unit id="k2oWHDk" resname="Editor">
-        <source>Editor</source>
-        <target>Editeurr</target>
+      <trans-unit id="K2uFPJ5" resname="in progress">
+        <source>in progress</source>
+        <target>En cour</target>
       </trans-unit>
-      <trans-unit id="nz33U6Q" resname="Create new">
-        <source>Create new</source>
-        <target>créer un nouveau</target>
+      <trans-unit id="gM_j5.K" resname="waiting">
+        <source>waiting</source>
+        <target>En attente</target>
       </trans-unit>
-      <trans-unit id="QAxmkmc" resname="Is Verified">
-        <source>Is Verified</source>
-        <target>est vérifié</target>
+      <trans-unit id="8S.eaEs" resname="canceled">
+        <source>canceled</source>
+        <target>Annuler</target>
       </trans-unit>
-      <trans-unit id="D5lam8." resname="no records found">
-        <source>no records found</source>
-        <target>Aucun enregistrement trouvé</target>
+      <trans-unit id="dABiZ2o" resname="shipping">
+        <source>shipping</source>
+        <target>Livraison</target>
       </trans-unit>
-      <trans-unit id="jJQKXII" resname="back to dashboard">
-        <source>back to dashboard</source>
-        <target>retour au tableau de bord</target>
+      <trans-unit id="GP3VSbL" resname="New">
+        <source>New</source>
+        <target>Nouveau</target>
       </trans-unit>
-      <trans-unit id="dKiDoDe" resname="Settings">
-        <source>Settings</source>
-        <target>Paramettres</target>
+      <trans-unit id="1c389.9" resname="Top">
+        <source>Top</source>
+        <target>Top</target>
+      </trans-unit>
+      <trans-unit id="1crefvM" resname="Stock">
+        <source>Stock</source>
+        <target>Stock</target>
+      </trans-unit>
+      <trans-unit id="U0M9PNE" resname="back to list">
+        <source>back to list</source>
+        <target>Retour a la liste</target>
+      </trans-unit>
+      <trans-unit id="ScJmuqq" resname="Search">
+        <source>Search</source>
+        <target>Recherche</target>
+      </trans-unit>
+      <trans-unit id="fdTZfZq" resname="More info">
+        <source>More info</source>
+        <target>Plus d'info</target>
+      </trans-unit>
+      <trans-unit id="wYmEDPf" resname="Log in">
+        <source>Log in</source>
+        <target>Se connecter</target>
       </trans-unit>
     </body>
   </file>

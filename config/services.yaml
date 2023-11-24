@@ -4,11 +4,13 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    article_images_directory: '%kernel.project_dir%/public/img/article'
+    public_path: '%kernel.project_dir%/public'
     user_images_directory: '%kernel.project_dir%/public/img/user'
+    conditions_directory: '%kernel.project_dir%/public/doc'
     maitenance_file_path: '%kernel.project_dir%/public/.maintenance'
-    app.locales: [fr, en]
+    app.locales: [en, fr]
     locale: fr
-    template: 'main'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -23,14 +25,6 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\EventListener\MaintenanceListener:
-        arguments:
-            - '%maitenance_file_path%'
-            - '@twig'
-        tags:
-            - { name: kernel.event_listener, event: kernel.request }
-
-    App\EventSubscriber\LocaleSubscriber:
-        arguments: ['%kernel.default_locale%']

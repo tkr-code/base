@@ -2,56 +2,41 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Personne;
-use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
-    private $em;
+   
     private $passwordEncoder;
+    private $service;
     public function __construct(EntityManagerInterface $entityManagerInterface, UserPasswordHasherInterface $userPasswordHasherInterface)
     {
-        $this->em = $entityManagerInterface;
         $this->passwordEncoder = $userPasswordHasherInterface;
     }
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        $users = [
-        [
-                'first_name' => 'Admin',
-                'last_name' => 'Admin',
-                'email' => 'admin@mail.com',
-                'roles' => ["ROLE_ADMIN"]
-        ],
-        [
-                'first_name' => 'Editor',
-                'last_name' => 'Editor',
-                'email' => 'editor@mail.com',
-                'roles' => ["ROLE_EDITOR"]
-        ],
-        [
-                'first_name' => 'User',
-                'last_name' => 'User',
-                'email' => 'user@mail.com',
-                'roles' => ["ROLE_USER"]
-        ],
+        $admin = [
+            ['first_name' => 'Admin','last_name' => 'Pmd','email' => 'admin@pmd-developper.com','roles' => ["ROLE_ADMIN"]],
+            // ['first_name' => 'testEmail','last_name' => 'test email','email' => 'test@mail.com','roles' => ["ROLE_CLIENT"]],
         ];
-        foreach ($users as $value) {
+        foreach ($admin as $key => $value) {
             $user = new User();
-            $user->setFirstName('Prenom_'.$value['first_name'])
-            ->setLastName('Nom_'.$value['last_name']);
+            $user->setPrenom($value['first_name'])
+            ->setNom($value['last_name']);
             $user->setEmail($value['email']);
+            // $user->setStatus('Activer');
             $user->setIsVerified(true);
-            $user->setStatus('Offline');
+            // $user->setCle($this->service->aleatoire(100));
+            // $user->setPhoneNumber('770000000');
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
             ->setRoles($value['roles']);
-            $this->addReference('_user_'.$value['first_name'],$user);
-            $this->em->persist($user);
+            $manager->persist($user);
         }
-        $this->em->flush();
+        
+        $manager->flush();
     }
 }
