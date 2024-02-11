@@ -39,7 +39,7 @@
 	<!-- /.modal-dialog -->
 </div>
 {% endblock %}
-{% block content %}
+{% block body %}
 {% include "includes/_alerte.html.twig" %}
 <div class="row">
 	<div class="col-md-3">
@@ -49,7 +49,7 @@
 				<div class="text-center">
 					<img class="profile-user-img img-fluid img-circle"
 						src="{{ asset('img/user/' ~ app.user.avatar|default('empty.png') ) }}"
-						alt="{{ app.user.prenom ~ ' ' ~ app.user.nom }}">
+						alt="{{ app.user.fullName }}">
 				</div>
 				<h3 class="profile-username text-center">{{app.user.prenom | title}}
 					{{app.user.nom | title }}</h3>
@@ -61,6 +61,12 @@
 				<div id="js-editor">
 					{{ form_start(form,{ attr:{ 'novalidate':'novalidate' },action: path('profile_edit',{id: app.user.id
 					})}) }}
+					{{ form_row(form.prenom,{row_attr:{class:'col-12'}}) }}
+						{{ form_row(form.nom,{row_attr:{class:'col-12'}}) }}
+					{{ form_row(form.adresse.pays,{label:'Pays *',row_attr:{class:'col-12'}}) }}
+						{{ form_row(form.adresse.city,{label:'Ville *',row_attr:{class:'col-12'}}) }}
+						{{ form_row(form.adresse.rue,{label:'Rue *',row_attr:{class:'col-12'}}) }}
+						{{ form_row(form.adresse.codePostal,{label:'code postal *', row_attr:{ class:'col-12'}}) }}
 					{{ form_widget(form) }}
 					<div id="show_preview" class="text-center my-3"></div>
 					<button class="btn btn-success">
@@ -83,9 +89,9 @@
 						<a class="nav-link {% if app.request.query.get('tab') is null or app.request.query.get('tab') == '' %}active{% endif %}"
 							href="#information" data-toggle="tab">Information</a>
 					</li>
-					<li class="nav-item">
+					{# <li class="nav-item">
 						<a class="nav-link" href="#reglage" data-toggle="tab">Reglage</a>
-					</li>
+					</li> #}
 				</ul>
 			</div>
 			<!-- /.card-header -->
@@ -94,54 +100,52 @@
 					<div class="{% if app.request.query.get('tab') is null or app.request.query.get('tab') == '' %}active{% endif %} tab-pane"
 						id="information">
 						<div class="row">
-							<div class="col-md-4 col-12">
+							<div class="col-md-4 col-12 mb-2">
 								<strong>
 									<i class="fas fa-user mr-1"></i>
 									compte</strong>
 								<p class="text-muted">
 									{% for item in app.user.roles %}
-									{{ roles.role(item)}}
+									{{ roles.badge(item)}}
 									{% endfor %}
 								</p>
+								<hr>
 							</div>
-							<div class="col-md-4 col-12">
+							<div class="col-md-4 col-12 mb-2">
 								<strong>
 									<i class="fas fa-book mr-1"></i>
 									Email</strong>
 								<p class="text-muted">
 									{{app.user.email}}
 								</p>
+								<hr>
 							</div>
-							<div class="col-md-4 col-12">
+							<div class="col-md-4 col-12 mb-2">
 								<strong>
 									<i class="fas fa-map-marker-alt mr-1"></i>
 									Adresse</strong>
 								<p class="text-muted">
-									{#% if app.user.adresse is not null or  %}
+									{% if app.user.adresse is not null  %}
 									{{ app.user.adresse.rue}},
 									{{ app.user.adresse.city }}
 									{{ app.user.adresse.pays}}
 									{% else %}
 									Cliquer sur modifier pour définir votre adresse
-									{% endif %#}
+									{% endif %}
 								</p>
+								<hr>
 							</div>
-							{#
-							<div class="col-md-4 col-12">
+							
+							<div class="col-md-4 col-12 mb-2">
 								<strong>
 									<i class="fas fa-phone mr-1"></i>
-									Telephone</strong>
+									Téléphone</strong>
 								<div id="load-phone-list">
 									{% include "admin/profile/_phone_list.html.twig" %}
 								</div>
 								<button id="modal-add-phone" class="btn btn-primary">Ajouter un numéro</button>
-							</div>#}
-						</div>
-					</div>
-					<!-- /.tab-pane -->
-					<div class="tab-pane" id="reglage">
-						<div class="row">
-							<div class="col-md-6">
+							</div>
+							<div class="col-md-4 col-12 mb-2 ">
 								<strong>
 									<i class="fas fas-fa-user-slash mr-1"></i>
 									Modifier mon email</strong>
@@ -167,9 +171,8 @@
 									Modifier l'email
 								</button>
 								{% endif %}
-								<hr>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 mb-12 col-12 ">
 								<strong>
 									<i class="fas fas-fa-user-slash mr-1"></i>
 									Modifier le mot de passe</strong>
@@ -182,10 +185,10 @@
 									<i class="fas fa-edit"></i>
 									Modifier le mot de passe
 								</a>
-								<hr>
+								
 							</div>
 							{% if is_granted('ROLE_ADMIN') %}
-							<div class="col-md-6">
+							<div class="col-md-6 mb-2 col-12">
 								<strong>
 									<i class="fas fas-fa-user-slash mr-1"></i>
 									Supprimer mon compte</strong>
@@ -210,15 +213,11 @@
 									<i class="fas fa-user-slash"></i>
 									Supprimer mon compte
 								</button>
-								<hr>
+								
 							</div>
 							{% endif %}
-
-
 						</div>
 					</div>
-					<!-- /.tab-pane -->
-					<!-- /.tab-pane -->
 				</div>
 				<!-- /.tab-content -->
 			</div>
@@ -236,7 +235,16 @@
 {% endblock %}
 {% block javascripts %}
 <script>
+    function UseContolTel(value, limite = 9) {
+        let tel = value.replace(/\D/g, "");
+        if (tel.length < limite || tel.length > limite) {
+        return true;
+        } else {
+        return false;
+        }
+        }
 	$(document).ready(function () {
+
 		function loadPhoneList() {
 			$.ajax({
 				url: '/main/load-phone-list',
@@ -249,6 +257,8 @@
 				success: function (data) {
 					$('.js-loader').css('display', 'none')
 					$('#load-phone-list').html(data.content)
+				},error:function(){
+					alert('Une erreur est survenu')
 				}
 			})
 
@@ -298,7 +308,7 @@
 						},
 						error: function () {
 							$('.js-loader').css('display', 'none')
-							alert('ok')
+							alert('Une erreur est survenu')
 						}
 					})
 				}
@@ -313,6 +323,17 @@
 			let token = $(this).attr('token')
 			let id = $(this).data('id')
 			let isWhatsapp = $('#isWhatsapp').is(':checked') ? 'Oui' : 'Non'
+
+			if(numero == ''){
+				$('#help-tel-phone').text('Entrer un numéro de téléphone')
+				return false 
+			}else{
+				$('#help-tel-phone').text('')
+			}
+			if(UseContolTel(numero,9)){
+				$('#help-tel-phone').text('Le numéro de téléphone  est incorrect')
+				return false
+			}
 			$.ajax({
 				url: '/main/phone/' + id + '/edit',
 				method: 'POST',
@@ -360,24 +381,23 @@
 					$('#help-tel-phone').text('')
 					alert('Une erreur est survenu')
 					$('.js-loader').css('display', 'none')
-					alert('Erreur 1')
 				}
 			})
 		})
 
-		// open modal add
+		// open modal ajouter un numero de telephone
 		$(document).on('click', '#modal-add-phone', function () {
 			$('#modal-default').modal('show')
 			let body = '<div class="form-group">'
-				+ '<input id="tel-phone" type="text" placeholder="Entrer le numero" class="form-control phone">'
+				+ '<input required id="tel-phone" type="text" placeholder="Entrer le numero" class="form-control phone">'
 				+ '<small id="help-tel-phone" class="text-danger"></small></div>' + '<div class="form-group">'
 				+ '<label>Numero whatsapp ?</label> ' + '<input type="checkbox" id="isWhatsapp"></div>'
-				+ '<button id="btn-add-phone" token="  {{ csrf_token('add-phone - item') }}" class="btn btn-primary">Ajouter</button>'
+				+ '<button id="btn-add-phone" token="  {{ csrf_token('add-phone-item') }}" class="btn btn-primary">Ajouter</button>'
 			$('#modal-default .modal-title').html('Ajouter un numéro')
 			$('#modal-default .modal-body').html(body)
 
 		})
-		// open modal edit
+		// open modal edit numero de telephone
 		$(document).on('click', '.modal-update-phone', function (e) {
 			e.preventDefault()
 			let href = $(this).attr('href')
@@ -393,17 +413,31 @@
 					$('#modal-default .modal-title').html('Modifier un numéro')
 					$('#modal-default .modal-body').html(data.content)
 					$('.modal-loader').css('display', 'none')
+				},error:function(){
+					$('.js-loader').css('display', 'none')
+					alert('Une erreur est survenu')
 				}
 			})
 
 		})
 
-		// Ajouter une numéro de téléphone
+		// Ajouter un numéro de téléphone
 		$(document).on('click', '#btn-add-phone', function (e) {
 			e.preventDefault()
 			let numero = $('#tel-phone').val()
 			let token = $(this).attr('token')
 			let isWhatsapp = $('#isWhatsapp').is(':checked') ? 'Oui' : 'Non'
+			if(numero == ''){
+				$('#help-tel-phone').text('Entrer un numéro de téléphone')
+				return false 
+			}else{
+				$('#help-tel-phone').text('')
+			}
+
+			if(UseContolTel(numero,9)){
+				$('#help-tel-phone').text('Le numéro de téléphone  est incorrect')
+				return false
+			}
 			$.ajax({
 				url: '/main/phone/new',
 				method: 'POST',
@@ -449,9 +483,8 @@
 				},
 				error: function () {
 					$('#help-tel-phone').text('')
-					alert('Une erreur est survenu')
 					$('.js-loader').css('display', 'none')
-					alert('Erreur 1')
+					alert('Une erreur est survenu')
 				}
 			})
 		})

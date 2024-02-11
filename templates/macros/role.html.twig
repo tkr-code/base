@@ -1,11 +1,23 @@
 {% macro role(item) %}
-    {% if item == 'ROLE_ADMIN' %}
-        Administrateur
-    {% elseif item == 'ROLE_USER'%}
-        Utilisateur
-    {% elseif item == 'ROLE_EDITOR'%}
-        Editeur
-    {% elseif item == 'ROLE_CLIENT'%}
-        CLient
-    {% endif %}
+	{% if item == 'ROLE_ADMIN' %}
+		Administrateur
+	{% elseif item == 'ROLE_USER'%}
+		Utilisateur
+	{% elseif item == 'ROLE_EDITOR'%}
+		Editeur
+	{% elseif item == 'ROLE_CLIENT'%}
+		CLient
+	{% endif %}
+{% endmacro %}
+{% macro badge(item) %}
+{% if item == 'ROLE_ADMIN' %}
+	<span class="badge badge-danger p-1">
+		Administrateur
+	</span>
+{% elseif item == 'ROLE_USER' %}
+	<span class="badge badge-primary p-1">
+		Utilisateurs
+	</span>
+{% endif %}
+    
 {% endmacro %}

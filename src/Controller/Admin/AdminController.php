@@ -2,8 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Phone;
+use App\Form\PhoneType;
 use App\Form\ProfileChangePasswordFormType;
 use App\Form\ProfileType;
+use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,9 +37,31 @@ class AdminController extends AbstractController
         ]);
     }
 
+
+    #[Route("/phone/new", name:"profile_phone_new", methods:["GET","POST"])]
+    public function phoneNew(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $phone = new Phone();
+        $phone->setUser($this->getUser());
+        $form = $this->createForm(PhoneType::class, $phone);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($phone);
+            $entityManager->flush();
+            $this->addFlash('success','Success');
+            return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('admin/profile/phone/new.html.twig', [
+            'phone' => $phone,
+            'form' => $form,
+        ]);
+    }
+
     
     #[Route("/profile/edit", name:"profile_edit", methods:["GET","POST"])]
-    public function edit(Request $request): Response
+    public function edit(Request $request, EntityManagerInterface $entityManager): Response
     {   $user = $this->getUser();
         $form = $this->createForm(ProfileType::class, $user,[]);
         $form->handleRequest($request);
@@ -58,15 +83,12 @@ class AdminController extends AbstractController
                     }
                 }
             }
-            
-            // $user->setPersonne($personne);
-            $this->getDoctrine()->getManager()->flush();
-            $message  = $this->translator->trans("La modification a été éffectué avec succès.");
-            $this->addFlash('success',$message);
+            $entityManager->flush();
+            $this->addFlash('success',"La modification a été éffectué avec succès.");
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/profile/index.html.twig', [
+        return $this->render('admin/profile/index.html.twig', [
             'user' => $user,
             'form' => $form
         ]);
@@ -78,6 +100,7 @@ class AdminController extends AbstractController
         // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
+        
         $form = $this->createForm(ProfileChangePasswordFormType::class);        
         $form->handleRequest($request);
 
@@ -92,7 +115,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/profile/password/edit.html.twig', [
+        return $this->render('admin/profile/password/edit.html.twig', [
             'form' => $form,
         ]);
     }

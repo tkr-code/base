@@ -1,7 +1,7 @@
 <ul>
 	{% for item in app.user.phones %}
 		<li class="phone-list" data-id="{{item.id}}">
-            {{ item.valeur | phone_format }}
+            {{ item.numero | phone_format }}
             {% if item.isWhatsapp %}
 		    <i class="fab text-success fa-whatsapp"></i>	
             {% endif %}
@@ -13,5 +13,7 @@
 				<i class="fas fa-trash-alt"></i>
 			</a>
 		</li>
+		{% else %}
+			Aucun numéro de téléphone
 	{% endfor %}
 </ul>

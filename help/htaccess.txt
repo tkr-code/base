@@ -1,0 +1,5 @@
+
+//redirige ver le dossier malick-tounkara/public/index.php
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks RewriteBase / RewriteEngine On RewriteCond %{REQUEST_FILENAME} !-f RewriteRule ^(.*)$ malick-tounkara/public/index.php [QSA,L]
+</IfModule>

@@ -16,7 +16,7 @@
 					compte</strong>
 				<p class="text-muted">
 					{% for item in user.roles %}
-						{{ roles.role(item)}}
+						{{ roles.badge(item)}}
 					{% endfor %}
 				</p>
 			</div>
@@ -54,15 +54,9 @@
 						{% if not loop.last %}
 							{{ ' |'}}
 						{% endif %}
+					{% else %}
+						Aucun numero de téléphone	
 					{% endfor %}
-				</p>
-			</div>
-			<div class="col-md-4 col-12">
-				<strong>
-					<i class="fas fa-phone mr-1"></i>
-					Nombre de commande enregistrer</strong>
-				<p class="text-muted">
-					{{ user.orders|length }}
 				</p>
 			</div>
 		</div>

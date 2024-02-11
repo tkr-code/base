@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
     //SUPPRIMER UEN IMAGE DE PRODUIT
     $(document).on('click', '.btn-image-delete', function (e) {
         e.preventDefault()

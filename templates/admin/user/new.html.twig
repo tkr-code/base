@@ -1,11 +1,21 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'admin/base.html.twig' %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
 {% block title %}New User{% endblock %}
-
+{% block breadcrumb %}
+    {{ breadcrumb.breadcrumb('Manage user'|trans,[
+        {
+            path:'order_index',
+            name:'Manage orders'
+        }
+    ])}}
+{% endblock %}
 {% block body %}
-    <h1>Create new User</h1>
-
-    {{ include('admin/user/_form.html.twig') }}
-
-    <a href="{{ path('app_admin_user_index') }}">back to list</a>
+<div class="card card-outline card-primary">
+    <div class="card-header">
+        <h3>{{'Create new User'|trans}}</h3>
+    </div>
+    <div class="card-body">
+        {{ include('admin/user/_form.html.twig') }}
+    </div>
+</div>
 {% endblock %}

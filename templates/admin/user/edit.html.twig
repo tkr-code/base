@@ -1,13 +1,73 @@
-{% extends 'base.html.twig' %}
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
 
-{% block title %}Edit User{% endblock %}
+{% extends 'admin/base.html.twig' %}
+
+
+{% block stylesheets %}
+	{{ head.dataTable() }}
+{% endblock %}
+
+{% block breadcrumb %}
+	{{ utils.breadcrumb('Gestion des utilisateurs',[
+        {
+            path:path('app_admin_user_index'),
+            name:'Listes des utilisateurs'
+        }
+    ])}}
+{% endblock %}
+{% block title %}
+	{{'Edit User'|trans}}
+{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					<div class="card-title">
+						Modifier un utilisateur
+					</div>
+				</div>
+				<div class="card-body">
+					{{ form_start(form,{attr:{'novalidate':'novalidate'}}) }}
+					<div class="row">
+						{{ form_row(form.prenom,{row_attr:{class:'col-md-6 col-12'}}) }}
+						{{ form_row(form.nom,{row_attr:{class:'col-md-6 col-12'}}) }}
+						{{ form_row(form.email,{row_attr:{class:'col-md-6 col-12'}}) }}
+						{{ form_row(form.adresse.pays,{label:'Pays *',row_attr:{class:'col-md-6 col-12'}}) }}
+						{{ form_row(form.adresse.city,{label:'Ville *',row_attr:{class:'col-md-4 col-12'}}) }}
+						{{ form_row(form.adresse.rue,{label:'Rue *',row_attr:{class:'col-md-4 col-12'}}) }}
+						{{ form_row(form.adresse.codePostal,{label:'code postal *', row_attr:{ class:'col-md-4 col-12'}}) }}
+						{{ form_row(form.isVerified,{row_attr:{class:'col-md-6 col-12'}}) }}
+					</div>
+					{{form_widget(form)}}
+					<button class="btn btn-success">{{ button_label|default('Save'|trans) }}</button>
+					{{ form_end(form) }}
 
-    {{ include('admin/user/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_admin_user_index') }}">back to list</a>
-
-    {{ include('admin/user/_delete_form.html.twig') }}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card card-outline card-danger">
+				<div class="card-header">
+					<div class="card-title">
+						Modifier le mot de passe
+					</div>
+				</div>
+				<div class="card-body">
+					{{ form_start(formPassword)}}
+					{{ form_widget(formPassword)}}
+					<button class="btn btn-success">{{ button_label|default('Save'|trans) }}</button>
+					{{ form_end(formPassword)}}
+				</div>
+			</div>
+		</div>
+					{{ link.back(path('app_admin_user_index')) }}
+	</div>
 {% endblock %}

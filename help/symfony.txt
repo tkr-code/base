@@ -1,0 +1,21 @@
+//  creer un projet symfony
+#composer create-project symfony/skeleton my_project_directory
+#cd my_project_directory
+#composer require webapp
+
+
+#symfony serve -d 
+#php bin/console console m:entity 
+#php bin/console make:migration -n 
+#php bin/console doctrine:migrations:migrate
+
+#symfony/polyfill-intl-messageformatter
+
+
+-- translation
+#php bin/console translation:update --dump-messages fr
+#php bin/console translation:update --force fr
+
+-- CKEditorBundle
+#php bin/console assets:install public
+#php bin/console ckeditor:install

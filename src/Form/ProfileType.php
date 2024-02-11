@@ -7,6 +7,7 @@ use App\Entity\Personne;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,27 +20,29 @@ class ProfileType extends AbstractType
     {
         $builder
 
-        // ->add('FirstName',TextType::class,[
-        //     'label'=>'first name',
-        //     'attr'=>[
-        //         'placeholder'=>'Prenom',
-        //     ]
-        // ])
-        // ->add('LastName',TextType::class,[
-        //     'label'=>'last name',
-        //     'attr'=>[
-        //         'placeholder'=>'Nom',
-        //     ]
-        // ])
-            // ->add('adresse',AdresseType::class)
-            ->add('avatar',FileType::class,[
+            ->add('prenom', TextType::class, [
+                'label' => 'Prénom *',
+                'attr' => [
+                    'placeholder' => "prénom",
+                ]
+            ])
+            ->add('nom', TextType::class, [
+                'label' => 'Nom *',
+                'attr' => [
+                    'placeholder' => 'Nom',
+                ]
+            ])
+            ->add('adresse', AdresseType::class, [
+                'label' => false
+            ])
+            ->add('avatar', FileType::class, [
                 // 'attr'=> [
                 //     'onchange'=>'previewImageFile()'
                 // ],
-                'label'=>'Modifier la photo de profil ( jpg or png )  ',
-                'multiple'=>false,
-                'mapped'=>false,
-                'required'=>false,
+                'label' => 'Modifier la photo de profil ( jpg or png )  ',
+                'multiple' => false,
+                'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -50,15 +53,14 @@ class ProfileType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid image document',
                     ])
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'translation_domain'=>'forms',
+            'translation_domain' => 'forms',
 
         ]);
     }

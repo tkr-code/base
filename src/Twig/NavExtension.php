@@ -41,12 +41,12 @@ class NavExtension extends AbstractExtension
                             ]
                         ]
                     ],
-                    [
-                        // 'id' => 'profile',
-                        'name' => 'Profile',
-                        'icon' => 'fas fa-user',
-                        'path' => 'profile_index',
-                    ],
+                    // [
+                    //     'id' => 'profile',
+                    //     'name' => 'Profile',
+                    //     'icon' => 'fas fa-home',
+                    //     'path' => 'profile_index',
+                    // ],
                     [
                         'name' => $this->app_name,
                         'icon' => 'fa fa-home',
@@ -64,8 +64,7 @@ class NavExtension extends AbstractExtension
                 ],
                 'admin' =>
                 [
-
-                    // [
+                        // [
                     //     'name' => 'Gérant',
                     //     'icon' => 'fas fa-users',
                     //     'links' => [
@@ -80,6 +79,22 @@ class NavExtension extends AbstractExtension
                     //     ]
 
                     // ],
+
+                    [
+                        'name' => 'Utilisateurs',
+                        'icon' => 'fas fa-users',
+                        'links' => [
+                            [
+                                'name' => 'Liste',
+                                'path' => 'app_admin_user_index',
+                            ],
+                            [
+                                'name' => 'Nouveau',
+                                'path' => 'app_admin_user_new',
+                            ],
+                        ]
+
+                    ],
 
                 ],
                 'editor' =>
