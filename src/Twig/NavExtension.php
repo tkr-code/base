@@ -95,6 +95,16 @@ class NavExtension extends AbstractExtension
                         ]
 
                     ],
+                    [
+                        'name'=>'Paramètres',
+                        'icon'=>'fas fa-cogs',
+                        'links'=>[
+                            [
+                                'name'=>'Options',
+                                'path'=>'app_admin_options_index',
+                            ]
+                        ]
+                    ],
 
                 ],
                 'editor' =>

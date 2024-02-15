@@ -6,11 +6,14 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use App\Entity\User;
+use App\Repository\OptionsRepository;
 
 class AppExtension extends AbstractExtension
 {
-    public function __construct()
+    private  $optionsRepository;
+    public function __construct(OptionsRepository $optionsRepository)
     {
+        $this->optionsRepository = $optionsRepository;
     }
     public function getFilters(): array
     {
@@ -28,7 +31,16 @@ class AppExtension extends AbstractExtension
         return [
             new TwigFunction('dataTables', [$this, 'dataTables']),
             new TwigFunction('dateFilter', [$this, 'dateFilter']),
+            new TwigFunction('options', [$this, 'options']),
         ];
+
+    }
+    public function options(string $name){
+        $Option =  $this->optionsRepository->findOneBy([
+            'name'=>$name
+        ],null);
+
+        return $Option->getValue();
     }
         
     public function dataTables(){

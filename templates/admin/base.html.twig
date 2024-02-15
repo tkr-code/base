@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{% endblock %} | {{ site.name }}</title>
+  <title>{% block title %}{% endblock %} | {{ options('app_name') }}</title>
   <link rel="shortcut icon" href="{{ asset('img/' ~ site.logo) }}" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -30,6 +30,11 @@
   
   {% block head %}{% endblock %}
 </head>
+<style>
+[class*="sidebar-dark-"] {
+  background-color: {{ options('sidebar_color')}};
+}
+</style>
 <body class="{{ app.request.attributes.get('_route') == 'admin' ? 'hold-transition sidebar-mini layout-fixed' : 'sidebar-mini sidebar-collapse' }}">
   <div class="js-loader js-loader-hide">
     <div class="text-center js-loader-content">
