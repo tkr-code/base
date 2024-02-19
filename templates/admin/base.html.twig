@@ -87,9 +87,9 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{path('admin')}}" class="brand-link">
-        <img src="{{ asset('img/logo/' ~ site.logo_sidebar) }}" alt="{{ site.name }}" class="brand-image  img-circle elevation-3"
+        <img src="{{ asset('img/logo/' ~ site.logo_sidebar) }}" alt="{{ options('app_name') }}" class="brand-image  img-circle elevation-3"
           style="opacity: .8">
-        <span class="brand-text font-weight-light">{{ site.name }}</span>
+        <span class="brand-text font-weight-light">{{ options('app_name') }}</span>
       </a>
 
       <!-- Sidebar -->
@@ -161,7 +161,7 @@
     {% block footer %}
     <footer class="main-footer">
       <strong>Copyright &copy; {{ "now"|date("Y") }}
-        <a href="{{ path('home') }}">{{ site.name}}</a>.</strong>
+        <a href="{{ path('home') }}">{{ options('app_name') }}</a>.</strong>
       {{'All rights reserved'|trans}}.
       <div class="float-right d-none d-sm-inline-block">
         <b>Version</b>

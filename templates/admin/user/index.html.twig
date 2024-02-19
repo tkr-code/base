@@ -43,10 +43,7 @@
 					</div>
 				</div>
 				<div class="card-body">
-					<a class="btn btn-primary" href="{{ path('app_admin_user_new') }}">
-						<i class="fa fa-plus"></i>
-						Ajouter un utilisateur</a>
-
+					{{ link.new(path('app_admin_user_new'),'Ajouter un utilisateur') }}
 					<hr>
 					<table id="datatable_1" class="table">
 						<thead>

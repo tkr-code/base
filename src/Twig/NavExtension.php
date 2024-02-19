@@ -41,14 +41,8 @@ class NavExtension extends AbstractExtension
                             ]
                         ]
                     ],
-                    // [
-                    //     'id' => 'profile',
-                    //     'name' => 'Profile',
-                    //     'icon' => 'fas fa-home',
-                    //     'path' => 'profile_index',
-                    // ],
                     [
-                        'name' => $this->app_name,
+                        'name' => 'Pages',
                         'icon' => 'fa fa-home',
                         'links' =>
                         [
