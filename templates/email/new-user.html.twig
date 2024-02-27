@@ -1,0 +1,11 @@
+{% extends "email/base.html.twig" %}
+{% block title %}New user account{% endblock %}
+{% block body %}
+    <p>Good morning {{ user.fullName }}</p>
+    <p>
+        Your user account credentials {{app_name}} <br>
+       Email:<b> {{user.email}}</b> <br>
+       Password:<b> {{ password }} </b>
+    </p>
+    <p>Click the button below to login</p>
+{% endblock %}

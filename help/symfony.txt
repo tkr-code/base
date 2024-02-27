@@ -3,7 +3,6 @@
 #cd my_project_directory
 #composer require webapp
 
-
 #symfony serve -d 
 #php bin/console console m:entity 
 #php bin/console make:migration -n 
@@ -11,11 +10,21 @@
 
 #symfony/polyfill-intl-messageformatter
 
+-- Entity
+
+-- Migrations
+php bin/console make:migrations -n
+php bin/console doctrine:migrations:migrate -n
 
 -- translation
-#php bin/console translation:update --dump-messages fr
-#php bin/console translation:update --force fr
+#php bin/console translation:extract --dump-messages fr
+#php bin/console translation:extract --dump-messages fr
+#php bin/console translation:extract --force fr
 
 -- CKEditorBundle
 #php bin/console assets:install public
 #php bin/console ckeditor:install
+
+-- Fixture
+php bin/console m:fixtures
+php bin/console d:f:l -n

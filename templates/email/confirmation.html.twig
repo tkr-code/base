@@ -1,0 +1,11 @@
+{% extends "email/base.html.twig" %}
+{% block body %}
+<p>
+    If you did not create an account on our online store {{app_name}}
+please click on this link to delete the account :
+    {# <a style="color:#5F5F5F" href="{{ signedUrl|default('#') }}">Confirm my Email</a>. #}
+    {# {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}. #}
+</p>
+{% endblock %}
+{# {% block btn_path %} {{ url('client_user_delete',{id:user.client.id,key:user.cle}) }} {% endblock %} #}
+{% block btn_text %} Delete account {% endblock %}

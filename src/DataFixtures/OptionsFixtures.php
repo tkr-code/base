@@ -26,6 +26,16 @@ class OptionsFixtures extends Fixture
                 'name'=>'sidebar_logo',
                 'value'=>'AdminLTELogo.png',
             ],
+            [
+                'label'=>'Email de contact',
+                'name'=>'email_contact',
+                'value'=>'malick.tounkara.1@gmail.com'
+            ],
+            [
+                'label'=>'Url de l\'application',
+                'name'=>'app_url',
+                'value'=>'https://pmd-developper.com'
+            ]
         ];
         foreach ($data as $key => $value) {
             $options = new Options;

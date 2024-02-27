@@ -38,6 +38,7 @@
 						,
 						{{ user.adresse.city }}
 						{{ user.adresse.pays}}
+						
 					{% else %}
 						Cliquer sur modifier pour définir votre adresse.
 						{{ link.pencil(path('admin_client_edit', {'id': user.id}))}}

@@ -36,9 +36,6 @@ class ProfileType extends AbstractType
                 'label' => false
             ])
             ->add('avatar', FileType::class, [
-                // 'attr'=> [
-                //     'onchange'=>'previewImageFile()'
-                // ],
                 'label' => 'Modifier la photo de profil ( jpg or png )  ',
                 'multiple' => false,
                 'mapped' => false,

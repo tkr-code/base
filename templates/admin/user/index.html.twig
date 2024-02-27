@@ -7,6 +7,7 @@
 {% import "macros/link.html.twig" as link %}
 {% import "macros/dataTable.html.twig" as dataTable %}
 {% import "macros/role.html.twig" as role %}
+{% import "macros/admin.html.twig" as admin %}
 
 
 {% extends 'admin/base.html.twig' %}
@@ -17,7 +18,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
-	{{ utils.breadcrumb('Manage user',[
+	{{ utils.breadcrumb('Manage user'|trans,[
         {
             path:path('app_admin_user_index'),
             name:'Listes des utilsateurs'
@@ -28,9 +29,7 @@
 {% endblock %}
 
 {% block body %}
-	{% for item in app.flashes('success') %}
-		{{ alerte.alert(item,'success')}}
-	{% endfor %}
+{% include "includes/_alerte.html.twig" %}
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card card-outline card-primary">
@@ -65,7 +64,7 @@
 											{{role.badge(item)}}
 										{% endfor %}
 									</td>
-									<td>{{ 'user.status' }}</td>
+									<td>{{ admin.status(user.status) }}</td>
 									<td>
 										{{ link.pencil(path('app_admin_user_edit', {'id': user.id}))}}
 										{{ link.show(path('app_admin_user_show', {'id': user.id}))}}</td>

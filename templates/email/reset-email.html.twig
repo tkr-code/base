@@ -1,0 +1,10 @@
+{% extends "email/base1.html.twig" %}
+{% block title %}{{'Change my email'|trans}}{% endblock %}
+{% block body %}
+    <p>Hello {{ user.fullName|default('') }}</p>
+    <p>{{'You can change your email address by clicking on edit my email'|trans}}</p>
+    <p style="font-size: 12px">{{'NB: This email is reserved for'|trans}} {{ user.fullName|default('') }}</p>
+{% endblock %}
+
+{% block btn_path %} {{ url('app_change_email_check_token',{token: token})}} {% endblock %}
+{% block btn_text %} Modifier mon email {% endblock %}

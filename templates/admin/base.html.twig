@@ -48,7 +48,7 @@
 
     <!-- Preloader -->
     <div class="preloader bg-white flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="{{ asset('img/' ~ site.logo) }}" alt="{{ site.name }}" height="60"
+      <img class="animation__shake" src="{{ asset('img/' ~ options('sidebar_logo')) }}" alt="{{ options('app_name')}}" height="60"
         width="60">
     </div>
 
@@ -87,7 +87,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{path('admin')}}" class="brand-link">
-        <img src="{{ asset('img/logo/' ~ site.logo_sidebar) }}" alt="{{ options('app_name') }}" class="brand-image  img-circle elevation-3"
+        <img src="{{ asset('img/' ~ options('sidebar_logo') ) }}" alt="{{ options('app_name') }}" class="brand-image  img-circle elevation-3"
           style="opacity: .8">
         <span class="brand-text font-weight-light">{{ options('app_name') }}</span>
       </a>
@@ -205,6 +205,9 @@
   <script src="{{ asset('vendor/raphael/raphael.min.js') }}"></script>
   <script src="{{ asset('vendor/jquery-mapael/jquery.mapael.min.js') }}"></script>
   <script src="{{ asset('vendor/jquery-mapael/maps/usa_states.min.js') }}"></script>
+  <!-- InputMask -->
+<script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
+<script src="{{ asset('vendor/inputmask/jquery.inputmask.min.js') }}"></script>
   <!-- ChartJS -->
   <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
   <script src="{{ asset('admin/js/admin.js') }}"></script>

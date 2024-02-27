@@ -44,6 +44,8 @@
 						{{ form_row(form.adresse.city,{label:'Ville *',row_attr:{class:'col-md-4 col-12'}}) }}
 						{{ form_row(form.adresse.rue,{label:'Rue *',row_attr:{class:'col-md-4 col-12'}}) }}
 						{{ form_row(form.adresse.codePostal,{label:'code postal *', row_attr:{ class:'col-md-4 col-12'}}) }}
+						{{ form_row(form.adresse.tel,{label:'Téléphone *', row_attr:{ class:'col-md-6 col-12'}}) }}
+						{{ form_row(form.status,{label:'Status *', row_attr:{ class:'col-md-6 col-12'}}) }}
 						{{ form_row(form.isVerified,{row_attr:{class:'col-md-6 col-12'}}) }}
 					</div>
 					{{form_widget(form)}}

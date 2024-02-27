@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -580,6 +580,18 @@
       <trans-unit id="IaE5GBl" resname="You should agree to our terms.">
         <source>You should agree to our terms.</source>
         <target>__You should agree to our terms.</target>
+      </trans-unit>
+      <trans-unit id="F7cRhkN" resname="not valid postal code">
+        <source>not valid postal code</source>
+        <target>__not valid postal code</target>
+      </trans-unit>
+      <trans-unit id="Z7P15FO" resname="Your street name must be at least {{ limit }} characters long">
+        <source>Your street name must be at least {{ limit }} characters long</source>
+        <target>__Your street name must be at least {{ limit }} characters long</target>
+      </trans-unit>
+      <trans-unit id="4QY8v6k" resname="Your street name cannot be longer than {{ limit }} characters">
+        <source>Your street name cannot be longer than {{ limit }} characters</source>
+        <target>__Your street name cannot be longer than {{ limit }} characters</target>
       </trans-unit>
     </body>
   </file>

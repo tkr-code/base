@@ -1,0 +1,9 @@
+{% extends "email/base1.html.twig" %}
+{% block body %}
+<h1>New  message</h1>
+<p>De: {{ mail }}</p>
+<p>Objet: {{ object }}</p>
+<p><b>Name:</b> {{ name }}</p>
+<p><b>Number phone:</b> {{ phone }}</p>
+<p> <b>Message:</b> {{ message }} </p>
+{% endblock %}

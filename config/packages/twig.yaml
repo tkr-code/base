@@ -3,6 +3,10 @@ twig:
     form_themes: ['bootstrap_4_layout.html.twig'] # accepte plusieurs thèmes
     globals:
         navs: '@App\Twig\NavExtension'
+        base: main
+        app_name: 'Base'
+        color:
+            default: '#d573d6'
         site:
             name: base
             description: 'App de base pour projet Symfony'

@@ -145,7 +145,7 @@
 								</div>
 								<button id="modal-add-phone" class="btn btn-primary">Ajouter un numéro</button>
 							</div>
-							<div class="col-md-4 col-12 mb-2 ">
+							<div class="col-md-8 col-12 mb-2 ">
 								<strong>
 									<i class="fas fas-fa-user-slash mr-1"></i>
 									Modifier mon email</strong>
@@ -162,15 +162,18 @@
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<p>Vous pouvez changer le mot de passe d'un compte de messagerie aux endroits
-											suivants</p>
+										<p>Nous avons bien reçu votre demande de modification d'adresse e-mail. Un e-mail de confirmation a été envoyé à votre adresse e-mail actuel.
+
+Veuillez vérifier votre boîte de réception et suivre les instructions fournies dans l'e-mail pour confirmer la modification de votre adresse e-mail.
+
+Si vous ne recevez pas l'e-mail de confirmation dans les prochaines minutes, veuillez vérifier votre dossier de courrier indésirable (spam). Si vous rencontrez des difficultés, n'hésitez pas à nous contacter.
+
+Cordialement.</p>
 									</div>
 								</div>
-								{% if is_granted('ROLE_ADMIN') %}
 								<button id="btn-edit-email" class="btn btn-primary">
 									Modifier l'email
 								</button>
-								{% endif %}
 							</div>
 							<div class="col-md-6 mb-12 col-12 ">
 								<strong>

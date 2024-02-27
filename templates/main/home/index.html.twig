@@ -2,15 +2,11 @@
 
 {% block title %} Accueil {% endblock %}
 
-{% block body %}
+{% block main %}
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-3">{{ site.name }}</h1>
-    <post-comments></post-comments>
+    <h1 class="display-3">{{ options('app_name') }}</h1>
     <hr>
-    <div class="row">
-      <div id="lift-stuff-app"></div>
-    </div>
     <p class="lead">PMD DEVELOPPER| Malick Tounkara</p>
     <hr class="my-2">
     <p>{{'More info'|trans}}</p>

@@ -23,7 +23,8 @@ class Adresse
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $codePostal = null;
 
-    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $tel = null;
 
     #[Assert\NotBlank]

@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    $('[data-mask]').inputmask()
 
     //SUPPRIMER UEN IMAGE DE PRODUIT
     $(document).on('click', '.btn-image-delete', function (e) {
@@ -75,13 +76,13 @@ $(document).ready(function () {
     // ENVOIE UN LIEN DE MODIFICATION D'EMAIL
     $(document).on('click', '#btn-edit-email', function () {
         Swal.fire({
-            title: 'Are you sure ?',
-            text: "You will send an email change email !",
+            title: 'Es-tu sûr ?',
+            text: "Vous enverrez un e-mail de changement d'e-mail !",
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            cancelButtonText: 'Close',
+            cancelButtonText: 'Fermer',
             confirmButtonText: 'Oui, je confirme!'
         }).then((result) => {
             if (result.isConfirmed) { // ajax
@@ -106,6 +107,15 @@ $(document).ready(function () {
                         $('.loader-edit-email').css('display', 'none')
                         $('#btn-edit-email').css('display', 'initial')
                         $('.alert-edit-email').css('display', 'initial')
+                        
+                        var bouton = $('#btn-edit-email');
+                        bouton.prop('disabled', true); // désactiver le bouton
+                        bouton.text('Veuillez patienter 2 minutes...'); // changer le texte du bouton
+                        setTimeout(function(){
+                            bouton.prop('disabled', false); // réactiver le bouton
+                            bouton.text('Cliquez ici'); // restaurer le texte du bouton
+                        }, 120000); // 2 minutes en millisecondes (2 minutes = 120 000 millisecondes)
+                        
                     }
                 })
                 // ./ajax end
@@ -117,19 +127,19 @@ $(document).ready(function () {
     $(document).on('click', '#btn-logout', function (e) {
         e.preventDefault()
         Swal.fire({
-            title: 'Are you sure',
-            text: "You are about to log out!  ",
+            title: 'Es-tu sûr ?',
+            text: "Vous êtes sur le point de vous déconnecter!  ",
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            cancelButtonText: 'Close',
-            confirmButtonText: "Yes, I'm confirme!"
+            cancelButtonText: 'Fermer',
+            confirmButtonText: "Oui, je confirme!"
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Successful disconnection !',
+                    title: 'Déconnexion réussie !',
                     showConfirmButton: false,
                     timer: 1500
                 }).then((result) => {
