@@ -57,14 +57,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Assert\Valid]
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Adresse $adresse = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Phone::class, orphanRemoval: true)]
     private Collection $phones;
 
     #[Assert\Choice(['1','2'])]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $status = null;
 
     #[ORM\Column(length: 255, nullable: true)]

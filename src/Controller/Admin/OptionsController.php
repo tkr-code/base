@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/my-account/options')]
+#[Route('/admin/my-account/options')]
 class OptionsController extends AbstractController
 {
     private $parent_page = 'Paramètres';

@@ -14,7 +14,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            lazy: true
+            # lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\LoginAuthenticator
             logout:
@@ -38,8 +38,9 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/my-account, roles: ROLE_USER }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-
+        - { path: ^/admin, roles: ROLE_ADMIN }
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_EDITOR,ROLE_USER]
 when@test:
     security:
         password_hashers:

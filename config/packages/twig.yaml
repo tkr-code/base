@@ -16,6 +16,7 @@ twig:
             email: ''
             logo: ''
             logo_sidebar: ''
+        MAILER_APP: "%env(MAILER_APP)%"
 when@test:
     twig:
         strict_variables: true

@@ -112,6 +112,7 @@ $(document).ready(function () {
                         bouton.prop('disabled', true); // désactiver le bouton
                         bouton.text('Veuillez patienter 2 minutes...'); // changer le texte du bouton
                         setTimeout(function(){
+                            updateCounter()
                             bouton.prop('disabled', false); // réactiver le bouton
                             bouton.text('Cliquez ici'); // restaurer le texte du bouton
                         }, 120000); // 2 minutes en millisecondes (2 minutes = 120 000 millisecondes)
@@ -122,6 +123,14 @@ $(document).ready(function () {
             }
         })
     })
+
+    function updateCounter() {
+        $('#counter').text(120);
+        count--; // Décrémenter le compteur
+        if (count >= 0) {
+            setTimeout(updateCounter, 1000); // Appel récursif de la fonction toutes les 1 seconde
+        }
+    }
 
     //BOUTON DE DECONNECTION
     $(document).on('click', '#btn-logout', function (e) {
