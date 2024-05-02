@@ -15,7 +15,7 @@ Avant de commencer, assurez-vous d'avoir installé ce qui suit :
 1. Clonez ce dépôt sur votre machine locale :
 
 ```bash
-git clone https://github.com/votre-utilisateur/nom-de-votre-depot.git
+git clone https://github.com/tkr-code/base.git
 ```
 
 2. Installez les dépendances du projet en exécutant la commande suivante à la racine du projet :
